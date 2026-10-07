@@ -47,6 +47,7 @@ export type ChromeCopy = {
     next: string
     open: string
     filter: string
+    pick: string
   }
 }
 
@@ -122,6 +123,26 @@ export type ArchiveCopy = {
   columns: string
   /** `{role}` */
   teamNote: string
+}
+
+export type AboutCopy = {
+  label: string
+  /** The statement: a filled half, then an outlined half. */
+  statement: { filled: string; outlined: string }
+  bio: string
+  loop: {
+    label: string
+    /** Accessible name for the group of steps. */
+    groupLabel: string
+    steps: { name: string; line: string }[]
+  }
+  portrait: {
+    /** Path under /public once Kenny adds one; until then the frame shows `placeholder`. */
+    src?: string
+    alt: string
+    placeholder: string
+    caption: string
+  }
 }
 
 /** One row of the hero's status list. `clock` rows show the live local time. */

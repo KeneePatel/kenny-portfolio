@@ -343,6 +343,11 @@
   --outline-width: var(--outline-thick);
 }
 
+/* Hover cue on something not yet chosen: amber stroke, still unfilled. */
+@utility type-outline-hint {
+  --outline-color: var(--color-primary);
+}
+
 /* Hovered / focused / chosen: the outline fills amber. */
 @utility type-outline-lit {
   --outline-fill: var(--color-primary);
