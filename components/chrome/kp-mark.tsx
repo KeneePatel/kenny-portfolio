@@ -1,6 +1,10 @@
 import Link from "next/link"
 
-/** KP monogram linking home; the full name shows beside it on desktop. */
+/**
+ * KP monogram linking home; the full name shows beside it on desktop. It sits
+ * on the pills' translucent backdrop (no border), so text scrolling under the
+ * bar doesn't show through.
+ */
 export function KpMark({
   initials,
   name,
@@ -17,7 +21,7 @@ export function KpMark({
       href="/#top"
       aria-label={label}
       data-cursor={cursor}
-      className="inline-flex min-h-11 items-center gap-3 font-mono text-data tracking-wider"
+      className="inline-flex min-h-11 items-center gap-3 rounded-full bg-pill p-1.25 font-mono text-data tracking-wider backdrop-blur-pill lg:pr-4.5"
     >
       <span
         aria-hidden="true"

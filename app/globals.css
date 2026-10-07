@@ -357,8 +357,10 @@
   border: 1px solid var(--color-stroke);
   border-radius: calc(infinity * 1px);
   background-color: var(--color-pill);
+  /* Standard property only: the minifier adds the -webkit- prefix itself. A
+     hand-written prefixed + standard pair got merged into the prefixed form
+     alone, which Chrome ignores. */
   backdrop-filter: blur(var(--blur-pill));
-  -webkit-backdrop-filter: blur(var(--blur-pill));
 }
 
 /* Prose links: 1px rule at rest, amber 2px grows in on hover and focus. */
