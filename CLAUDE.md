@@ -16,6 +16,7 @@ https://claude.ai/code/artifact/1d6d6c0a-03dc-42c4-94cd-eb7e63801aec
 - Next.js (App Router) · TypeScript (strict) · Tailwind · shadcn/ui · **pnpm only** (never npm/yarn/bun).
 - `pnpm dev` · `pnpm build` · `pnpm lint` · `pnpm exec tsc --noEmit` (typecheck)
 - Add shadcn components with `pnpm dlx shadcn@latest add <name>`. Never hand-write a shadcn component that the CLI can generate.
+- shadcn style is `base-luma` (Base UI, not Radix: compose with the `render` prop, not `asChild`). After adding a component, change its `import { cn } from "cn"` to `import { cn } from "@/lib/utils"`. The configured `cn` knows our theme scales; the plain one merges `text-label` away as a colour.
 - **Ask before adding any dependency** not listed here. Prefer CSS + small hooks over animation libraries. Allowed without asking: `next-themes`, shadcn-generated deps (e.g. `embla-carousel-react`, Radix packages), `clsx`/`tailwind-merge`/`class-variance-authority`.
 
 ## Skills (`.claude/skills`)
@@ -30,8 +31,19 @@ This repo has project skills in `.claude/skills/<name>/SKILL.md`. Use them — t
 
 | Skill          | Use it when                                                         |
 | -------------- | ------------------------------------------------------------------- |
-| `<skill-name>` | <!-- e.g. building UI components, writing tests, reviewing a PR --> |
-| `<skill-name>` |                                                                     |
+| `design-taste-frontend` | Building any UI. Technique only (RSC client leaves, no scroll listeners, transform/opacity motion, z-index scale, contrast checks). Its bans on custom cursors, section numbers, time strips and dots are overridden by this file. |
+| `full-output-enforcement` | Writing code: complete files, no elided sections. (`[TODO: …]` copy placeholders in `content/` are still required.) |
+| `design-taste-frontend-v1` | Not used: superseded by `design-taste-frontend`. |
+| `gpt-taste` | Not used: GSAP-driven; animation libraries need Kenny's OK. |
+| `high-end-visual-design` | Not used: competing aesthetic (glass, double-bezel). |
+| `minimalist-ui` | Not used: competing aesthetic (pastels, bento). |
+| `industrial-brutalist-ui` | Not used: competing aesthetic (CRT, red accent). |
+| `redesign-existing-projects` | Not used: this is a greenfield build. |
+| `image-to-code` | Not used: the design already exists on the canvas. |
+| `imagegen-frontend-web` | Not used: image generation only. |
+| `imagegen-frontend-mobile` | Not used: image generation only. |
+| `brandkit` | Not used: brand-board image generation. |
+| `stitch-design-taste` | Not used: writes DESIGN.md for Google Stitch. |
 
 ## How to work
 
@@ -75,7 +87,7 @@ lib/                      cn(), motion tokens, pure math (field.ts, timeline.ts)
 
 Rules:
 
-- **Server Components by default.** `"use client"` only on interactive leaves (Field, RingCursor, ThemeToggle, Menu, WorkTrack, ArchiveFilter, ThinkLoop, StackLayers, YearScrubber, CopyEmail). A section’s `index.tsx` stays a Server Component and passes content down as props.
+- **Server Components by default.** `"use client"` only on interactive leaves (Field, RingCursor, ThemeToggle, Menu, WorkTrack, ArchiveFilter, ThinkLoop, StackLayers, YearScrubber, CopyEmail, plus the ThemeProvider wrapper). A section’s `index.tsx` stays a Server Component and passes content down as props.
 - One component per file, named export, kebab-case filenames, aim for < 150 lines. Split before it grows.
 - Components never import from `content/` directly except section `index.tsx` files and route pages.
 - Pure logic (dot grid, lens falloff, timeline positions, filters) lives in `lib/` as plain functions with no React — easy to test.
@@ -102,11 +114,16 @@ Define in `globals.css` as CSS variables, mapped onto shadcn’s variable names,
 | `--primary` (amber)                 | `#FFB547`                | `#B36F00`             | lens, ring, active states, marks            |
 | `--primary-foreground`              | `#0F1011`                | `#0F1011`             | text on amber                               |
 | `--amber-text` (custom)             | `#FFB547`                | `#8A5300`             | small amber text (Day needs the darker one) |
-| `--stroke` (custom)                 | `rgb(237 235 230 / .4)`  | `rgb(15 16 17 / .42)` | outlined type                               |
+| `--stroke` (custom)                 | `rgb(237 235 230 / .4)`  | `rgb(15 16 17 / .42)` | quiet outlines (decorative, inactive), pill borders |
 | `--ring`                            | `#FFB547`                | `#0F1011`             | focus ring                                  |
+| `--pill` (custom)                   | background @ 62%         | background @ 70%      | pill backdrop                               |
+| `--overlay` (custom)                | background @ 97%         | background @ 97%      | menu backdrop                               |
 
-- Amber is for: lens/dots, ring cursor, section numbers & mono labels, active panel/chip/year, the one key number on a page. **Never** for backgrounds, body text, gradients or glows.
-- Themes via `next-themes`: `attribute="class"`, `defaultTheme="dark"`, `enableSystem={false}` (ask Kenny before following the OS setting). The toggle persists; no flash of the wrong theme.
+- `--secondary` and `--muted` also point at the raised surface; `--card-foreground` etc. alias `--foreground`. `--destructive`/`--chart-*` keep shadcn's values (not part of the design). `--radius` is `0`: pills and round buttons use `rounded-full` explicitly.
+- Tailwind's default palette is removed (`--color-*: initial`), so only token colours compile.
+- Amber is for: lens/dots, ring cursor, section numbers & mono labels, active panel/chip/year, the one key number on a page. **Never** for backgrounds, body text, gradients or glows. Day `--primary` is 3.4:1, so small amber text uses `text-amber-text`.
+- Outlined type that people read (hero line 3, menu links, section numbers) is stroked at full `--foreground` (`type-outline`); decorative giants and inactive states use the 40% `--stroke` (`type-outline-quiet`).
+- Themes via `next-themes`: `attribute="class"`, `defaultTheme="system"`, `enableSystem` (Kenny's decision: the first visit follows the OS; Night is the server/no-JS fallback). The toggle persists the visitor's choice; no flash of the wrong theme.
 
 ### Type
 

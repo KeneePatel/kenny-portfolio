@@ -4,12 +4,89 @@
 
 @custom-variant dark (&:is(.dark *));
 
+/*
+ * Static theme scales. Per-theme colours live in :root (Day) and .dark (Night).
+ * Adding a --text-*, --spacing-* or --blur-* name? Add it to lib/utils.ts too,
+ * so cn() merges it as the right kind of class.
+ */
+@theme {
+  /* Tokens only: drop Tailwind's palette so off-token colours don't compile. */
+  --color-*: initial;
+
+  /* md 768 (tablet) and lg 1024 (desktop) match the defaults; large is 1440. */
+  --breakpoint-xl: 90rem;
+
+  /* Type scale. Fluid between 390px and 1440px viewports; rem limits follow zoom. */
+  --text-greeting: clamp(7.5rem, 2.95rem + 18.667vw, 19.75rem);
+  --text-greeting--line-height: 0.8;
+  --text-greeting--letter-spacing: -0.065em;
+  --text-greeting--font-weight: 800;
+
+  --text-numeral: clamp(6.5rem, 3.575rem + 12vw, 14.375rem);
+  --text-numeral--line-height: 0.78;
+  --text-numeral--letter-spacing: -0.06em;
+  --text-numeral--font-weight: 800;
+
+  --text-section: clamp(2.75rem, 1.45rem + 5.333vw, 6.25rem);
+  --text-section--line-height: 0.92;
+  --text-section--letter-spacing: -0.05em;
+  --text-section--font-weight: 800;
+
+  --text-project: clamp(2.375rem, 1.586rem + 3.238vw, 4.5rem);
+  --text-project--line-height: 0.92;
+  --text-project--letter-spacing: -0.045em;
+  --text-project--font-weight: 800;
+
+  --text-statement: clamp(2rem, 1.211rem + 3.238vw, 4.125rem);
+  --text-statement--line-height: 1;
+  --text-statement--letter-spacing: -0.035em;
+  --text-statement--font-weight: 700;
+
+  --text-menu: clamp(2.75rem, 1.171rem + 6.476vw, 7rem);
+  --text-menu--line-height: 0.98;
+  --text-menu--letter-spacing: -0.045em;
+  --text-menu--font-weight: 800;
+
+  --text-list: clamp(1.375rem, 1.096rem + 1.143vw, 2.125rem);
+  --text-list--line-height: 1.15;
+  --text-list--letter-spacing: -0.02em;
+  --text-list--font-weight: 500;
+
+  --text-body: clamp(1.0625rem, 1.039rem + 0.095vw, 1.125rem);
+  --text-body--line-height: 1.65;
+  --text-body--font-weight: 400;
+
+  --text-data: 0.8125rem;
+  --text-data--line-height: 1.5;
+
+  --text-label: 0.75rem;
+  --text-label--line-height: 1.4;
+  --text-label--letter-spacing: 0.08em;
+
+  /* Layout */
+  --spacing-page: clamp(1.25rem, 4vw, 4rem);
+
+  /* Surfaces behind the chrome */
+  --blur-pill: 10px;
+  --blur-menu: 14px;
+
+  /* Motion curves (lib/motion.ts mirrors these) */
+  --ease-out: cubic-bezier(0.2, 0.7, 0.1, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+}
+
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-sans);
-  --font-mono: var(--font-geist-mono);
-  --font-heading: var(--font-sans);
+  --color-foreground-2: var(--foreground-2);
+  --color-amber-text: var(--amber-text);
+  --color-stroke: var(--stroke);
+  --color-pill: var(--pill);
+  --color-overlay: var(--overlay);
+  --font-sans: var(--font-archivo);
+  --font-mono: var(--font-plex-mono);
+  --font-heading: var(--font-archivo);
+  --spacing-gutter: var(--gutter);
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
@@ -48,83 +125,227 @@
   --radius-4xl: calc(var(--radius) * 2.6);
 }
 
+/*
+ * Day. Night (.dark) is the brand default; the OS preference picks the first theme.
+ * Only the palette changes per theme; aliases below follow it automatically.
+ */
 :root {
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.145 0 0);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.145 0 0);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.205 0 0);
-  --primary-foreground: oklch(0.985 0 0);
-  --secondary: oklch(0.97 0 0);
-  --secondary-foreground: oklch(0.205 0 0);
-  --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.556 0 0);
-  --accent: oklch(0.97 0 0);
-  --accent-foreground: oklch(0.205 0 0);
+  color-scheme: light;
+
+  --background: #eceae4;
+  --foreground: #0f1011;
+  --foreground-2: #45433e;
+  --muted-foreground: #625f59;
+  --surface: #e2dfd8;
+  --border: #cfcbc2;
+  --primary: #b36f00;
+  --primary-foreground: #0f1011;
+  --amber-text: #8a5300;
+  --stroke: rgb(15 16 17 / 0.42);
+  --ring: #0f1011;
+  --pill: color-mix(in srgb, var(--background) 70%, transparent);
+  --overlay: color-mix(in srgb, var(--background) 97%, transparent);
   --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.922 0 0);
-  --input: oklch(0.922 0 0);
-  --ring: oklch(0.708 0 0);
+
+  /* One raised surface: panels, the open-source band, hover. `accent` is not amber. */
+  --card: var(--surface);
+  --popover: var(--surface);
+  --accent: var(--surface);
+  --secondary: var(--surface);
+  --muted: var(--surface);
+  --card-foreground: var(--foreground);
+  --popover-foreground: var(--foreground);
+  --accent-foreground: var(--foreground);
+  --secondary-foreground: var(--foreground);
+  --input: var(--border);
+
+  /* Not part of the design; revisit charts with the case study (M11). */
   --chart-1: oklch(0.87 0 0);
   --chart-2: oklch(0.556 0 0);
   --chart-3: oklch(0.439 0 0);
   --chart-4: oklch(0.371 0 0);
   --chart-5: oklch(0.269 0 0);
-  --radius: 0.625rem;
-  --sidebar: oklch(0.985 0 0);
-  --sidebar-foreground: oklch(0.145 0 0);
-  --sidebar-primary: oklch(0.205 0 0);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.97 0 0);
-  --sidebar-accent-foreground: oklch(0.205 0 0);
-  --sidebar-border: oklch(0.922 0 0);
-  --sidebar-ring: oklch(0.708 0 0);
+
+  /* Unused; aliased so no stray colour lives in the theme. */
+  --sidebar: var(--card);
+  --sidebar-foreground: var(--foreground);
+  --sidebar-primary: var(--primary);
+  --sidebar-primary-foreground: var(--primary-foreground);
+  --sidebar-accent: var(--accent);
+  --sidebar-accent-foreground: var(--accent-foreground);
+  --sidebar-border: var(--border);
+  --sidebar-ring: var(--ring);
+
+  /* Square everywhere; pills and round buttons use rounded-full explicitly. */
+  --radius: 0rem;
+
+  --gutter: calc(var(--spacing) * 4);
+  --chrome-height: calc(var(--spacing) * 21);
+  --stretch-display: 112%;
+  --outline-thin: 1px;
+  --outline-thick: 1.2px;
+
+  /* Motion durations (lib/motion.ts mirrors these) */
+  --duration-instant: 120ms;
+  --duration-quick: 200ms;
+  --duration-ring: 240ms;
+  --duration-morph: 360ms;
+  --duration-band: 450ms;
+  --duration-slow: 700ms;
+
+  /* Layers */
+  --z-chrome: 40;
+  --z-menu: 50;
+  --z-skip: 70;
+  --z-cursor: 80;
 }
 
+@media (width >= 48rem) {
+  :root {
+    --gutter: calc(var(--spacing) * 6);
+  }
+}
+
+/* Night */
 .dark {
-  --background: oklch(0.145 0 0);
-  --foreground: oklch(0.985 0 0);
-  --card: oklch(0.205 0 0);
-  --card-foreground: oklch(0.985 0 0);
-  --popover: oklch(0.205 0 0);
-  --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.922 0 0);
-  --primary-foreground: oklch(0.205 0 0);
-  --secondary: oklch(0.269 0 0);
-  --secondary-foreground: oklch(0.985 0 0);
-  --muted: oklch(0.269 0 0);
-  --muted-foreground: oklch(0.708 0 0);
-  --accent: oklch(0.269 0 0);
-  --accent-foreground: oklch(0.985 0 0);
+  color-scheme: dark;
+
+  --background: #0f1011;
+  --foreground: #edebe6;
+  --foreground-2: #b5b2ab;
+  --muted-foreground: #8c8983;
+  --surface: #17181a;
+  --border: #2a2b2e;
+  --primary: #ffb547;
+  --primary-foreground: #0f1011;
+  --amber-text: #ffb547;
+  --stroke: rgb(237 235 230 / 0.4);
+  --ring: #ffb547;
+  --pill: color-mix(in srgb, var(--background) 62%, transparent);
   --destructive: oklch(0.704 0.191 22.216);
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.556 0 0);
-  --chart-1: oklch(0.87 0 0);
-  --chart-2: oklch(0.556 0 0);
-  --chart-3: oklch(0.439 0 0);
-  --chart-4: oklch(0.371 0 0);
-  --chart-5: oklch(0.269 0 0);
-  --sidebar: oklch(0.205 0 0);
-  --sidebar-foreground: oklch(0.985 0 0);
-  --sidebar-primary: oklch(0.488 0.243 264.376);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.269 0 0);
-  --sidebar-accent-foreground: oklch(0.985 0 0);
-  --sidebar-border: oklch(1 0 0 / 10%);
-  --sidebar-ring: oklch(0.556 0 0);
 }
 
 @layer base {
   * {
-    @apply border-border outline-ring/50;
-  }
-  body {
-    @apply bg-background text-foreground;
+    @apply border-border outline-ring;
   }
   html {
-    @apply font-sans;
+    @apply bg-background font-sans;
+    scroll-padding-top: var(--chrome-height);
+  }
+  body {
+    @apply bg-background text-body text-foreground;
+  }
+  :focus-visible {
+    outline: 2px solid var(--color-ring);
+    outline-offset: 3px;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+/* Focus ring for components whose defaults set outline-none (shadcn). */
+@utility focus-ring {
+  &:focus-visible {
+    outline: 2px solid var(--color-ring);
+    outline-offset: 3px;
+  }
+}
+
+/* Outlined display type. Ink-strength stroke by default; never for body, links or buttons. */
+@utility type-outline {
+  color: var(--outline-fill, transparent);
+  -webkit-text-stroke: var(--outline-width, var(--outline-thin))
+    var(--outline-color, var(--color-foreground));
+
+  @supports not (-webkit-text-stroke: 1px black) {
+    color: var(--outline-color, var(--color-foreground));
+  }
+  @media (forced-colors: active) {
+    color: CanvasText;
+    -webkit-text-stroke: 0;
+  }
+}
+
+/* Decorative giants and inactive states: the 40% stroke. */
+@utility type-outline-quiet {
+  --outline-color: var(--color-stroke);
+}
+
+@utility type-outline-thick {
+  --outline-width: var(--outline-thick);
+}
+
+/* Hovered / focused / chosen: the outline fills amber. */
+@utility type-outline-lit {
+  --outline-fill: var(--color-primary);
+  --outline-color: var(--color-primary);
+}
+
+/*
+ * The pill look, shared by interactive pills (Button variant) and static ones (clock).
+ * Surface only: layout (display, size, padding) stays in utilities so `hidden md:inline-flex` wins.
+ */
+@utility pill-surface {
+  border: 1px solid var(--color-stroke);
+  border-radius: calc(infinity * 1px);
+  background-color: var(--color-pill);
+  backdrop-filter: blur(var(--blur-pill));
+  -webkit-backdrop-filter: blur(var(--blur-pill));
+}
+
+/* Prose links: 1px rule at rest, amber 2px grows in on hover and focus. */
+@utility link-rule {
+  text-decoration: none;
+  background-image:
+    linear-gradient(var(--color-primary), var(--color-primary)),
+    linear-gradient(var(--color-border), var(--color-border));
+  background-size:
+    0% 2px,
+    100% 1px;
+  background-position:
+    0 100%,
+    0 100%;
+  background-repeat: no-repeat;
+  padding-bottom: 2px;
+  transition: background-size var(--duration-quick) var(--ease-out);
+
+  /* Also when a parent link is hovered/focused (the text sits inside a 44px target). */
+  &:hover,
+  &:focus-visible,
+  :where(a:hover, a:focus-visible) > & {
+    background-size:
+      100% 2px,
+      100% 1px;
+  }
+}
+
+/* 4 / 8 / 12 columns with the page gutter. */
+@utility page-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  column-gap: var(--gutter);
+
+  @media (width >= 48rem) {
+    grid-template-columns: repeat(8, minmax(0, 1fr));
+  }
+  @media (width >= 64rem) {
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+  }
+}
+
+/* Reduced motion: final frames, no travel. Colour still changes, instantly. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0s !important;
+    animation-delay: 0s !important;
+    transition-duration: 0s !important;
+    transition-delay: 0s !important;
   }
 }
