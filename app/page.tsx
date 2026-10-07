@@ -2,11 +2,12 @@ import { AboutSection } from "@/components/sections/about"
 import { ArchiveSection } from "@/components/sections/archive"
 import { Hero } from "@/components/sections/hero"
 import { PlaceholderSection } from "@/components/sections/placeholder-section"
+import { StackSection } from "@/components/sections/stack"
 import { WorkSection } from "@/components/sections/work-track"
 import { site } from "@/content/site"
 
-// Sections that already exist; the rest are temporary stubs until M7–M10.
-const BUILT = new Set(["work", "archive", "about"])
+// Sections that already exist; the rest are temporary stubs until M8–M10.
+const BUILT = new Set(["work", "archive", "about", "toolkit"])
 
 export default function Home() {
   return (
@@ -15,6 +16,7 @@ export default function Home() {
       <WorkSection />
       <ArchiveSection />
       <AboutSection />
+      <StackSection />
       {site.nav
         .filter((item) => !BUILT.has(item.id))
         .map((item) => (

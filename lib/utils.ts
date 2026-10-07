@@ -21,6 +21,8 @@ export const cn = createCn({
         "data",
         "label",
         "name",
+        "layer",
+        "tool",
       ],
       spacing: ["page", "gutter"],
       blur: ["pill", "menu"],

@@ -63,6 +63,17 @@
   --text-label--line-height: 1.4;
   --text-label--letter-spacing: 0.08em;
 
+  /* Toolkit layer names and the tools inside them. */
+  --text-layer: clamp(2.125rem, 1.15rem + 4vw, 4.75rem);
+  --text-layer--line-height: 1;
+  --text-layer--letter-spacing: -0.04em;
+  --text-layer--font-weight: 800;
+
+  --text-tool: clamp(1.25rem, 1.064rem + 0.762vw, 1.75rem);
+  --text-tool--line-height: 1.3;
+  --text-tool--letter-spacing: -0.015em;
+  --text-tool--font-weight: 600;
+
   /* The outlined name behind the hero (decorative, bleeds off both edges). */
   --text-name: clamp(6.5rem, 3.111rem + 13.905vw, 15.625rem);
   --text-name--line-height: 0.9;

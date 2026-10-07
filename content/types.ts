@@ -125,6 +125,25 @@ export type ArchiveCopy = {
   teamNote: string
 }
 
+/** One layer of the toolkit: what's in it, and where it was used. */
+export type StackLayer = {
+  id: string
+  code: string
+  name: string
+  tools: string[]
+  seenIn: string[]
+}
+
+export type StackCopy = {
+  label: string
+  title: string
+  /** `{count}` */
+  toolsCount: string
+  seenIn: string
+  /** The layer open on arrival. */
+  defaultOpen: string
+}
+
 export type AboutCopy = {
   label: string
   /** The statement: a filled half, then an outlined half. */
