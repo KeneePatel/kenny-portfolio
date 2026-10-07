@@ -76,6 +76,7 @@ app/
 components/
   ui/                     shadcn-generated. Extend with cva variants; don’t fork.
   signal/                 design-system primitives (see below)
+  chrome/                 top bar (KP mark, clock, theme, Menu pills) and the Menu dialog
   field/                  Field (canvas), field math wrapper, static fallback
   sections/
     hero/  work-track/  archive/  about/  stack/  path/  open-source/  contact/
@@ -87,7 +88,7 @@ lib/                      cn(), motion tokens, pure math (field.ts, timeline.ts)
 
 Rules:
 
-- **Server Components by default.** `"use client"` only on interactive leaves (Field, RingCursor, ThemeToggle, Menu, WorkTrack, ArchiveFilter, ThinkLoop, StackLayers, YearScrubber, CopyEmail, plus the ThemeProvider wrapper). A section’s `index.tsx` stays a Server Component and passes content down as props.
+- **Server Components by default.** `"use client"` only on interactive leaves (Field, RingCursor, ThemeToggle, Menu, WorkTrack, ArchiveFilter, ThinkLoop, StackLayers, YearScrubber, CopyEmail, plus the live HalifaxTime and the ThemeProvider wrapper). A section’s `index.tsx` stays a Server Component and passes content down as props.
 - One component per file, named export, kebab-case filenames, aim for < 150 lines. Split before it grows.
 - Components never import from `content/` directly except section `index.tsx` files and route pages.
 - Pure logic (dot grid, lens falloff, timeline positions, filters) lives in `lib/` as plain functions with no React — easy to test.
@@ -159,7 +160,7 @@ Define in `globals.css` as CSS variables, mapped onto shadcn’s variable names,
 
 **RingCursor** — fine pointers only (`(hover: hover) and (pointer: fine)`), never on touch or reduced motion. Never hides the system cursor. 36 px amber ring trailing the pointer (k = 0.24); over any element with `data-cursor="label"` it grows to 76 px, fills amber and shows the label. Move it with `transform` on a ref inside rAF — **never React state per frame.**
 
-**Chrome & Menu** — KP mark + three pills (Halifax clock, theme, Menu). Menu = shadcn `Dialog` styled full-screen: six numbered links at up to 112 px, outlined until hover/focus, then amber; contact + local time in the corner. Focus trapped, Escape closes, focus returns to Menu.
+**Chrome & Menu** — KP mark + three pills (Halifax clock, theme, Menu). Menu = shadcn `Dialog` styled full-screen: six numbered links at up to 112 px, outlined until hover/focus, then amber; contact + local time in the corner. Focus trapped, Escape closes, focus returns to Menu; choosing a link closes the menu and moves focus to that section. Below 768 px the bar is KP + Menu only: the clock hides and the theme toggle moves into the menu as a row at thumb height (Kenny's decision). Below 1024 px the "Kenny Patel" text beside KP is visually hidden.
 
 **Hero** — one `h1`: “Hi.” / “I’m Kenny Patel.” / “And this is my website.” (third line outlined). Status block (based, local time, builds, status). Outlined “KENNY PATEL” behind (aria-hidden); each letter is a span, hover weight 300→900, neighbours 640 (CSS `:hover` + `:has()`), 360 ms.
 

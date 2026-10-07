@@ -17,6 +17,8 @@ const buttonVariants = cva(
         destructive:
           "bg-destructive/10 text-destructive hover:bg-destructive/20 focus-visible:border-destructive/40 focus-visible:ring-destructive/20 dark:bg-destructive/20 dark:hover:bg-destructive/30 dark:focus-visible:ring-destructive/40",
         link: "text-primary underline-offset-4 hover:underline",
+        // Chrome pills: hover and keyboard focus share one look (+ the 2px ring).
+        pill: "pill-surface focus-ring rounded-full border-stroke font-normal transition-colors duration-(--duration-instant) ease-out hover:bg-accent focus-visible:border-stroke focus-visible:bg-accent focus-visible:ring-0 aria-expanded:bg-accent",
       },
       size: {
         default:
@@ -28,6 +30,8 @@ const buttonVariants = cva(
         "icon-xs": "size-6 [&_svg:not([class*='size-'])]:size-3",
         "icon-sm": "size-8",
         "icon-lg": "size-10",
+        pill: "min-h-11 gap-2.5 px-4.5",
+        "pill-icon": "min-h-11 min-w-11 px-3.5",
       },
     },
     defaultVariants: {

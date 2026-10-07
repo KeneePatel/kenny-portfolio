@@ -182,6 +182,7 @@
   --gutter: calc(var(--spacing) * 4);
   --chrome-height: calc(var(--spacing) * 21);
   --stretch-display: 112%;
+  --hang-numeral: -0.06em; /* section numbers hang off the left margin */
   --outline-thin: 1px;
   --outline-thick: 1.2px;
 
@@ -239,6 +240,10 @@
   :focus-visible {
     outline: 2px solid var(--color-ring);
     outline-offset: 3px;
+  }
+  /* Programmatic focus targets (skip link, menu) don't need a box around a whole section. */
+  [tabindex="-1"]:focus {
+    outline: none;
   }
 }
 

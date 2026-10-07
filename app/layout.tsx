@@ -1,6 +1,8 @@
 import type { Metadata } from "next"
 import { Archivo, IBM_Plex_Mono } from "next/font/google"
 
+import { Chrome } from "@/components/chrome/chrome"
+import { SkipLink } from "@/components/signal/skip-link"
 import { ThemeProvider } from "@/components/theme-provider"
 import { site } from "@/content/site"
 import { cn } from "@/lib/utils"
@@ -40,6 +42,10 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           enableSystem
           disableTransitionOnChange
         >
+          <SkipLink href={`#${site.chrome.skipTarget}`}>
+            {site.chrome.skipLink}
+          </SkipLink>
+          <Chrome site={site} />
           {children}
         </ThemeProvider>
       </body>
