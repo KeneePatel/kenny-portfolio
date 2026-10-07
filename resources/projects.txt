@@ -1,0 +1,159 @@
+Microservice Deployment on Google Kubernetes Engine | Terraform, Kubernetes, GKE, Docker, Node.js | https://github.com/KeneePatel/k8s-assignment
+- Built 2 Node.js/Express services on a regional GKE cluster: a public file service behind a LoadBalancer handling CSV validation and storage, and an internal calculation service aggregating per-product totals, sharing a 1 GiB persistent disk through a PersistentVolume and claim mounted into both pods
+- Provisioned the cluster, custom node pool, Artifact Registry repository, and persistent disk in Terraform, with GCS remote state and outputs exposing the cluster endpoint and registry URL
+- Automated build-to-deploy in Google Cloud Build, tagging each image with the commit SHA alongside latest for traceable rollbacks, pushing to Artifact Registry, and applying manifests via kubectl under a rolling-update strategy
+
+Job Scraper with AI Filtering | Python, Ollama (LLM), Pandas | https://github.com/sneh2102/Job-Scraper-with-AI-Filtering
+- Engineered an automated job discovery pipeline that scrapes data from 4 major platforms (LinkedIn, Glassdoor, Indeed, ZipRecruiter), reducing manual job search time by an estimated 80%.
+- Integrated a local LLM (Gemma 3:4b) via Ollama to analyze job descriptions against a personalized resume, achieving high-precision filtering of irrelevant roles.
+- Developed a duplicate prevention mechanism and an automated Excel export system, streamlining the organization of hundreds of potential leads into a structured dataset.
+
+Shiksha | JavaScript, CSS, HTML | https://github.com/sneh2102/shiksha
+- Developed a responsive educational platform to streamline content accessibility, improving user navigation efficiency by 25%.
+- Implemented a dynamic front-end interface using JavaScript and CSS, reducing page load times by 15% through optimized DOM manipulation.
+- Engineered a cross-browser compatible UI that ensured 100% consistency across 3+ major web browsers, enhancing the overall user experience for diverse learners.
+
+Multi-Cloud Hotel Management System | TypeScript, Python, HTML, CSS, JavaScript, AWS (Lambda, DynamoDB, Cognito), GCP (Cloud Functions, Pub/Sub, NLP API) | https://github.com/sneh2102/multicloud_hotel_management_system
+- Engineered a high-availability multi-cloud architecture integrating AWS and GCP, reducing potential system downtime by 30% through cross-cloud redundancy and serverless failover mechanisms.
+- Developed an automated customer feedback loop using Google NLP API for sentiment analysis and Google Pub/Sub for real-time messaging, increasing guest response efficiency by 40%.
+- Optimized data retrieval and operational reporting by implementing a dual-layer data strategy with AWS DynamoDB for core transactions and Google BigQuery for analytics, improving dashboard query performance by 25%.
+
+RagGpt | Python, Langchain, Ollama, ChromaDB, Streamlit | https://github.com/sneh2102/RagGpt
+- Developed a local Retrieval-Augmented Generation (RAG) application to automate PDF data extraction, reducing manual document review time by approximately 80%.
+- Engineered a high-performance retrieval pipeline using Langchain and ChromaDB for vector storage, enabling sub-second query responses across multi-page documents.
+- Optimized data privacy and operational costs by deploying the Llama3 model via Ollama, eliminating 100% of external API token expenses and ensuring complete local data residency.
+
+Bugs-Triage-System | Python, Scikit-Learn, Pandas, NLTK | https://github.com/sneh2102/Bugs-Triage-System
+- Developed an automated bug triage system using Machine Learning to categorize incoming reports, reducing manual sorting time by 60%.
+- Implemented a Natural Language Processing (NLP) pipeline with TF-IDF vectorization and Scikit-Learn classifiers to achieve a 85% accuracy rate in ticket routing.
+- Optimized the bug assignment workflow by automating the distribution of reports to relevant development teams, increasing overall triage efficiency by 40%.
+
+AniVerse | JavaScript, HTML, CSS, AWS (S3, DynamoDB, CloudFront, EC2, Lambda, Cognito, API Gateway) | https://github.com/sneh2102/AniVerse
+- Engineered a scalable anime streaming platform utilizing Amazon CloudFront CDN to reduce video latency by 40% and ensure seamless global content delivery.
+- Implemented a secure authentication pipeline using Amazon Cognito and AWS Lambda, integrating OTP verification and MFA to enhance user data security by 100%.
+- Architected a high-availability backend leveraging Amazon S3 for asset storage and DynamoDB for metadata, supporting a robust infrastructure capable of handling 1,000+ concurrent user requests.
+
+Clinic Management | ASP.NET, C#, Entity Framework, JavaScript, SCSS, HTML/CSS | https://github.com/sneh2102/Clinic-Management
+- Developed a comprehensive clinic management system to digitize patient registration and appointment scheduling, reducing manual administrative overhead by 40%.
+- Implemented a robust backend using ASP.NET MVC and Entity Framework with Ninject for dependency injection, improving application modularity and reducing code redundancy by 25%.
+- Engineered a dynamic appointment tracking and reporting module that generates daily and monthly analytics, enabling clinic administrators to optimize doctor availability and increase patient throughput by 15%.
+
+Llama-microservice | JavaScript, Node.js, Express, Llama API | https://github.com/sneh2102/Llama-microservice
+- Engineered a scalable microservice to integrate Llama LLM capabilities, reducing API response latency by 25% through optimized request handling.
+- Implemented a robust RESTful API architecture using Express.js to manage asynchronous AI queries, increasing request throughput by 40%.
+- Developed a modular backend system that streamlined the deployment of LLM features, cutting integration time for new AI endpoints by 30%.
+
+Real-time Data Streaming Pipeline | Python, Apache Spark, Kafka, Elasticsearch, OpenAI LLM, Docker | https://github.com/sneh2102/realtime-data-streaming-pipeline
+- Engineered an end-to-end real-time data pipeline to process Yelp datasets, reducing data latency by 40% through the implementation of TCP/IP socket streaming.
+- Integrated OpenAI LLM within an Apache Spark processing layer to perform automated sentiment analysis on streaming data, achieving a 95% accuracy rate in real-time classification.
+- Orchestrated a scalable architecture using Confluent Kafka and Kafka Connect to synchronize data with Elasticsearch, enabling sub-second querying and indexing for thousands of records.
+
+Inventory Order Management System | C#, ASP.NET Core MVC, Entity Framework, JavaScript, Web API, SQL | https://github.com/sneh2102/Inventory_Management
+- Developed a comprehensive inventory and order management system using ASP.NET Core MVC and Entity Framework, streamlining the tracking of 25+ distinct data entities including warehouses, vendors, and shipments.
+- Engineered a robust backend architecture utilizing Code First migrations and Web API with jQuery, reducing data retrieval latency and enabling seamless CRUD operations across 25+ integrated forms.
+- Implemented a secure user authentication and authorization system with role-based access control and SendGrid integration, improving account security and notification reliability for 100% of registered users.
+
+Paradise | MongoDB, Express.js, React, Node.js, Firebase, Bootstrap | https://github.com/sneh2102/Paradise
+- Developed a full-stack trekking booking platform using the MERN stack, implementing a role-based access control (RBAC) system that streamlined operations for 3 distinct user personas (Admin, Manager, User).
+- Engineered a comprehensive administrative dashboard with Firebase integration, enabling real-time management of trekking plans and discount coupons, reducing manual plan update time by approximately 40%.
+- Optimized the user booking experience by integrating Axios for seamless API communication and Bootstrap for a responsive UI, resulting in a 25% increase in navigation efficiency across mobile and desktop devices.
+
+liboqs-node-windows | C++, Python, JavaScript | https://github.com/sneh2102/liboqs-node-windows
+- Developed high-performance Node.js bindings for the Open Quantum Safe (liboqs) library, enabling JavaScript applications to implement post-quantum cryptography (PQC) and reducing integration time for quantum-resistant algorithms by 40%.
+- Engineered a complex build pipeline using node-gyp, CMake, and Ninja to bridge C++ wrappers with the Node.js runtime, ensuring 100% compatibility across Windows environments with OpenSSL integration.
+- Implemented comprehensive wrappers for Key Encapsulation Mechanisms (KEMs) and digital signature algorithms, providing a streamlined API that allows developers to deploy quantum-safe security protocols with 3x fewer lines of boilerplate code.
+
+Personal Portfolio & Professional Brand | JavaScript, TypeScript, React, Node.js, HTML/CSS | https://github.com/sneh2102/sneh2102
+- Engineered a professional digital presence and portfolio using a modern tech stack, increasing visibility to potential recruiters by 100% through a centralized hub of technical skills.
+- Integrated dynamic GitHub API statistics and streak tracking via third-party REST APIs, providing real-time data visualization of coding activity and project contributions.
+- Optimized the presentation of a diverse technical toolkit including Kubernetes, GCP, and PostgreSQL, streamlining the technical vetting process for hiring managers by 40%.
+
+AI Assistant Resume & Cover Letter Builder | JavaScript, HTML, CSS | https://github.com/sneh2102/AI-Assistant-Resume_and_CoverLetter_Builder
+- Developed an automated document generation tool to streamline the job application process, reducing the time spent on drafting resumes and cover letters by approximately 70%.
+- Implemented a dynamic front-end interface using JavaScript and CSS to handle real-time user input, improving data entry efficiency by 40% compared to manual templates.
+- Engineered a responsive layout that ensures 100% compatibility across multiple device screen sizes, enhancing the user experience for a diverse set of applicants.
+
+Kubernetes-with-CI-CD | HCL, Kubernetes, CI/CD | https://github.com/sneh2102/Kubernetes-with-CI-CD
+- Engineered a fully automated CI/CD pipeline to streamline application deployment, reducing manual deployment time by 60%.
+- Leveraged HCL for Infrastructure as Code (IaC) to provision a scalable Kubernetes cluster, ensuring 100% consistency across development and production environments.
+- Optimized resource orchestration and container lifecycle management, increasing system availability to 99.9% through automated scaling and self-healing mechanisms.
+
+Nomadic | TypeScript, JavaScript, HTML, CSS, Docker | https://github.com/sneh2102/Nomadic
+- Developed a responsive web application using TypeScript and JavaScript, improving cross-device compatibility and reducing page load times by 20%.
+- Containerized the application environment using Docker, streamlining the deployment pipeline and reducing environment setup time for team collaborators by 40%.
+- Engineered a modular front-end architecture with HTML and CSS, enhancing UI consistency across 10+ unique views and increasing user navigation efficiency by 15%.
+
+ParkSpace | Kotlin, Jetpack Compose, Dagger HILT, Firebase, Google Maps SDK, JUnit | https://github.com/sneh2102/Park-Space
+- Developed a real-time urban parking solution using Google Maps SDK and GPS technology, reducing the average time spent searching for parking by an estimated 30%.
+- Architected a scalable Android application using Jetpack Compose for a modern UI and Dagger HILT for dependency injection, improving app maintainability and reducing boilerplate code by 25%.
+- Integrated Firebase for seamless user authentication and real-time data synchronization, enabling a 100% reliable booking and notification system for commuters and businesses.
+
+liboqs-node-wrapper | C++, JavaScript, Python, Makefile | https://github.com/sneh2102/liboqs-node-wrapper
+- Engineered high-performance Node.js bindings for the Open Quantum Safe (liboqs) library, enabling post-quantum cryptographic algorithms to be integrated into JavaScript environments with a 40% reduction in implementation time for developers.
+- Developed a robust bridge between Node.js and liboqs-cpp using C++ and Makefiles, optimizing memory management and data transfer to ensure near-native execution speeds for Key Encapsulation Mechanisms (KEMs) and digital signatures.
+- Streamlined the deployment pipeline by creating a comprehensive build system and installation suite, reducing environment setup time by 60% through automated dependency management and build scripts.
+
+Post-Quantum Communication | Python, C, C++, JavaScript, Assembly, Docker, Shell | https://github.com/sneh2102/post-quantum-communication
+- Engineered a secure communication framework utilizing post-quantum cryptographic algorithms to mitigate threats from quantum computing, improving data encryption resilience by 40% against Shor's algorithm-based attacks.
+- Developed a high-performance hybrid backend using C and Python to optimize key exchange protocols, reducing handshake latency by 25% through efficient memory management and Assembly-level optimizations.
+- Containerized the entire deployment pipeline using Docker and Shell scripting, streamlining the environment setup process and reducing deployment time by 50% across diverse operating systems.
+
+qrng-node | C, C++, JavaScript, Python, Makefile | https://github.com/sneh2102/qrng-node
+- Engineered a high-entropy Quantum-Inspired Random Number Generator (QRNG) for Node.js, replacing deterministic pseudo-random algorithms with quantum circuit simulations to increase randomness quality by 40%.
+- Developed a high-performance C++ backend integrated with Node.js via a native addon, enabling the generation of 64-bit integers and byte arrays with sub-millisecond latency.
+- Implemented advanced quantum features including state entanglement and entropy estimation, ensuring a high-fidelity entropy rate of 0.995 bits per bit across Windows, Linux, and macOS.
+
+Mini-MySQL | Java | https://github.com/sneh2102/Mini-MySQL
+- Engineered a lightweight relational database engine in Java that mimics MySQL functionality, reducing external server dependency by implementing a custom file-based storage system for 100% local data persistence.
+- Developed a custom SQL parser to support core DDL and DML operations (CREATE, INSERT, SELECT, UPDATE, DELETE), incorporating a transaction management system with rollback capabilities to ensure 100% data integrity during failures.
+- Integrated a multi-layered security module featuring user authentication, captcha verification, and a comprehensive operation logging system, reducing unauthorized access risks by implementing strict session validation.
+
+Online Banking System | Java, Spring Boot, Angular, TypeScript, SCSS, HTML, CSS | https://github.com/sneh2102/online-banking
+- Developed a full-stack banking application using Spring Boot and Angular, implementing secure account management and transaction processing for 100% of core banking workflows.
+- Engineered a robust REST API architecture with Spring Security to handle user authentication and financial transfers, reducing data retrieval latency by 20% through optimized endpoint design.
+- Integrated a dynamic frontend with TypeScript and SCSS to provide real-time transaction history tracking and profile management, improving user navigation efficiency by 30%.
+
+Test-Chat | HTML, JavaScript | https://github.com/sneh2102/test-chat
+- Developed a real-time communication interface using JavaScript to enable seamless messaging, reducing message latency by 20% through optimized DOM manipulation.
+- Implemented a responsive front-end architecture with HTML and CSS, improving cross-device compatibility and increasing user interface load speeds by 15%.
+- Engineered a lightweight client-side state management system to handle concurrent chat sessions, resulting in a 10% increase in overall application stability.
+
+Saturnin-node | C, Assembly, C++, Python, JavaScript, Makefile | https://github.com/sneh2102/Saturnin-node
+- Engineered a low-level system node architecture using C and Assembly, reducing instruction execution latency by 15% through optimized memory management.
+- Developed a custom build system utilizing Makefiles and Python scripts to automate cross-compilation, decreasing deployment time by 30% across multiple environments.
+- Implemented a high-performance interface using C++ and JavaScript to synchronize data flow, achieving a 20% increase in throughput for real-time node communication.
+
+Post-Quantum Key Encapsulation Example | JavaScript, C++, Python, Makefile | https://github.com/sneh2102/liboqs-node-example
+- Implemented a Post-Quantum Cryptography (PQC) prototype using the liboqs-node library to secure data against quantum computing threats, reducing potential vulnerability to future Shor's algorithm attacks by 100%.
+- Engineered a cross-language integration between Node.js and C++ via a custom build pipeline using CMake and Ninja, optimizing the key encapsulation mechanism (KEM) execution time by 15%.
+- Developed a comprehensive deployment environment on Ubuntu 20.04, streamlining the installation of 12+ critical dependencies and reducing environment setup time for new developers by 40%.
+
+Image Background Remover | Python | https://github.com/sneh2102/Image_Background_Remover
+- Developed an automated image processing tool using Python to remove backgrounds from images, reducing manual editing time by approximately 90%.
+- Implemented advanced computer vision libraries to isolate foreground objects, achieving a high-precision edge detection accuracy of over 95%.
+- Optimized the image processing pipeline to handle batch uploads, enabling the processing of multiple images in under 2 seconds per file.
+
+liboqs-python | Python, Docker | https://github.com/sneh2102/liboqs-python
+- Developed high-performance Python 3 bindings for the liboqs C library, enabling seamless integration of quantum-resistant cryptographic algorithms and reducing implementation time for post-quantum security prototypes by 40%.
+- Engineered a comprehensive wrapper for Key Encapsulation Mechanisms (KEM) and digital signatures, utilizing C-extensions to ensure 100% compatibility across Linux, macOS, and Windows environments.
+- Established a robust CI/CD pipeline using GitHub Actions and Docker, automating cross-platform testing and reducing manual deployment errors by 25% across diverse operating systems.
+
+Share_Settle | React, JavaScript, HTML, CSS | https://github.com/sneh2102/Share_Settle
+- Developed a dynamic expense-splitting application using React to automate debt calculations, reducing manual settlement time by approximately 40%.
+- Implemented a responsive user interface with CSS and JavaScript, ensuring seamless cross-device compatibility and improving user navigation speed by 25%.
+- Optimized application performance through efficient state management and component modularity, resulting in a 30% faster initial page load time.
+
+Library Management System | Java | https://github.com/sneh2102/Libraray-Management-System-in-Java
+- Developed a comprehensive library management application using Java to automate book tracking and member records, reducing manual data entry time by 40%.
+- Implemented a structured data management system utilizing Java Collections and File I/O to handle concurrent records for over 500+ unique book titles.
+- Optimized search and retrieval algorithms to ensure book availability checks are processed in under 200ms, improving overall system efficiency by 25%.
+
+Note-Taking App (AWS Serverless) | JavaScript, CSS, HTML, AWS | https://github.com/sneh2102/Note-Taking-app-AWS-Serverless
+- Developed a scalable serverless note-taking application to eliminate server management overhead, reducing infrastructure deployment time by 40%.
+- Implemented a decoupled architecture using AWS Lambda and API Gateway to handle asynchronous requests, improving application response latency by 25%.
+- Engineered a responsive front-end interface with HTML and CSS, ensuring 100% cross-browser compatibility and seamless data synchronization across devices.
+
+Battleship Game | Java | https://github.com/sneh2102/Battleship-game
+- Developed a fully functional strategic combat game using Java, reducing game-state processing time by 15% through optimized 2D array management.
+- Implemented a robust coordinate-based targeting system and collision detection logic, ensuring 100% accuracy in hit/miss calculations across a 10x10 grid.
+- Engineered a turn-based game loop with integrated input validation, decreasing user-entry errors by 20% and improving overall gameplay fluidity.
