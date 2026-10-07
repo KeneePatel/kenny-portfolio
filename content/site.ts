@@ -76,6 +76,7 @@ export const site: Site = {
       previous: "prev",
       next: "next",
       open: "open",
+      filter: "filter",
     },
   },
   placeholder: {

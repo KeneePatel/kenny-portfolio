@@ -418,6 +418,28 @@
   translate: calc(var(--track-index, 0) * -1 * (var(--panel-w) + var(--track-gap))) 0;
 }
 
+/*
+ * Archive rows: number · title · stack · area · arrow. The area column drops
+ * below desktop; on phones the stack moves under the title.
+ */
+@utility archive-grid {
+  display: grid;
+  align-items: baseline;
+  column-gap: var(--gutter);
+  row-gap: calc(var(--spacing) * 1.5);
+  grid-template-columns: 3rem minmax(0, 1fr) 1.25rem;
+  grid-template-areas: "number title arrow" ". stack .";
+
+  @media (width >= 48rem) {
+    grid-template-columns: 3rem minmax(0, 1fr) minmax(0, 16rem) 1.25rem;
+    grid-template-areas: "number title stack arrow";
+  }
+  @media (width >= 64rem) {
+    grid-template-columns: 3rem minmax(0, 1fr) minmax(0, 16rem) 9.5rem 1.25rem;
+    grid-template-areas: "number title stack area arrow";
+  }
+}
+
 /* 4 / 8 / 12 columns with the page gutter. */
 @utility page-grid {
   display: grid;

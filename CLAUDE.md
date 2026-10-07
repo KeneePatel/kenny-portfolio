@@ -166,7 +166,7 @@ Define in `globals.css` as CSS variables, mapped onto shadcn’s variable names,
 
 **WorkTrack** — featured projects from `content/projects.ts`, one in focus. Currently three (Speech Denoising, Microservices on GKE, Starknet): Kenny left out RoomM8, post-quantum for Node and team projects (repos on a collaborator's account). Built as a custom track (CSS transform on tablet+, native scroll-snap on phones) rather than Embla. Prev/next round buttons, numbered tabs, arrow keys; 700 ms in-out; inactive panels at 38% opacity. Mobile: native swipe with snap, panels at 84vw. Each panel: number, title, one line, a diagram drawn from the project (no stock images), stack in mono, one CTA.
 
-**Archive** — filterable list (`ToggleGroup`): All · Cloud & DevOps · AI & Data · Systems & Security · Web & Mobile; “Showing n of N” updates. Row hover: title 500→800 + 10 px shift, arrow turns amber. Team projects show “Team project · my part: …”.
+**Archive** — filterable list (`ToggleGroup`): All · Cloud & DevOps · AI & Data · Systems & Security · Web & Mobile; “Showing n of N” updates. Kenny's decisions: team projects (collaborator repos) are left out, featured projects aren't repeated, Word Map is dropped (unsourced); the active chip fills amber. Only filters with at least one project are shown. Rows without a URL aren't links (no arrow, no hover effect). Row hover: title 500→800 + 10 px shift, arrow turns amber. Team projects show “Team project · my part: …”.
 
 **About / ThinkLoop** — statement half filled, half outlined. Build → Break → Understand → Rebuild as toggle buttons; the chosen step fills amber; its line is announced (`aria-live="polite"`). Portrait tilted −2°, overlapping the column edge.
 

@@ -1,3 +1,7 @@
+import type { Area } from "@/lib/archive"
+
+export type { Area }
+
 /** A homepage section reachable from the menu. `id` is the section's anchor. */
 export type NavItem = {
   number: string
@@ -42,6 +46,7 @@ export type ChromeCopy = {
     previous: string
     next: string
     open: string
+    filter: string
   }
 }
 
@@ -91,6 +96,32 @@ export type WorkCopy = {
   next: string
   /** Announced politely when the track moves. `{current}`, `{total}`, `{title}` */
   announcement: string
+}
+
+/** A project in the archive list. Rows without `href` aren't links. */
+export type ArchiveItem = {
+  slug: string
+  title: string
+  stack: string[]
+  area: Area
+  href?: string
+  /** Team project: shown as "Team project · my part: {role}". */
+  team?: boolean
+  role?: string
+}
+
+export type ArchiveCopy = {
+  /** `{total}` = number of archive projects. */
+  label: string
+  title: string
+  filtersLabel: string
+  all: string
+  areas: Record<Area, string>
+  /** `{count}`, `{total}` */
+  showing: string
+  columns: string
+  /** `{role}` */
+  teamNote: string
 }
 
 /** One row of the hero's status list. `clock` rows show the live local time. */
