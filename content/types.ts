@@ -264,6 +264,14 @@ export type Site = {
     title: string
     description: string
   }
+  /** The 404 page: label, a filled and an outlined phrase, one line, the way home. */
+  notFound: {
+    metaTitle: string
+    label: string
+    title: { filled: string; outlined: string }
+    body: string
+    home: { label: string; href: string }
+  }
   hero: {
     lines: [string, string, string]
     facts: HeroFact[]

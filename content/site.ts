@@ -23,6 +23,13 @@ export const site: Site = {
     title: "Kenny Patel — Software engineer, Halifax",
     description: "[TODO: one-line site description]",
   },
+  notFound: {
+    metaTitle: "Page not found — Kenny Patel",
+    label: "404 · Not found",
+    title: { filled: "Only", outlined: "noise here." },
+    body: "This page doesn’t exist, or it has moved.",
+    home: { label: "Back to the homepage", href: "/" },
+  },
   hero: {
     lines: ["Hi.", "I’m Kenny Patel.", "And this is my website."],
     facts: [

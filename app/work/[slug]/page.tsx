@@ -22,7 +22,7 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: PageProps<"/work/[slug]">): Promise<Metadata> {
   const { slug } = await params
   const study = caseStudies.find((item) => item.slug === slug)
-  if (!study) return {}
+  if (!study) return { title: site.notFound.metaTitle }
   return {
     title: fillTemplate(caseCopy.metaTitle, { title: titleOf(slug) }),
     description: study.lede,

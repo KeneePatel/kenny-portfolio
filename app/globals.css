@@ -113,7 +113,9 @@
   --text-name--letter-spacing: -0.02em;
   --text-name--font-weight: 300;
 
-  /* Hero entrance (CSS only; text is server-rendered and never waits for JS). */
+  /* Hero entrance (CSS only; text is server-rendered and never waits for JS).
+     "Hi." is the LCP element, so it lifts without fading: visible from first paint. */
+  --animate-lift: hero-lift var(--duration-slow) var(--ease-out) both;
   --animate-rise: hero-rise var(--duration-slow) var(--ease-out) both;
   --animate-fade: hero-fade var(--duration-slow) var(--ease-out) both;
 
@@ -124,6 +126,14 @@
     }
     to {
       opacity: 1;
+      transform: none;
+    }
+  }
+  @keyframes hero-lift {
+    from {
+      transform: translateY(var(--rise-distance));
+    }
+    to {
       transform: none;
     }
   }

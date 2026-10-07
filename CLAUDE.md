@@ -141,7 +141,7 @@ Define in `globals.css` as CSS variables, mapped onto shadcn’s variable names,
 - Easing: out `cubic-bezier(.2,.7,.1,1)` (arrivals, hover) · in-out `cubic-bezier(.65,0,.35,1)` (track, band, menu) · follow `x += (target − x) * 0.2` per frame (lens, ring).
 - **No idle loops.** Lens and ring update only while the pointer moves; stop when it settles. Pause the field when off-screen (IntersectionObserver) or the tab is hidden.
 - Reduced motion: no rise/slide/morph, no ring, field drawn once with the lens parked; colour changes still happen.
-- Hero entrance (CSS only): “Hi.” 120 ms, line 2 700 ms, line 3 1300 ms (rise 16 px, 700 ms, out); status/hint fade at 1600 ms. Text is server-rendered — never hidden waiting for JS.
+- Hero entrance (CSS only): “Hi.” 120 ms, line 2 700 ms, line 3 1300 ms (rise 16 px, 700 ms, out); status/hint fade at 1600 ms. Text is server-rendered — never hidden waiting for JS. “Hi.” rises without fading (it starts visible), because Chrome never counts an element that starts at opacity 0 as the LCP; the other lines rise and fade.
 
 ### Layout
 
@@ -188,6 +188,7 @@ Define in `globals.css` as CSS variables, mapped onto shadcn’s variable names,
 - Kenny chose not to show the canvas PESQ figure: the key number, chart values, clips, transcript, spectrograms and links stay `[TODO]` until he confirms them. A missing number is a dashed slot or dashed bar, never amber, and with no known values a chart has no axis. `[TODO…]` strings render muted.
 - A/B: chip `ToggleGroup` (B, the clean output, on arrival); play is disabled until `src` is set; switching sides mid-play continues from the same moment. Charts: chip `Toggle` (pressed = table), a real `<table>` with caption; one amber bar (`highlight`).
 - Skip link: “Skip to selected work” on `/`, “Skip to content” (`#main`) on every other page.
+- `app/not-found.tsx` (copy in `site.notFound`) serves unknown URLs and unknown slugs with a 404 status, its own title and a `main#main`.
 
 ---
 
