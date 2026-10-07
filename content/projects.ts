@@ -66,7 +66,7 @@ export const featured: Project[] = [
       ],
       alt: "A code diff: module.js becomes module.ts, and an untyped function gains TypeScript types.",
     },
-    pendingLink: "[TODO: contribution log link, arrives in M9]",
+    link: { label: "Contribution log ↓", href: "#open-source" },
   },
 ]
 

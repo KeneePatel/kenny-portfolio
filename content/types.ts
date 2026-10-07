@@ -125,6 +125,19 @@ export type ArchiveCopy = {
   teamNote: string
 }
 
+/** One line of the open-source log. Rows without `href` aren't links. */
+export type OpenSourceEntry = {
+  title: string
+  type: string
+  href?: string
+}
+
+export type OpenSourceCopy = {
+  number: string
+  label: string
+  title: { filled: string; outlined: string }
+}
+
 export type Lane = "education" | "engineering" | "open-source" | "other"
 
 /** One bar on the Path timeline. Dates are "YYYY-MM"; `end` may be "present". */
