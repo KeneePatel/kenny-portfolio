@@ -1,8 +1,16 @@
+import Link from "next/link"
+
 import { monoLabelVariants } from "@/components/signal/mono-label"
 import type { PathCopy } from "@/content/types"
 
 /** Closes the Path section: the MACS as a headline, then the bachelor's. */
-export function Education({ education }: { education: PathCopy["education"] }) {
+export function Education({
+  education,
+  cursor,
+}: {
+  education: PathCopy["education"]
+  cursor: string
+}) {
   return (
     <div className="flex flex-col gap-2.5">
       <h3 className={monoLabelVariants({ tone: "muted" })}>{education.label}</h3>
@@ -12,7 +20,9 @@ export function Education({ education }: { education: PathCopy["education"] }) {
           <span key={detail}>{detail}</span>
         ))}
         <span className="text-amber-text">{education.gpa}</span>
-        <span className="text-muted-foreground">{education.pendingThesis}</span>
+        <Link href={education.thesis.href} data-cursor={cursor} className="-my-3 inline-flex min-h-11 items-center">
+          <span className="link-rule">{education.thesis.label}</span>
+        </Link>
       </p>
       <p className="font-mono text-xs text-muted-foreground">{education.secondary}</p>
     </div>

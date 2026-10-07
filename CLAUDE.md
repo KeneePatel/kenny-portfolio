@@ -80,15 +80,17 @@ components/
   field/                  Field (canvas), field math wrapper, static fallback
   sections/
     hero/  work-track/  archive/  about/  stack/  path/  open-source/  contact/
+  case-study/             /work/[slug] parts (header, key result, A/B player, story rows, charts)
 content/                  typed data — the ONLY place copy and facts live
-  site.ts  projects.ts  archive.ts  timeline.ts  stack.ts  open-source.ts  types.ts
+  site.ts  projects.ts  archive.ts  timeline.ts  stack.ts  open-source.ts  contact.ts
+  case-studies.ts  types.ts
 hooks/                    use-reduced-motion, use-fine-pointer, use-halifax-clock, use-in-view
 lib/                      cn(), motion tokens, pure math (field.ts, timeline.ts)
 ```
 
 Rules:
 
-- **Server Components by default.** `"use client"` only on interactive leaves (Field, RingCursor, ThemeToggle, Menu, WorkTrack, ArchiveFilter, ThinkLoop, StackLayers, YearScrubber, CopyEmail, plus the live HalifaxTime and the ThemeProvider wrapper). A section’s `index.tsx` stays a Server Component and passes content down as props.
+- **Server Components by default.** `"use client"` only on interactive leaves (Field, RingCursor, ThemeToggle, Menu, WorkTrack, ArchiveFilter, ThinkLoop, StackLayers, YearScrubber, CopyEmail, AbPlayer, BarChart, plus the live HalifaxTime, the route-aware skip link and the ThemeProvider wrapper). A section’s `index.tsx` stays a Server Component and passes content down as props.
 - One component per file, named export, kebab-case filenames, aim for < 150 lines. Split before it grows.
 - Components never import from `content/` directly except section `index.tsx` files and route pages.
 - Pure logic (dot grid, lens falloff, timeline positions, filters) lives in `lib/` as plain functions with no React — easy to test.
@@ -181,6 +183,11 @@ Define in `globals.css` as CSS variables, mapped onto shadcn’s variable names,
 **Halifax clock** — `Intl.DateTimeFormat('en-CA', { timeZone: 'America/Halifax', … })`. Render it only after mount (or with `suppressHydrationWarning`) so server and client don’t mismatch; update every 30 s.
 
 **Case study** (`/work/[slug]`) — title with outlined second word, meta grid, the key number in amber, A/B audio (labelled, transcript, never autoplays), charts with a “View as table” toggle.
+
+- Built from the canvas board “Case study — Speech Denoising”; one entry per featured project in `content/case-studies.ts` (slug = the project’s slug). `ensureStatic = "navigation"` keeps it fully static and gives unknown slugs a real 404.
+- Kenny chose not to show the canvas PESQ figure: the key number, chart values, clips, transcript, spectrograms and links stay `[TODO]` until he confirms them. A missing number is a dashed slot or dashed bar, never amber, and with no known values a chart has no axis. `[TODO…]` strings render muted.
+- A/B: chip `ToggleGroup` (B, the clean output, on arrival); play is disabled until `src` is set; switching sides mid-play continues from the same moment. Charts: chip `Toggle` (pressed = table), a real `<table>` with caption; one amber bar (`highlight`).
+- Skip link: “Skip to selected work” on `/`, “Skip to content” (`#main`) on every other page.
 
 ---
 

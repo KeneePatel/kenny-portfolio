@@ -1,3 +1,5 @@
+import Link from "next/link"
+
 import type { Project } from "@/content/types"
 
 import { ProjectDiagram } from "./diagrams/project-diagram"
@@ -28,16 +30,20 @@ export function ProjectPanel({
       <ProjectDiagram diagram={diagram} />
       <div className="flex flex-wrap items-center justify-between gap-2.5">
         <p className="font-mono text-xs text-foreground-2">{stack.join(" · ")}</p>
-        {link ? (
+        {link?.external ? (
           <a
             href={link.href}
-            rel={link.external ? "noopener noreferrer" : undefined}
+            rel="noopener noreferrer"
             data-cursor={cursor}
             className="inline-flex min-h-11 items-center font-semibold"
           >
             <span className="link-rule">{link.label}</span>
-            {link.external ? <span aria-hidden="true">&nbsp;↗</span> : null}
+            <span aria-hidden="true">&nbsp;↗</span>
           </a>
+        ) : link ? (
+          <Link href={link.href} data-cursor={cursor} className="inline-flex min-h-11 items-center font-semibold">
+            <span className="link-rule">{link.label}</span>
+          </Link>
         ) : (
           <span className="font-mono text-xs text-muted-foreground">{pendingLink}</span>
         )}

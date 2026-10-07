@@ -18,8 +18,11 @@ export type Location = {
 
 /** Every string the chrome (skip link, top bar, menu) shows or announces. */
 export type ChromeCopy = {
+  /** Homepage skip link (to the selected work). */
   skipLink: string
   skipTarget: string
+  /** Every other page: skip to the start of `<main>`. */
+  skipToContent: string
   homeLabel: string
   menu: string
   menuTitle: string
@@ -50,6 +53,8 @@ export type ChromeCopy = {
     pick: string
     write: string
     copy: string
+    play: string
+    view: string
   }
 }
 
@@ -194,7 +199,8 @@ export type PathCopy = {
     headline: string
     details: string[]
     gpa: string
-    pendingThesis: string
+    /** The thesis case study. */
+    thesis: { label: string; href: string }
     secondary: string
   }
 }
@@ -274,4 +280,87 @@ export type Site = {
     linkedin: string
   }
   chrome: ChromeCopy
+}
+
+/** A link that may not exist yet: until `href` is set, `pending` shows in its place. */
+export type PendingLink = { label: string; href?: string; pending?: string; external?: boolean }
+
+/** A case-study row: mono heading, one statement, an optional side note. */
+export type CaseBlock = { id: string; heading: string; statement: string; note?: string }
+
+/** One bar. `value: null` until the number is confirmed (drawn dashed, never as data). */
+export type ChartRow = { label: string; group: string; value: number | null; highlight?: boolean }
+
+export type CaseChart = {
+  id: string
+  fig: string
+  title: string
+  /** Table column headers: label, group, value. */
+  columns: [string, string, string]
+  format: { decimals: number; signed?: boolean; unit?: string }
+  rows: ChartRow[]
+  caption: string
+}
+
+/** One side of the A/B listening test. `src` is a path under /public once Kenny adds the clip. */
+export type AudioSample = { id: string; label: string; detail: string; noisy: boolean; src?: string }
+
+/** A spectrogram panel. `src` is a path under /public; until then `pending` fills the frame. */
+export type CaseImage = { label: string; alt: string; src?: string; pending: string }
+
+export type CaseStudy = {
+  /** Matches a featured project's slug. */
+  slug: string
+  kind: string
+  title: { filled: string; outlined: string }
+  lede: string
+  meta: { term: string; detail: string }[]
+  result: {
+    label: string
+    /** The one key number on the page (amber). Until confirmed, `pending` shows instead. */
+    value?: string
+    pending: string
+    caption: string
+    note: string
+  }
+  listen: {
+    fig: string
+    groupLabel: string
+    samples: AudioSample[]
+    /** The sample chosen on arrival. */
+    defaultSample: string
+    transcriptLabel: string
+    transcript: string
+    pending: string
+    caption: string
+  }
+  story: CaseBlock[]
+  approach: {
+    block: CaseBlock
+    groups: { label: string; items: string[]; tone?: "data" | "outcome" }[]
+  }
+  spectrograms: { fig: string; axis: { frequency: string; time: string }; images: CaseImage[]; caption: string }
+  decisions: CaseBlock[]
+  results: { id: string; heading: string; charts: CaseChart[]; listening: CaseBlock }
+  learned: { block: CaseBlock; linksLabel: string; links: PendingLink[] }
+}
+
+/** Strings every case study shares. */
+export type CaseCopy = {
+  /** `{number}`, `{total}`, `{kind}` */
+  eyebrow: string
+  allWork: { label: string; href: string }
+  next: string
+  /** The ending when there's no next case study: a filled and an outlined phrase. */
+  backTo: { label: string; filled: string; outlined: string }
+  /** `{label}`: the chosen sample. */
+  play: string
+  pause: string
+  /** `{current}` / `{total}` around the clip position. */
+  position: string
+  chartView: string
+  /** Shown in a chart for a value that isn't in yet. */
+  pendingValue: string
+  /** Metadata title: `{title}` */
+  metaTitle: string
 }

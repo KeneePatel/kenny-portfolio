@@ -2,9 +2,9 @@ import type { Metadata } from "next"
 import { Archivo, IBM_Plex_Mono } from "next/font/google"
 
 import { Chrome } from "@/components/chrome/chrome"
+import { RouteSkipLink } from "@/components/chrome/route-skip-link"
 import { SiteFooter } from "@/components/chrome/site-footer"
 import { RingCursor } from "@/components/signal/ring-cursor"
-import { SkipLink } from "@/components/signal/skip-link"
 import { ThemeProvider } from "@/components/theme-provider"
 import { footer } from "@/content/contact"
 import { site } from "@/content/site"
@@ -45,9 +45,10 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           enableSystem
           disableTransitionOnChange
         >
-          <SkipLink href={`#${site.chrome.skipTarget}`}>
-            {site.chrome.skipLink}
-          </SkipLink>
+          <RouteSkipLink
+            home={{ href: `#${site.chrome.skipTarget}`, label: site.chrome.skipLink }}
+            page={{ href: "#main", label: site.chrome.skipToContent }}
+          />
           <Chrome site={site} />
           {children}
           <SiteFooter site={site} copy={footer} />

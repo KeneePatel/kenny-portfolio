@@ -92,7 +92,7 @@ export const path: PathCopy = {
     headline: "Master of Applied Computer Science",
     details: ["Dalhousie University", "Jan 2024 – Aug 2025"],
     gpa: "GPA 3.78",
-    pendingThesis: "[TODO: thesis link, arrives in M11]",
+    thesis: { label: "Thesis →", href: "/work/speech-denoising" },
     secondary: "Bachelor of Computer Science and Engineering · Charotar University · 2019–2023",
   },
 }

@@ -53,6 +53,7 @@ export const site: Site = {
   chrome: {
     skipLink: "Skip to selected work",
     skipTarget: "work",
+    skipToContent: "Skip to content",
     homeLabel: "Kenny Patel, home",
     menu: "Menu",
     menuTitle: "Index",
@@ -80,6 +81,8 @@ export const site: Site = {
       pick: "pick",
       write: "write",
       copy: "copy",
+      play: "play",
+      view: "view",
     },
   },
 }

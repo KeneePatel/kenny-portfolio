@@ -17,7 +17,7 @@ export const featured: Project[] = [
       caption: "↓ U-Net · 16 kHz",
       alt: "A noisy speech waveform above the same speech after a U-Net removes the noise.",
     },
-    pendingLink: "[TODO: case study link, arrives in M11]",
+    link: { label: "Case study →", href: "/work/speech-denoising" },
   },
   {
     slug: "microservices-on-gke",

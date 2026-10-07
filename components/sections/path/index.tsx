@@ -20,7 +20,7 @@ export function PathSection() {
       className="px-page pt-28 md:pt-44"
     >
       <YearScrubber number={number} headingId={HEADING_ID} copy={path} items={timeline}>
-        <Education education={path.education} />
+        <Education education={path.education} cursor={site.chrome.cursor.open} />
       </YearScrubber>
     </section>
   )

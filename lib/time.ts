@@ -38,3 +38,10 @@ export function currentMinute(now = Date.now()): number {
 export function minuteToDate(minute: number): Date {
   return new Date(minute * MINUTE)
 }
+
+/** "1:07" for a media position in seconds; unknown or invalid lengths read "0:00". */
+export function formatDuration(seconds: number): string {
+  const whole = Number.isFinite(seconds) && seconds > 0 ? Math.floor(seconds) : 0
+  const minutes = Math.floor(whole / 60)
+  return `${minutes}:${String(whole % 60).padStart(2, "0")}`
+}
