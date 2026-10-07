@@ -17,12 +17,17 @@ function formatterFor(timeZone: string) {
   return formatter
 }
 
-/** "21:28 ADT" for the given instant in the given IANA time zone. */
-export function formatClock(date: Date, timeZone: string): string {
+/** "21:28 ADT" (or "21:28" with `zone: false`) for an instant in an IANA time zone. */
+export function formatClock(
+  date: Date,
+  timeZone: string,
+  { zone = true }: { zone?: boolean } = {}
+): string {
   const parts = formatterFor(timeZone).formatToParts(date)
   const part = (type: Intl.DateTimeFormatPartTypes) =>
     parts.find((p) => p.type === type)?.value ?? ""
-  return `${part("hour")}:${part("minute")} ${part("timeZoneName")}`
+  const time = `${part("hour")}:${part("minute")}`
+  return zone ? `${time} ${part("timeZoneName")}` : time
 }
 
 /** Whole minutes since the epoch; the clock only needs to change once a minute. */

@@ -25,6 +25,7 @@ export const cn = createCn({
         "tool",
         "year",
         "degree",
+        "contact",
       ],
       spacing: ["page", "gutter"],
       blur: ["pill", "menu"],

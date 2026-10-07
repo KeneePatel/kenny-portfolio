@@ -4,15 +4,18 @@ import { useHalifaxClock } from "@/hooks/use-halifax-clock"
 import { cn } from "@/lib/utils"
 import { formatClock, minuteToDate } from "@/lib/time"
 
-// Same character count as "21:28 ADT", so the mono slot keeps its width before mount.
-const PLACEHOLDER = "--:-- ---"
+// Same character count as the formatted time, so the slot keeps its width before mount.
+const PLACEHOLDER = { zone: "--:-- ---", bare: "--:--" }
 
-/** Live local time for a zone, e.g. "21:28 ADT". Rendered only after mount. */
+/** Live local time for a zone, e.g. "21:28 ADT" (or "21:28"). Rendered only after mount. */
 export function HalifaxTime({
   timeZone,
+  zone = true,
   className,
 }: {
   timeZone: string
+  /** Show the zone abbreviation ("ADT" / "AST"). */
+  zone?: boolean
   className?: string
 }) {
   const minute = useHalifaxClock()
@@ -20,7 +23,7 @@ export function HalifaxTime({
   if (minute === null) {
     return (
       <span aria-hidden="true" className={cn("invisible", className)}>
-        {PLACEHOLDER}
+        {zone ? PLACEHOLDER.zone : PLACEHOLDER.bare}
       </span>
     )
   }
@@ -28,7 +31,7 @@ export function HalifaxTime({
   const date = minuteToDate(minute)
   return (
     <time dateTime={date.toISOString()} className={className}>
-      {formatClock(date, timeZone)}
+      {formatClock(date, timeZone, { zone })}
     </time>
   )
 }

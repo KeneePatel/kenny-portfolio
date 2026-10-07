@@ -13,6 +13,8 @@ type SectionHeadingProps = {
   id: string
   /** Controls on the right (counters, prev/next, filters). */
   children?: React.ReactNode
+  /** `display`: the closing headline (Contact), up to 150px. */
+  size?: "section" | "display"
   className?: string
 }
 
@@ -22,6 +24,7 @@ export function SectionHeading({
   title,
   id,
   children,
+  size = "section",
   className,
 }: SectionHeadingProps) {
   return (
@@ -31,8 +34,14 @@ export function SectionHeading({
         className
       )}
     >
-      {/* Stacked on phones so the number never pushes the title off-screen. */}
-      <div className="flex min-w-0 flex-col items-start gap-4 md:flex-row md:items-end lg:gap-8">
+      {/* Stacked on phones so the number never pushes the title off-screen; the
+          display size stays stacked so its headline gets the full width. */}
+      <div
+        className={cn(
+          "flex min-w-0 flex-col items-start gap-4",
+          size === "section" && "md:flex-row md:items-end lg:gap-8"
+        )}
+      >
         <OutlineText
           aria-hidden="true"
           className="ml-(--hang-numeral) text-numeral font-stretch-(--stretch-display)"
@@ -41,7 +50,10 @@ export function SectionHeading({
         </OutlineText>
         <div className="flex min-w-0 flex-col gap-2.5 pb-1.5">
           <MonoLabel>{label}</MonoLabel>
-          <h2 id={id} className="text-section text-balance">
+          <h2
+            id={id}
+            className={cn("text-balance", size === "display" ? "text-contact" : "text-section")}
+          >
             {title}
           </h2>
         </div>

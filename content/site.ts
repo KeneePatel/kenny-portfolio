@@ -78,9 +78,8 @@ export const site: Site = {
       open: "open",
       filter: "filter",
       pick: "pick",
+      write: "write",
+      copy: "copy",
     },
-  },
-  placeholder: {
-    sectionLabel: "[TODO: section label]",
   },
 }

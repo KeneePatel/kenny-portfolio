@@ -48,6 +48,8 @@ export type ChromeCopy = {
     open: string
     filter: string
     pick: string
+    write: string
+    copy: string
   }
 }
 
@@ -123,6 +125,27 @@ export type ArchiveCopy = {
   columns: string
   /** `{role}` */
   teamNote: string
+}
+
+export type ContactCopy = {
+  label: string
+  title: { filled: string; outlined: string }
+  copy: {
+    idle: string
+    done: string
+    failed: string
+    /** Announced politely (screen readers) after a copy attempt. */
+    announceDone: string
+    announceFailed: string
+  }
+  /** "It’s {time} in Halifax right now." around the live clock. */
+  live: { before: string; after: string }
+}
+
+export type FooterCopy = {
+  place: string
+  copyright: string
+  backToTop: string
 }
 
 /** One line of the open-source log. Rows without `href` aren't links. */
@@ -251,8 +274,4 @@ export type Site = {
     linkedin: string
   }
   chrome: ChromeCopy
-  /** Temporary copy for section stubs until each section's milestone lands. */
-  placeholder: {
-    sectionLabel: string
-  }
 }

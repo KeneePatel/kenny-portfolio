@@ -74,6 +74,12 @@
   --text-tool--letter-spacing: -0.015em;
   --text-tool--font-weight: 600;
 
+  /* The closing headline (Contact). */
+  --text-contact: clamp(3.25rem, 0.975rem + 9.333vw, 9.375rem);
+  --text-contact--line-height: 0.9;
+  --text-contact--letter-spacing: -0.055em;
+  --text-contact--font-weight: 800;
+
   /* Path: the chosen year (decorative, outlined) and the education headline. */
   --text-year: clamp(5rem, 3.143rem + 7.619vw, 10rem);
   --text-year--line-height: 0.8;
