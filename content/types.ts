@@ -125,6 +125,44 @@ export type ArchiveCopy = {
   teamNote: string
 }
 
+export type Lane = "education" | "engineering" | "open-source" | "other"
+
+/** One bar on the Path timeline. Dates are "YYYY-MM"; `end` may be "present". */
+export type TimelineItem = {
+  id: string
+  lane: Lane
+  title: string
+  /** Short date label shown beside the title, e.g. "Dec 22–May 23". */
+  dates: string
+  start: string
+  end: string | "present"
+  /** Technical work draws a 6px bar; other work a 2px grey one. */
+  kind: "technical" | "other"
+  /** Drawn as an outline rather than a filled bar. */
+  hollow?: boolean
+}
+
+export type PathCopy = {
+  label: string
+  title: string
+  lanes: { id: Lane; name: string; quiet?: boolean }[]
+  yearsLabel: string
+  /** `{year}` */
+  inYear: string
+  firstYear: number
+  defaultYear: number
+  /** "Now" for the timeline, as YYYY-MM. Bump it when updating the site. */
+  asOf: string
+  education: {
+    label: string
+    headline: string
+    details: string[]
+    gpa: string
+    pendingThesis: string
+    secondary: string
+  }
+}
+
 /** One layer of the toolkit: what's in it, and where it was used. */
 export type StackLayer = {
   id: string

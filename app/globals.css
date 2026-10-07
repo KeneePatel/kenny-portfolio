@@ -74,6 +74,17 @@
   --text-tool--letter-spacing: -0.015em;
   --text-tool--font-weight: 600;
 
+  /* Path: the chosen year (decorative, outlined) and the education headline. */
+  --text-year: clamp(5rem, 3.143rem + 7.619vw, 10rem);
+  --text-year--line-height: 0.8;
+  --text-year--letter-spacing: -0.05em;
+  --text-year--font-weight: 800;
+
+  --text-degree: clamp(1.75rem, 1.193rem + 2.286vw, 3.25rem);
+  --text-degree--line-height: 1;
+  --text-degree--letter-spacing: -0.04em;
+  --text-degree--font-weight: 800;
+
   /* The outlined name behind the hero (decorative, bleeds off both edges). */
   --text-name: clamp(6.5rem, 3.111rem + 13.905vw, 15.625rem);
   --text-name--line-height: 0.9;

@@ -14,6 +14,8 @@ const toggleVariants = cva(
         // Archive filters: mono pill; pressed fills amber (shape + aria-pressed, never colour alone).
         // ThinkLoop: big outlined words; the chosen one fills amber (shape + aria-pressed).
         step: "focus-ring type-outline rounded-none bg-transparent text-statement font-extrabold transition-[color,-webkit-text-stroke-color] duration-(--duration-quick) ease-out hover:bg-transparent hover:text-transparent hover:type-outline-hint focus-visible:ring-0 aria-pressed:bg-transparent aria-pressed:type-outline-lit aria-pressed:hover:text-primary",
+        // Path year buttons: equal columns with a top rule; the chosen year's rule turns amber.
+        year: "focus-ring min-w-0 flex-1 rounded-none border-t-2 border-border bg-transparent font-mono text-xs font-normal text-muted-foreground duration-(--duration-quick) ease-out hover:bg-transparent hover:text-foreground focus-visible:ring-0 aria-pressed:border-primary aria-pressed:bg-transparent aria-pressed:text-foreground",
         chip: "focus-ring rounded-full border border-stroke font-mono text-xs font-normal tracking-wide text-foreground-2 duration-(--duration-quick) ease-out hover:bg-accent hover:text-foreground focus-visible:ring-0 aria-pressed:border-primary aria-pressed:bg-primary aria-pressed:text-primary-foreground aria-pressed:hover:bg-primary aria-pressed:hover:text-primary-foreground",
       },
       size: {
@@ -23,6 +25,7 @@ const toggleVariants = cva(
         lg: "h-10 min-w-10 px-4 has-data-[icon=inline-end]:pr-3 has-data-[icon=inline-start]:pl-3",
         chip: "h-auto min-h-11 px-4.5",
         step: "h-auto min-h-11 px-0",
+        year: "h-auto min-h-11 px-0",
       },
     },
     defaultVariants: {
