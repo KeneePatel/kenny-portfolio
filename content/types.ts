@@ -39,7 +39,58 @@ export type ChromeCopy = {
     close: string
     go: string
     scroll: string
+    previous: string
+    next: string
+    open: string
   }
+}
+
+/** A box in a flow diagram. */
+export type FlowNode = { label: string; tone?: "solid" | "dashed" | "accent" }
+/** One step in a flow-diagram row: a box, or the connector between boxes. */
+export type FlowStep = FlowNode | { arrow: string }
+
+/** A diagram drawn from the project itself (no stock images). `alt` describes it. */
+export type ProjectDiagram =
+  | { kind: "signal"; caption: string; alt: string }
+  | { kind: "flow"; rows: FlowStep[][]; note?: string; alt: string }
+  | {
+      kind: "diff"
+      header: string
+      lines: { sign: "+" | "-"; text: string }[]
+      alt: string
+    }
+
+export type Project = {
+  slug: string
+  title: string
+  kind: string
+  line: string
+  stack: string[]
+  diagram: ProjectDiagram
+  /** The panel's one action. */
+  link?: { label: string; href: string; external?: boolean }
+  /** Shown instead of `link` until its target exists. */
+  pendingLink?: string
+}
+
+/** Copy for the Work section and its track controls. */
+export type WorkCopy = {
+  /** `{total}` = number of featured projects, two digits. */
+  label: string
+  title: string[]
+  trackLabel: string
+  trackRole: string
+  slideRole: string
+  /** `{current}`, `{total}` */
+  slideLabel: string
+  tabsLabel: string
+  /** `{number}`, `{title}` */
+  tabLabel: string
+  previous: string
+  next: string
+  /** Announced politely when the track moves. `{current}`, `{total}`, `{title}` */
+  announcement: string
 }
 
 /** One row of the hero's status list. `clock` rows show the live local time. */

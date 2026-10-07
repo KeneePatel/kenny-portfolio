@@ -73,6 +73,9 @@ export const site: Site = {
       close: "close",
       go: "go",
       scroll: "scroll",
+      previous: "prev",
+      next: "next",
+      open: "open",
     },
   },
   placeholder: {

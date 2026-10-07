@@ -152,7 +152,7 @@ Define in `globals.css` as CSS variables, mapped onto shadcn’s variable names,
 **Field** (`components/field/`) — Canvas 2D, client-only, below the SSR’d hero text.
 
 - Grid of dots every 26 px; each has seeded jitter ±11 px (deterministic PRNG, e.g. mulberry32, so it never reshuffles).
-- Lens radius 200 desktop / 120 mobile. `t = smoothstep(1 − dist / R)`; position = grid + jitter·(1−t), plus `y += sin(x / 38) · 9 · t` (the clean wave). Buckets: t > .55 amber 4 px · t > .08 foreground @60% 2.6 px · else foreground @24% 1.8 px.
+- Lens radius 200 desktop / 120 mobile. `t = smoothstep(1 − dist / R)`; position = grid + jitter·(1−t), plus `y += sin(x / 38) · 9 · t` (the clean wave). Buckets: t > .55 amber 4 px · t > .08 foreground @60% 2.6 px · else foreground @24% 1.8 px (Night; Day uses 50% / 22% from the canvas, Kenny's decision, via `--field-near-alpha` / `--field-far-alpha`).
 - Lens eases toward the pointer (follow k = 0.2); rest position ≈ (68% width, 44% height). Touch: follows a dragging finger, stays where lifted.
 - Precompute grid + jitter on resize (ResizeObserver, devicePixelRatio aware); redraw only while the lens is moving; read colours from CSS variables and redraw on theme change.
 - Variant `calm` (contact section): every dot in place, no lens, drawn once.
@@ -162,9 +162,9 @@ Define in `globals.css` as CSS variables, mapped onto shadcn’s variable names,
 
 **Chrome & Menu** — KP mark + three pills (Halifax clock, theme, Menu). Menu = shadcn `Dialog` styled full-screen: six numbered links at up to 112 px, outlined until hover/focus, then amber; contact + local time in the corner. Focus trapped, Escape closes, focus returns to Menu; choosing a link closes the menu and moves focus to that section. Below 768 px the bar is KP + Menu only: the clock hides and the theme toggle moves into the menu as a row at thumb height (Kenny's decision). Below 1024 px the "Kenny Patel" text beside KP is visually hidden.
 
-**Hero** — one `h1`: “Hi.” / “I’m Kenny Patel.” / “And this is my website.” (third line outlined). Status block (based, local time, builds, status). Outlined “KENNY PATEL” behind (aria-hidden); each letter is a span, hover weight 300→900, neighbours 640 (CSS `:hover` + `:has()`), 360 ms.
+**Hero** — one `h1`: “Hi.” / “I’m Kenny Patel.” / “And this is my website.” (third line outlined). Status block (based, local time, builds, status). Outlined “KENNY PATEL” behind (aria-hidden); each letter is a span, hover weight 300→900, neighbours 640 (CSS `:hover` + `:has()`), 360 ms. From the canvas (approved): a hint line (pointer / touch copy, hidden with reduced motion) and a “Scroll → 01 Work” link at the bottom.
 
-**WorkTrack** — six featured projects, one in focus. shadcn `Carousel` (Embla) is fine. Prev/next round buttons, numbered tabs, arrow keys; 700 ms in-out; inactive panels at 38% opacity. Mobile: native swipe with snap, panels at 84vw. Each panel: number, title, one line, a diagram drawn from the project (no stock images), stack in mono, one CTA.
+**WorkTrack** — featured projects from `content/projects.ts`, one in focus. Currently three (Speech Denoising, Microservices on GKE, Starknet): Kenny left out RoomM8, post-quantum for Node and team projects (repos on a collaborator's account). Built as a custom track (CSS transform on tablet+, native scroll-snap on phones) rather than Embla. Prev/next round buttons, numbered tabs, arrow keys; 700 ms in-out; inactive panels at 38% opacity. Mobile: native swipe with snap, panels at 84vw. Each panel: number, title, one line, a diagram drawn from the project (no stock images), stack in mono, one CTA.
 
 **Archive** — filterable list (`ToggleGroup`): All · Cloud & DevOps · AI & Data · Systems & Security · Web & Mobile; “Showing n of N” updates. Row hover: title 500→800 + 10 px shift, arrow turns amber. Team projects show “Team project · my part: …”.
 

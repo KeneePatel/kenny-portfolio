@@ -225,6 +225,14 @@
   --weight-name-peak: 900;
   --weight-name-near: 640;
 
+  /* Work track: panels peek on tablet+, swipe at 84vw on phones. */
+  --panel-w: 84vw;
+  --panel-h: clamp(30rem, 42vw, 37.5rem);
+  --track-gap: calc(var(--spacing) * 8);
+  --panel-dim: 0.38;
+  --panel-dim-scale: 0.97;
+  --wave-clean-width: 1.4px; /* the denoised signal reads a touch heavier */
+
   /* Hero entrance delays (lib/motion.ts mirrors these) */
   --hero-greeting: 120ms;
   --hero-line2: 700ms;
@@ -250,6 +258,7 @@
 @media (width >= 48rem) {
   :root {
     --gutter: calc(var(--spacing) * 6);
+    --panel-w: min(53.75rem, 68vw);
   }
 }
 
@@ -402,6 +411,11 @@
       font-weight: var(--weight-name-near);
     }
   }
+}
+
+/* Work track position: --track-index is set on the element by the component. */
+@utility track-offset {
+  translate: calc(var(--track-index, 0) * -1 * (var(--panel-w) + var(--track-gap))) 0;
 }
 
 /* 4 / 8 / 12 columns with the page gutter. */
