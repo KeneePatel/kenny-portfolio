@@ -39,12 +39,18 @@ export function ThemeToggle({
       <span className="sr-only hidden dark:inline">{labels.switchToDay}</span>
     </>
   )
+  // The ring cursor reads data-cursor-dark in Night, so both labels are static.
+  const cursor = {
+    "data-cursor": labels.cursorToNight,
+    "data-cursor-dark": labels.cursorToDay,
+  }
 
   if (layout === "row") {
     return (
       <button
         type="button"
         onClick={toggle}
+        {...cursor}
         className={cn(
           "flex min-h-11 w-full items-center justify-between border-t font-mono text-data",
           className
@@ -62,7 +68,7 @@ export function ThemeToggle({
   }
 
   return (
-    <Pill size="icon" onClick={toggle} className={className}>
+    <Pill size="icon" onClick={toggle} {...cursor} className={className}>
       <ContrastIcon aria-hidden="true" />
       {name}
     </Pill>

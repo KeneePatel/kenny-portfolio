@@ -63,6 +63,35 @@
   --text-label--line-height: 1.4;
   --text-label--letter-spacing: 0.08em;
 
+  /* The outlined name behind the hero (decorative, bleeds off both edges). */
+  --text-name: clamp(6.5rem, 3.111rem + 13.905vw, 15.625rem);
+  --text-name--line-height: 0.9;
+  --text-name--letter-spacing: -0.02em;
+  --text-name--font-weight: 300;
+
+  /* Hero entrance (CSS only; text is server-rendered and never waits for JS). */
+  --animate-rise: hero-rise var(--duration-slow) var(--ease-out) both;
+  --animate-fade: hero-fade var(--duration-slow) var(--ease-out) both;
+
+  @keyframes hero-rise {
+    from {
+      opacity: 0;
+      transform: translateY(var(--rise-distance));
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+  @keyframes hero-fade {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
   /* Layout */
   --spacing-page: clamp(1.25rem, 4vw, 4rem);
 
@@ -146,6 +175,9 @@
   --pill: color-mix(in srgb, var(--background) 70%, transparent);
   --overlay: color-mix(in srgb, var(--background) 97%, transparent);
   --destructive: oklch(0.577 0.245 27.325);
+  /* Field dots: graphite on paper (lit dots are --primary at full strength). */
+  --field-near-alpha: 0.5;
+  --field-far-alpha: 0.22;
 
   /* One raised surface: panels, the open-source band, hover. `accent` is not amber. */
   --card: var(--surface);
@@ -185,6 +217,20 @@
   --hang-numeral: -0.06em; /* section numbers hang off the left margin */
   --outline-thin: 1px;
   --outline-thick: 1.2px;
+  --hang-name: -0.5vw; /* the hero name bleeds off the left edge */
+  --rise-distance: calc(var(--spacing) * 4);
+  /* Ring cursor: 36px ring grows to a 76px labelled disc. */
+  --ring-grow: calc(76 / 36);
+  /* Hero name letters: rest weight is --text-name's; hover peak and neighbours. */
+  --weight-name-peak: 900;
+  --weight-name-near: 640;
+
+  /* Hero entrance delays (lib/motion.ts mirrors these) */
+  --hero-greeting: 120ms;
+  --hero-line2: 700ms;
+  --hero-name: 900ms;
+  --hero-line3: 1300ms;
+  --hero-meta: 1600ms;
 
   /* Motion durations (lib/motion.ts mirrors these) */
   --duration-instant: 120ms;
@@ -224,6 +270,9 @@
   --ring: #ffb547;
   --pill: color-mix(in srgb, var(--background) 62%, transparent);
   --destructive: oklch(0.704 0.191 22.216);
+  /* Field dots: dust under a streetlight. */
+  --field-near-alpha: 0.6;
+  --field-far-alpha: 0.24;
 }
 
 @layer base {
@@ -326,6 +375,32 @@
     background-size:
       100% 2px,
       100% 1px;
+  }
+}
+
+/*
+ * Hero name: each letter a span. Hovered letter peaks at 900 and turns amber;
+ * its neighbours rise to 640. Hover-capable pointers only; snaps with reduced motion.
+ */
+@utility name-letters {
+  display: flex;
+  white-space: nowrap;
+  font-stretch: var(--stretch-display);
+
+  & > span {
+    transition:
+      font-weight var(--duration-morph) var(--ease-out),
+      -webkit-text-stroke-color var(--duration-quick) var(--ease-out);
+  }
+  @media (hover: hover) {
+    & > span:hover {
+      font-weight: var(--weight-name-peak);
+      -webkit-text-stroke-color: var(--color-primary);
+    }
+    & > span:hover + span,
+    & > span:has(+ span:hover) {
+      font-weight: var(--weight-name-near);
+    }
   }
 }
 

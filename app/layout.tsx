@@ -2,6 +2,7 @@ import type { Metadata } from "next"
 import { Archivo, IBM_Plex_Mono } from "next/font/google"
 
 import { Chrome } from "@/components/chrome/chrome"
+import { RingCursor } from "@/components/signal/ring-cursor"
 import { SkipLink } from "@/components/signal/skip-link"
 import { ThemeProvider } from "@/components/theme-provider"
 import { site } from "@/content/site"
@@ -47,6 +48,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           </SkipLink>
           <Chrome site={site} />
           {children}
+          <RingCursor />
         </ThemeProvider>
       </body>
     </html>

@@ -20,6 +20,7 @@ export const cn = createCn({
         "body",
         "data",
         "label",
+        "name",
       ],
       spacing: ["page", "gutter"],
       blur: ["pill", "menu"],

@@ -25,6 +25,17 @@ export const site: Site = {
   },
   hero: {
     lines: ["Hi.", "I’m Kenny Patel.", "And this is my website."],
+    facts: [
+      { label: "Based", value: "Halifax, NS" },
+      { label: "Local", clock: true },
+      { label: "Builds", value: "Full-stack · Cloud · ML" },
+      { label: "Status", value: "Open to roles" },
+    ],
+    hint: {
+      pointer: "Move your cursor — the noise clears where you look.",
+      touch: "Drag across the field — the noise clears where you touch.",
+    },
+    scroll: { label: "Scroll", targetId: "work" },
   },
   nav: [
     { number: "01", label: "Work", id: "work" },
@@ -53,12 +64,15 @@ export const site: Site = {
       day: "Day",
       switchToDay: "Theme: night. Switch to day",
       switchToNight: "Theme: day. Switch to night",
+      cursorToDay: "day",
+      cursorToNight: "night",
     },
     cursor: {
       home: "top",
       menu: "menu",
       close: "close",
       go: "go",
+      scroll: "scroll",
     },
   },
   placeholder: {
