@@ -8,7 +8,7 @@ const paths = {
 }
 const viewBox = `0 0 ${WAVE.width} ${WAVE.height}`
 
-/** The chosen side's waveform, with an amber playhead once there's a clip to play. */
+/** The chosen side's waveform, with an accent playhead once there's a clip to play. */
 export function ListenWave({ noisy, progress }: { noisy: boolean; progress: number | null }) {
   return (
     <div aria-hidden="true" className="relative h-45 border bg-card">

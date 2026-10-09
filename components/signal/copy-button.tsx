@@ -18,7 +18,7 @@ type CopyButtonProps = {
 }
 
 /**
- * Copies `value` to the clipboard. The pill confirms in amber for 2s and a
+ * Copies `value` to the clipboard. The pill confirms in the accent colour for 2s and a
  * separate status line announces the result politely; if the clipboard isn't
  * available it says so instead of failing silently.
  */

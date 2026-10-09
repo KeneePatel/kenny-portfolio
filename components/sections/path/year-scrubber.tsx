@@ -25,7 +25,7 @@ type YearScrubberProps = {
 
 /**
  * Year buttons 2019–now (pressed state, arrow keys); the chosen year gets an
- * amber band across the lanes (450 ms; jumps with reduced motion) and a
+ * accent band across the lanes (450 ms; jumps with reduced motion) and a
  * politely announced "In {year}" list. On phones the timeline scrolls inside
  * its own area, never the page.
  */

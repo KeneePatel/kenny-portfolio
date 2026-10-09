@@ -16,7 +16,7 @@ export const FIELD = {
   mobileBelow: 768,
   /** Where the lens rests, as fractions of the field's width and height. */
   rest: { x: 0.68, y: 0.44 },
-  /** t above which a dot is lit (amber) or near (mid opacity). */
+  /** t above which a dot is lit (accent) or near (mid opacity). */
   threshold: { lit: 0.55, near: 0.08 },
   /** Dot diameters, CSS px. */
   dotSize: { lit: 4, near: 2.6, far: 1.8 },

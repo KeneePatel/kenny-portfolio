@@ -11,10 +11,10 @@ const toggleVariants = cva(
       variant: {
         default: "bg-transparent",
         outline: "border border-input bg-transparent hover:bg-muted",
-        // Archive filters: mono pill; pressed fills amber (shape + aria-pressed, never colour alone).
-        // ThinkLoop: big outlined words; the chosen one fills amber (shape + aria-pressed).
+        // Archive filters: mono pill; pressed fills with the accent (shape + aria-pressed, never colour alone).
+        // ThinkLoop: big outlined words; the chosen one fills with the accent (shape + aria-pressed).
         step: "focus-ring type-outline rounded-none bg-transparent text-statement font-extrabold transition-[color,-webkit-text-stroke-color] duration-(--duration-quick) ease-out hover:bg-transparent hover:text-transparent hover:type-outline-hint focus-visible:ring-0 aria-pressed:bg-transparent aria-pressed:type-outline-lit aria-pressed:hover:text-primary",
-        // Path year buttons: equal columns with a top rule; the chosen year's rule turns amber.
+        // Path year buttons: equal columns with a top rule; the chosen year's rule turns to the accent.
         year: "focus-ring min-w-0 flex-1 rounded-none border-t-2 border-border bg-transparent font-mono text-xs font-normal text-muted-foreground duration-(--duration-quick) ease-out hover:bg-transparent hover:text-foreground focus-visible:ring-0 aria-pressed:border-primary aria-pressed:bg-transparent aria-pressed:text-foreground",
         chip: "focus-ring rounded-full border border-stroke font-mono text-xs font-normal tracking-wide text-foreground-2 duration-(--duration-quick) ease-out hover:bg-accent hover:text-foreground focus-visible:ring-0 aria-pressed:border-primary aria-pressed:bg-primary aria-pressed:text-primary-foreground aria-pressed:hover:bg-primary aria-pressed:hover:text-primary-foreground",
       },

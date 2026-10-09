@@ -325,7 +325,7 @@ export type CaseStudy = {
   meta: { term: string; detail: string }[]
   result: {
     label: string
-    /** The one key number on the page (amber). Until confirmed, `pending` shows instead. */
+    /** The one key number on the page (accent colour). Until confirmed, `pending` shows instead. */
     value?: string
     pending: string
     caption: string

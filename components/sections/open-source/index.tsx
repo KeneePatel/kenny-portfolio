@@ -7,7 +7,7 @@ const SECTION_ID = "open-source"
 const HEADING_ID = "open-source-heading"
 
 /**
- * 06 Open source: the page's one raised band (full-bleed surface, 2px amber
+ * 06 Open source: the page's one raised band (full-bleed surface, 2px accent
  * top rule) with a diff-style log. Server-only: nothing here is interactive.
  */
 export function OpenSourceSection() {

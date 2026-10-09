@@ -12,7 +12,7 @@ type TrackTabsProps = {
 }
 
 /**
- * Numbered buttons, one per project. The current one is underlined amber and
+ * Numbered buttons, one per project. The current one is underlined in the accent and
  * marked aria-current (never colour alone). Tablet and up only.
  */
 export function TrackTabs({

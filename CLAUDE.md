@@ -3,7 +3,7 @@
 
 # Kenny Patel — Portfolio (“Signal”)
 
-Personal portfolio for Kenny Patel, software engineer in Halifax, NS. The design is **Direction 3 — Experimental Interactive**: night-first, one amber accent, huge type in filled and outlined voices, and a hero “field” of noisy dots that clears into a clean signal wherever the cursor goes (from Kenny’s master’s thesis on speech denoising).
+Personal portfolio for Kenny Patel, software engineer in Halifax, NS. The design is **Direction 3 — Experimental Interactive**: night-first, one Klein-blue accent, huge type in filled and outlined voices, and a hero “field” of noisy dots that clears into a clean signal wherever the cursor goes (from Kenny’s master’s thesis on speech denoising).
 
 The design lives on a Claude Design canvas (Kenny can open it; agents can’t):
 https://claude.ai/code/artifact/1d6d6c0a-03dc-42c4-94cd-eb7e63801aec
@@ -98,7 +98,7 @@ Rules:
 
 ### Signal primitives (`components/signal/`)
 
-`OutlineText` · `SectionHeading` (giant outlined number + amber mono label + title) · `MonoLabel` · `Pill` (Button variant) · `RoundButton` (Button variant) · `ThemeToggle` · `CopyButton` · `RingCursor` · `SkipLink`. Every section heading uses `SectionHeading`; every outlined phrase uses `OutlineText`.
+`OutlineText` · `SectionHeading` (giant outlined number + accent mono label + title) · `MonoLabel` · `Pill` (Button variant) · `RoundButton` (Button variant) · `ThemeToggle` · `CopyButton` · `RingCursor` · `SkipLink`. Every section heading uses `SectionHeading`; every outlined phrase uses `OutlineText`.
 
 ---
 
@@ -108,23 +108,24 @@ Define in `globals.css` as CSS variables, mapped onto shadcn’s variable names,
 
 | Token                               | Night (`.dark`, default) | Day (`:root`)         | Use                                         |
 | ----------------------------------- | ------------------------ | --------------------- | ------------------------------------------- |
-| `--background`                      | `#0F1011`                | `#ECEAE4`             | page                                        |
-| `--card` / `--popover` / `--accent` | `#17181A`                | `#E2DFD8`             | panels, open-source band, hover surface     |
-| `--foreground`                      | `#EDEBE6`                | `#0F1011`             | text, filled display                        |
-| `--foreground-2` (custom)           | `#B5B2AB`                | `#45433E`             | secondary text                              |
-| `--muted-foreground`                | `#8C8983`                | `#625F59`             | labels, captions (lightest text allowed)    |
-| `--border` / `--input`              | `#2A2B2E`                | `#CFCBC2`             | hairlines                                   |
-| `--primary` (amber)                 | `#FFB547`                | `#B36F00`             | lens, ring, active states, marks            |
-| `--primary-foreground`              | `#0F1011`                | `#0F1011`             | text on amber                               |
-| `--amber-text` (custom)             | `#FFB547`                | `#8A5300`             | small amber text (Day needs the darker one) |
-| `--stroke` (custom)                 | `rgb(237 235 230 / .4)`  | `rgb(15 16 17 / .42)` | quiet outlines (decorative, inactive), pill borders |
-| `--ring`                            | `#FFB547`                | `#0F1011`             | focus ring                                  |
+| `--background`                      | `#0A0C12`                | `#EEF1F8`             | page                                        |
+| `--card` / `--popover` / `--accent` | `#13161D`                | `#E0E4ED`             | panels, open-source band, hover surface     |
+| `--foreground`                      | `#EBEDF2`                | `#0F1118`             | text, filled display                        |
+| `--foreground-2` (custom)           | `#B9BCC4`                | `#43464E`             | secondary text                              |
+| `--muted-foreground`                | `#90949D`                | `#60636C`             | labels, captions (lightest text allowed)    |
+| `--border` / `--input`              | `#272A31`                | `#CACED7`             | hairlines                                   |
+| `--primary` (accent)                | `#7B94FF`                | `#1326D2`             | lens, ring, active states, marks            |
+| `--primary-foreground`              | `#0A0C12`                | `#F8FAFE`             | text on the accent                          |
+| `--amber-text` (custom)             | `#7B94FF`                | `#1326D2`             | small accent text (name kept from the amber palette) |
+| `--stroke` (custom)                 | `rgb(235 237 242 / .4)`  | `rgb(15 17 24 / .42)` | quiet outlines (decorative, inactive), pill borders |
+| `--ring`                            | `#7B94FF`                | `#0F1118`             | focus ring                                  |
 | `--pill` (custom)                   | background @ 62%         | background @ 70%      | pill backdrop                               |
 | `--overlay` (custom)                | background @ 97%         | background @ 97%      | menu backdrop                               |
 
 - `--secondary` and `--muted` also point at the raised surface; `--card-foreground` etc. alias `--foreground`. `--destructive`/`--chart-*` keep shadcn's values (not part of the design). `--radius` is `0`: pills and round buttons use `rounded-full` explicitly.
 - Tailwind's default palette is removed (`--color-*: initial`), so only token colours compile.
-- Amber is for: lens/dots, ring cursor, section numbers & mono labels, active panel/chip/year, the one key number on a page. **Never** for backgrounds, body text, gradients or glows. Day `--primary` is 3.4:1, so small amber text uses `text-amber-text`.
+- Palette is **Klein** (Kenny's decision, Oct 2026): International Klein Blue by day, electric periwinkle by night, on cool blue-tinted neutrals. It replaced amber because warm ivory, warm greys and an orange accent read as Claude's own palette. Don't drift back to warm ivory/cream backgrounds, warm greys or orange/terracotta accents.
+- The accent is for: lens/dots, ring cursor, section numbers & mono labels, active panel/chip/year, the one key number on a page. **Never** for backgrounds, body text, gradients or glows. Both accents pass 4.5:1 as text (Night 7.0:1, Day 8.3:1), so `--amber-text` equals `--primary`; the token keeps its old name to avoid touching class names.
 - Outlined type that people read (hero line 3, menu links, section numbers) is stroked at full `--foreground` (`type-outline`); decorative giants and inactive states use the 40% `--stroke` (`type-outline-quiet`).
 - Themes via `next-themes`: `attribute="class"`, `defaultTheme="system"`, `enableSystem` (Kenny's decision: the first visit follows the OS; Night is the server/no-JS fallback). The toggle persists the visitor's choice; no flash of the wrong theme.
 
@@ -154,39 +155,39 @@ Define in `globals.css` as CSS variables, mapped onto shadcn’s variable names,
 **Field** (`components/field/`) — Canvas 2D, client-only, below the SSR’d hero text.
 
 - Grid of dots every 26 px; each has seeded jitter ±11 px (deterministic PRNG, e.g. mulberry32, so it never reshuffles).
-- Lens radius 200 desktop / 120 mobile. `t = smoothstep(1 − dist / R)`; position = grid + jitter·(1−t), plus `y += sin(x / 38) · 9 · t` (the clean wave). Buckets: t > .55 amber 4 px · t > .08 foreground @60% 2.6 px · else foreground @24% 1.8 px (Night; Day uses 50% / 22% from the canvas, Kenny's decision, via `--field-near-alpha` / `--field-far-alpha`).
+- Lens radius 200 desktop / 120 mobile. `t = smoothstep(1 − dist / R)`; position = grid + jitter·(1−t), plus `y += sin(x / 38) · 9 · t` (the clean wave). Buckets: t > .55 accent 4 px · t > .08 foreground @60% 2.6 px · else foreground @24% 1.8 px (Night; Day uses 50% / 22% from the canvas, Kenny's decision, via `--field-near-alpha` / `--field-far-alpha`).
 - Lens eases toward the pointer (follow k = 0.2); rest position ≈ (68% width, 44% height). Touch: follows a dragging finger, stays where lifted.
 - Precompute grid + jitter on resize (ResizeObserver, devicePixelRatio aware); redraw only while the lens is moving; read colours from CSS variables and redraw on theme change.
 - Variant `calm` (contact section): every dot in place, no lens, drawn once.
 - `aria-hidden`; no information lives in the dots. Reduced motion → draw once.
 
-**RingCursor** — fine pointers only (`(hover: hover) and (pointer: fine)`), never on touch or reduced motion. Never hides the system cursor. 36 px amber ring trailing the pointer (k = 0.24); over any element with `data-cursor="label"` it grows to 76 px, fills amber and shows the label. Move it with `transform` on a ref inside rAF — **never React state per frame.**
+**RingCursor** — fine pointers only (`(hover: hover) and (pointer: fine)`), never on touch or reduced motion. Never hides the system cursor. 36 px accent ring trailing the pointer (k = 0.24); over any element with `data-cursor="label"` it grows to 76 px, fills with the accent and shows the label. Move it with `transform` on a ref inside rAF — **never React state per frame.**
 
-**Chrome & Menu** — KP mark + three pills (Halifax clock, theme, Menu). Menu = shadcn `Dialog` styled full-screen: six numbered links at up to 112 px, outlined until hover/focus, then amber; contact + local time in the corner. Focus trapped, Escape closes, focus returns to Menu; choosing a link closes the menu and moves focus to that section. Below 768 px the bar is KP + Menu only: the clock hides and the theme toggle moves into the menu as a row at thumb height (Kenny's decision). Below 1024 px the "Kenny Patel" text beside KP is visually hidden.
+**Chrome & Menu** — KP mark + three pills (Halifax clock, theme, Menu). Menu = shadcn `Dialog` styled full-screen: six numbered links at up to 112 px, outlined until hover/focus, then the accent; contact + local time in the corner. Focus trapped, Escape closes, focus returns to Menu; choosing a link closes the menu and moves focus to that section. Below 768 px the bar is KP + Menu only: the clock hides and the theme toggle moves into the menu as a row at thumb height (Kenny's decision). Below 1024 px the "Kenny Patel" text beside KP is visually hidden.
 
 **Hero** — one `h1`: “Hi.” / “I’m Kenny Patel.” / “And this is my website.” (third line outlined). Status block (based, local time, builds, status). Outlined “KENNY PATEL” behind (aria-hidden); each letter is a span, hover weight 300→900, neighbours 640 (CSS `:hover` + `:has()`), 360 ms. From the canvas (approved): a hint line (pointer / touch copy, hidden with reduced motion) and a “Scroll → 01 Work” link at the bottom.
 
 **WorkTrack** — featured projects from `content/projects.ts`, one in focus. Currently three (Speech Denoising, Microservices on GKE, Starknet): Kenny left out RoomM8, post-quantum for Node and team projects (repos on a collaborator's account). Built as a custom track (CSS transform on tablet+, native scroll-snap on phones) rather than Embla. Prev/next round buttons, numbered tabs, arrow keys; 700 ms in-out; inactive panels at 38% opacity. Mobile: native swipe with snap, panels at 84vw. Each panel: number, title, one line, a diagram drawn from the project (no stock images), stack in mono, one CTA.
 
-**Archive** — filterable list (`ToggleGroup`): All · Cloud & DevOps · AI & Data · Systems & Security · Web & Mobile; “Showing n of N” updates. Kenny's decisions: team projects (collaborator repos) are left out, featured projects aren't repeated, Word Map is dropped (unsourced); the active chip fills amber. Only filters with at least one project are shown. Rows without a URL aren't links (no arrow, no hover effect). Row hover: title 500→800 + 10 px shift, arrow turns amber. Team projects show “Team project · my part: …”.
+**Archive** — filterable list (`ToggleGroup`): All · Cloud & DevOps · AI & Data · Systems & Security · Web & Mobile; “Showing n of N” updates. Kenny's decisions: team projects (collaborator repos) are left out, featured projects aren't repeated, Word Map is dropped (unsourced); the active chip fills with the accent. Only filters with at least one project are shown. Rows without a URL aren't links (no arrow, no hover effect). Row hover: title 500→800 + 10 px shift, arrow turns to the accent. Team projects show “Team project · my part: …”.
 
-**About / ThinkLoop** — statement half filled, half outlined. Build → Break → Understand → Rebuild as toggle buttons; the chosen step fills amber; its line is announced (`aria-live="polite"`). Portrait tilted −2°, overlapping the column edge.
+**About / ThinkLoop** — statement half filled, half outlined. Build → Break → Understand → Rebuild as toggle buttons; the chosen step fills with the accent; its line is announced (`aria-live="polite"`). Portrait tilted −2°, overlapping the column edge.
 
 **StackLayers** — six layers (Interface, Services, Data, Infrastructure, Languages, Signal & ML) as giant outlined words; `Collapsible`/`Accordion` disclosure shows tools + “Seen in” projects.
 
-**YearScrubber (Path)** — lanes: Education, Engineering, Open source, Other. Year buttons 2019–now; the chosen year gets an amber band across lanes (450 ms) and an announced “In {year}” list. Technical items 6 px bars; “other” work 2 px grey. On mobile the timeline scrolls inside its own `ScrollArea`. Education (MACS headline, thesis link) closes the section.
+**YearScrubber (Path)** — lanes: Education, Engineering, Open source, Other. Year buttons 2019–now; the chosen year gets an accent band across lanes (450 ms) and an announced “In {year}” list. Technical items 6 px bars; “other” work 2 px grey. On mobile the timeline scrolls inside its own `ScrollArea`. Education (MACS headline, thesis link) closes the section.
 
-**Open source** — raised band with a 2 px amber top rule; diff-style log with amber “+” markers.
+**Open source** — raised band with a 2 px accent top rule; diff-style log with accent “+” markers.
 
 **Contact** — calm field behind “Have something interesting to build?” (“build?” outlined), email + CopyButton (“Copied ✓”, announced), GitHub, LinkedIn, live “It’s HH:MM in Halifax right now.”
 
 **Halifax clock** — `Intl.DateTimeFormat('en-CA', { timeZone: 'America/Halifax', … })`. Render it only after mount (or with `suppressHydrationWarning`) so server and client don’t mismatch; update every 30 s.
 
-**Case study** (`/work/[slug]`) — title with outlined second word, meta grid, the key number in amber, A/B audio (labelled, transcript, never autoplays), charts with a “View as table” toggle.
+**Case study** (`/work/[slug]`) — title with outlined second word, meta grid, the key number in the accent, A/B audio (labelled, transcript, never autoplays), charts with a “View as table” toggle.
 
 - Built from the canvas board “Case study — Speech Denoising”; one entry per featured project in `content/case-studies.ts` (slug = the project’s slug). `ensureStatic = "navigation"` keeps it fully static and gives unknown slugs a real 404.
-- Kenny chose not to show the canvas PESQ figure: the key number, chart values, clips, transcript, spectrograms and links stay `[TODO]` until he confirms them. A missing number is a dashed slot or dashed bar, never amber, and with no known values a chart has no axis. `[TODO…]` strings render muted.
-- A/B: chip `ToggleGroup` (B, the clean output, on arrival); play is disabled until `src` is set; switching sides mid-play continues from the same moment. Charts: chip `Toggle` (pressed = table), a real `<table>` with caption; one amber bar (`highlight`).
+- Kenny chose not to show the canvas PESQ figure: the key number, chart values, clips, transcript, spectrograms and links stay `[TODO]` until he confirms them. A missing number is a dashed slot or dashed bar, never in the accent, and with no known values a chart has no axis. `[TODO…]` strings render muted.
+- A/B: chip `ToggleGroup` (B, the clean output, on arrival); play is disabled until `src` is set; switching sides mid-play continues from the same moment. Charts: chip `Toggle` (pressed = table), a real `<table>` with caption; one accent bar (`highlight`).
 - Skip link: “Skip to selected work” on `/`, “Skip to content” (`#main`) on every other page.
 - `app/not-found.tsx` (copy in `site.notFound`) serves unknown URLs and unknown slugs with a 404 status, its own title and a `main#main`.
 
@@ -194,7 +195,7 @@ Define in `globals.css` as CSS variables, mapped onto shadcn’s variable names,
 
 ## Accessibility (non-negotiable)
 
-- Contrast per the token table; amber small text in Day uses `--amber-text`.
+- Contrast per the token table; small accent text uses `--amber-text`.
 - Skip link first; landmarks `header/nav/main/footer`; one `h1`; decorative giants (`KENNY PATEL`, section numbers) are `aria-hidden` with real headings carrying the words.
 - Real `<button>`/`<a>` only; pressed/expanded state on toggles; focus ring 2 px, offset 3 px.
 - Targets ≥ 44 px; nothing depends on hover.

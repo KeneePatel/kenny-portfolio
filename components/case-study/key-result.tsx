@@ -2,7 +2,7 @@ import { MonoLabel } from "@/components/signal/mono-label"
 import type { CaseStudy } from "@/content/types"
 
 /**
- * The one key number on the page, in amber. Until it's confirmed, a dashed
+ * The one key number on the page, in the accent colour. Until it's confirmed, a dashed
  * slot holds its place — a placeholder never wears the accent.
  */
 export function KeyResult({ result }: { result: CaseStudy["result"] }) {

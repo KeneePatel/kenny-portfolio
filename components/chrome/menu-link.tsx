@@ -9,7 +9,7 @@ type MenuLinkProps = {
   onSelect: (event: React.MouseEvent<HTMLAnchorElement>, id: string) => void
 }
 
-/** Numbered index link: outlined at rest, amber and shifted on hover or focus. */
+/** Numbered index link: outlined at rest, accent-coloured and shifted on hover or focus. */
 export function MenuLink({ item, cursor, onSelect }: MenuLinkProps) {
   return (
     <Link

@@ -12,7 +12,7 @@ type HeroFooterProps = {
 /**
  * What the field does (hidden with reduced motion, when the lens can't move),
  * and the way on to the first section: a full-width row on phones, a quiet
- * mono link with an amber rule from tablet up.
+ * mono link with an accent rule from tablet up.
  */
 export function HeroFooter({ hint, scrollLabel, target, cursor, className }: HeroFooterProps) {
   return (

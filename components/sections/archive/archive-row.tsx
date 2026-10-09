@@ -13,7 +13,7 @@ type ArchiveRowProps = {
 /**
  * One archive row. With a URL, the title link stretches over the whole row;
  * hover and keyboard focus share one look (weight 500 → 800, a 10px shift,
- * the arrow turns amber). Without one, the row is plain text: no false affordance.
+ * the arrow turns to the accent). Without one, the row is plain text: no false affordance.
  */
 export function ArchiveRow({ item, number, areaLabel, teamNote, cursor }: ArchiveRowProps) {
   const { title, href, stack, team, role } = item

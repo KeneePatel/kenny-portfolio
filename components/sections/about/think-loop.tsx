@@ -15,7 +15,7 @@ type ThinkLoopProps = {
 
 /**
  * Build → Break → Understand → Rebuild as toggle buttons (one pressed at a
- * time, arrow keys between them). The chosen step fills amber and its line is
+ * time, arrow keys between them). The chosen step fills with the accent and its line is
  * announced politely.
  */
 export function ThinkLoop({ loop, cursor }: ThinkLoopProps) {

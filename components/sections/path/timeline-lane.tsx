@@ -23,7 +23,7 @@ function barClass(item: LaneItem, active: boolean) {
 }
 
 /**
- * One lane of the timeline: its label, the amber band for the chosen year,
+ * One lane of the timeline: its label, the accent band for the chosen year,
  * the "now" line, and one row (label + bar) per item. Never colour alone:
  * active items also get full-strength labels and the band behind them.
  */

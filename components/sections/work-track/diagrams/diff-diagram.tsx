@@ -2,7 +2,7 @@ import { cn } from "@/lib/utils"
 
 type DiffLine = { sign: "+" | "-"; text: string }
 
-/** A small diff: removed lines muted, added lines amber. */
+/** A small diff: removed lines muted, added lines in the accent. */
 export function DiffDiagram({ header, lines }: { header: string; lines: DiffLine[] }) {
   return (
     <div className="flex w-full flex-col gap-1 font-mono text-xs leading-relaxed">

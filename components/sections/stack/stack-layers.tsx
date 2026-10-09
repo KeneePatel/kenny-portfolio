@@ -20,7 +20,7 @@ type StackLayersProps = {
 }
 
 /**
- * Six layers as giant words: outlined while closed (the stroke turns amber on
+ * Six layers as giant words: outlined while closed (the stroke turns to the accent on
  * hover or focus), filled when open. One open at a time; Base UI's accordion
  * provides the disclosure semantics (button + aria-expanded, heading wrapper).
  */

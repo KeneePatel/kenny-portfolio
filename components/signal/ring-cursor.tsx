@@ -19,7 +19,7 @@ function labelAt(target: EventTarget | null): string {
 }
 
 /**
- * An amber ring trailing a mouse or trackpad, growing into a labelled disc
+ * An accent-coloured ring trailing a mouse or trackpad, growing into a labelled disc
  * over [data-cursor] elements. Never on touch or with reduced motion, and the
  * system cursor always stays. Moved via a ref inside rAF: no React state.
  */

@@ -118,7 +118,7 @@ export const caseStudies: CaseStudy[] = [
           columns: ["Method", "Family", "ΔPESQ"],
           format: { decimals: 2, signed: true },
           rows: methods(),
-          caption: `${pendingCaption} One axis and one ink for every method; the result being discussed is the only amber bar.`,
+          caption: `${pendingCaption} One axis and one ink for every method; the result being discussed is the only blue bar.`,
         },
         {
           id: "stoi",

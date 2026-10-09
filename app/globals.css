@@ -215,17 +215,18 @@
 :root {
   color-scheme: light;
 
-  --background: #eceae4;
-  --foreground: #0f1011;
-  --foreground-2: #45433e;
-  --muted-foreground: #625f59;
-  --surface: #e2dfd8;
-  --border: #cfcbc2;
-  --primary: #b36f00;
-  --primary-foreground: #0f1011;
-  --amber-text: #8a5300;
-  --stroke: rgb(15 16 17 / 0.42);
-  --ring: #0f1011;
+  /* Klein: cool paper, blue-black ink, International Klein Blue accent. */
+  --background: #eef1f8;
+  --foreground: #0f1118;
+  --foreground-2: #43464e;
+  --muted-foreground: #60636c;
+  --surface: #e0e4ed;
+  --border: #caced7;
+  --primary: #1326d2;
+  --primary-foreground: #f8fafe;
+  --amber-text: #1326d2; /* accent text (name kept from the amber palette) */
+  --stroke: rgb(15 17 24 / 0.42);
+  --ring: #0f1118;
   --pill: color-mix(in srgb, var(--background) 70%, transparent);
   --overlay: color-mix(in srgb, var(--background) 97%, transparent);
   --destructive: oklch(0.577 0.245 27.325);
@@ -233,7 +234,7 @@
   --field-near-alpha: 0.5;
   --field-far-alpha: 0.22;
 
-  /* One raised surface: panels, the open-source band, hover. `accent` is not amber. */
+  /* One raised surface: panels, the open-source band, hover. shadcn's `accent` is this surface, not the brand accent. */
   --card: var(--surface);
   --popover: var(--surface);
   --accent: var(--surface);
@@ -325,20 +326,21 @@
 .dark {
   color-scheme: dark;
 
-  --background: #0f1011;
-  --foreground: #edebe6;
-  --foreground-2: #b5b2ab;
-  --muted-foreground: #8c8983;
-  --surface: #17181a;
-  --border: #2a2b2e;
-  --primary: #ffb547;
-  --primary-foreground: #0f1011;
-  --amber-text: #ffb547;
-  --stroke: rgb(237 235 230 / 0.4);
-  --ring: #ffb547;
+  /* Klein by night: blue-black ground, electric periwinkle accent. */
+  --background: #0a0c12;
+  --foreground: #ebedf2;
+  --foreground-2: #b9bcc4;
+  --muted-foreground: #90949d;
+  --surface: #13161d;
+  --border: #272a31;
+  --primary: #7b94ff;
+  --primary-foreground: #0a0c12;
+  --amber-text: #7b94ff;
+  --stroke: rgb(235 237 242 / 0.4);
+  --ring: #7b94ff;
   --pill: color-mix(in srgb, var(--background) 62%, transparent);
   --destructive: oklch(0.704 0.191 22.216);
-  /* Field dots: dust under a streetlight. */
+  /* Field dots: dust in a blue light. */
   --field-near-alpha: 0.6;
   --field-far-alpha: 0.24;
 }
@@ -402,12 +404,12 @@
   --outline-width: var(--outline-thick);
 }
 
-/* Hover cue on something not yet chosen: amber stroke, still unfilled. */
+/* Hover cue on something not yet chosen: accent stroke, still unfilled. */
 @utility type-outline-hint {
   --outline-color: var(--color-primary);
 }
 
-/* Hovered / focused / chosen: the outline fills amber. */
+/* Hovered / focused / chosen: the outline fills with the accent. */
 @utility type-outline-lit {
   --outline-fill: var(--color-primary);
   --outline-color: var(--color-primary);
@@ -427,7 +429,7 @@
   backdrop-filter: blur(var(--blur-pill));
 }
 
-/* Prose links: 1px rule at rest, amber 2px grows in on hover and focus. */
+/* Prose links: 1px rule at rest, accent 2px grows in on hover and focus. */
 @utility link-rule {
   text-decoration: none;
   background-image:
@@ -454,7 +456,7 @@
 }
 
 /*
- * Hero name: each letter a span. Hovered letter peaks at 900 and turns amber;
+ * Hero name: each letter a span. Hovered letter peaks at 900 and turns to the accent;
  * its neighbours rise to 640. Hover-capable pointers only; snaps with reduced motion.
  */
 @utility name-letters {
