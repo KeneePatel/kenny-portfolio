@@ -4,8 +4,8 @@ import type { AboutCopy } from "@/content/types"
 import { cn } from "@/lib/utils"
 
 /**
- * The portrait as "fig. 1": monochrome, high contrast, tilted −2° (the one
- * deliberate imperfection). A labelled frame until a photo is added to content.
+ * The portrait as "fig. 1", shown straight and exactly as Kenny edited it (no
+ * filters, no tilt). A labelled frame until a photo is in content.
  */
 export function Portrait({
   portrait,
@@ -18,14 +18,14 @@ export function Portrait({
 
   return (
     <figure className={cn("flex flex-col gap-2.5", className)}>
-      <div className="relative aspect-4/5 -rotate-2 overflow-hidden border border-stroke bg-card">
+      <div className="relative aspect-4/5 overflow-hidden border border-stroke bg-card">
         {src ? (
           <Image
             src={src}
             alt={alt}
             fill
             sizes="(min-width: 1024px) 24rem, 80vw"
-            className="object-cover contrast-125 grayscale"
+            className="object-cover"
           />
         ) : (
           <span className="absolute bottom-3.5 left-3.5 right-3.5 font-mono text-xs text-muted-foreground">

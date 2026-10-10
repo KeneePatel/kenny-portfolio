@@ -3,46 +3,46 @@ import type { StackCopy, StackLayer } from "./types"
 /*
  * The toolkit, from Kenny's own sources only: the resume (skills, MyTech Lab,
  * the Kintu Designs internship, Starknet), the featured projects and the
- * archive. "Seen in" names only things shown on this site. The canvas also
- * listed tools from team projects (Angular, Tailwind, Spring Boot, ASP.NET,
- * MySQL, MongoDB, DynamoDB, Elasticsearch, ChromaDB, AWS, Azure, C++, Kotlin,
- * scikit-learn, LangChain): [TODO: Kenny to confirm which belong here].
+ * archive (including the Serverless File Storage, FlexiGym and RoomM8 repos).
+ * "Seen in" names only things shown on this site. The canvas also listed
+ * tools from other team projects (Angular, ASP.NET, Elasticsearch, ChromaDB,
+ * Azure, C++, Kotlin, scikit-learn, LangChain): [TODO: Kenny to confirm].
  */
 export const stack: StackLayer[] = [
   {
     id: "interface",
     code: "L5",
     name: "Interface",
-    tools: ["React", "Vue", "Next.js", "Bootstrap", "Flutter", "React Native"],
-    seenIn: ["Starknet, open source", "Trekking Booking Platform", "Kintu Designs (internship)", "Cross-Platform Mobile Apps"],
+    tools: ["React", "Next.js", "Vue", "Tailwind CSS", "shadcn/ui", "Flutter", "React Native"],
+    seenIn: ["FlexiGym", "RoomM8", "Starknet, open source", "Kintu Designs (internship)"],
   },
   {
     id: "services",
     code: "L4",
     name: "Services",
-    tools: ["Node.js", "Express", "Flask", "FastAPI", "REST APIs"],
-    seenIn: ["Microservices on GKE", "Kintu Designs (internship)", "Flight Price Prediction"],
+    tools: ["Node.js", "Express", "Spring Boot", "Flask", "FastAPI", "REST APIs", "Stripe"],
+    seenIn: ["Microservices on GKE", "FlexiGym", "RoomM8", "Kintu Designs (internship)"],
   },
   {
     id: "data",
     code: "L3",
     name: "Data",
-    tools: ["PostgreSQL", "MongoDB", "Redis", "SQL", "Firebase"],
-    seenIn: ["Kintu Designs (internship)", "Trekking Booking Platform", "Flight Price Prediction"],
+    tools: ["PostgreSQL", "MySQL", "MongoDB", "DynamoDB", "Redis", "Firebase"],
+    seenIn: ["RoomM8", "FlexiGym", "Serverless File Storage", "Kintu Designs (internship)"],
   },
   {
     id: "infrastructure",
     code: "L2",
     // Soft hyphen: on narrow phones the word breaks as "Infra- / structure".
     name: "Infra­structure",
-    tools: ["GCP", "GKE", "Kubernetes", "Terraform", "Docker", "Cloud Build", "Artifact Registry", "Prometheus", "Grafana"],
-    seenIn: ["Microservices on GKE", "Kintu Designs (internship)"],
+    tools: ["Terraform", "AWS Lambda", "Step Functions", "GCP", "GKE", "Kubernetes", "Docker", "Cloud Build", "Prometheus", "Grafana"],
+    seenIn: ["Serverless File Storage", "Microservices on GKE", "Kintu Designs (internship)"],
   },
   {
     id: "languages",
     code: "L1",
     name: "Languages",
-    tools: ["Python", "TypeScript", "JavaScript", "C++", "Java", "Rust", "SQL", "Bash"],
+    tools: ["TypeScript", "JavaScript", "Python", "Java", "Rust", "SQL", "Bash"],
     seenIn: ["Across everything above"],
   },
   {

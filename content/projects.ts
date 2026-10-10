@@ -2,8 +2,8 @@ import type { Project, WorkCopy } from "./types"
 
 /*
  * Featured projects for the Work track. Facts from resources/Resume.pdf and
- * resources/projects.txt. Kenny left out RoomM8, post-quantum for Node and
- * team projects (collaborator repos).
+ * resources/projects.txt. Other projects, team projects included, live in
+ * the archive. "This website" is the portfolio itself (Kenny, 2026-10-10).
  */
 export const featured: Project[] = [
   {
@@ -65,6 +65,28 @@ export const featured: Project[] = [
       alt: "A code diff: module.js becomes module.ts, and an untyped function gains TypeScript types.",
     },
     link: { label: "Contribution log ↓", href: "#open-source" },
+  },
+  {
+    slug: "this-website",
+    title: "This website",
+    kind: "Front end · Design",
+    line: "The site you’re on. The dots up top nod to my thesis: move your cursor and the noise settles into a clean wave.",
+    stack: ["Next.js", "TypeScript", "Tailwind CSS", "Canvas 2D"],
+    diagram: {
+      kind: "flow",
+      rows: [
+        [
+          { label: "noisy dots", tone: "dashed" },
+          { arrow: "→" },
+          { label: "cursor lens" },
+          { arrow: "→" },
+          { label: "clean wave", tone: "accent" },
+        ],
+      ],
+      note: "Canvas 2D · redraws only while the pointer moves · pauses off-screen",
+      alt: "Noisy dots pass through the cursor’s lens and come out as a clean wave. The canvas redraws only while the pointer moves and pauses when it’s off-screen.",
+    },
+    link: { label: "You’re looking at it ↑", href: "#top" },
   },
 ]
 

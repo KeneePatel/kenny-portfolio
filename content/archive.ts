@@ -1,41 +1,37 @@
 import type { ArchiveCopy, ArchiveItem } from "./types"
 
 /*
- * Everything that isn't featured. Stacks are from the resumes; areas follow
- * the art-direction canvas. Kenny's call (2026-10-10): the current resume's
- * three team projects are in. Their repos live on a collaborator's account
- * (projects.txt), so they show "Team project · my part", with Kenny's part
- * taken from the resume bullets. Trekking Booking Platform is the "Paradise"
- * repo and Responsive Educational Platform is "Shiksha". The bindings exist
- * as two repos (liboqs-node-wrapper, liboqs-node-windows): [TODO: Kenny to
- * pick one], so that row isn't a link yet.
+ * Everything that isn't featured. Stacks and facts are from
+ * resources/projects.txt and the resumes; areas follow the art-direction
+ * canvas. Serverless File Storage, FlexiGym and RoomM8 are Kenny's repos
+ * (2026-10-10). FlexiGym and RoomM8 were team projects, so they show
+ * "Team project · my part", with Kenny's part taken from his commits.
  */
 export const archive: ArchiveItem[] = [
   {
-    slug: "trekking-booking",
-    title: "Trekking Booking Platform",
-    stack: ["React", "Node.js", "MongoDB", "Firebase"],
-    area: "web",
-    href: "https://github.com/sneh2102/Paradise",
-    team: true,
-    role: "the front end, role-based access, and the Firebase admin dashboard",
+    slug: "serverless-file-storage",
+    title: "Serverless File Storage",
+    stack: ["Terraform", "AWS Lambda", "Step Functions", "DynamoDB", "Next.js"],
+    area: "cloud",
+    href: "https://github.com/KeneePatel/serverless-file-storage",
   },
   {
-    slug: "quantum-safe-bindings",
-    title: "Quantum-Safe Node.js Bindings",
-    stack: ["TypeScript", "JavaScript", "C++", "CMake"],
-    area: "systems",
+    slug: "flexi-gym",
+    title: "FlexiGym",
+    stack: ["Next.js", "Express", "MongoDB", "Stripe"],
+    area: "web",
+    href: "https://github.com/KeneePatel/flexi-gym",
     team: true,
-    role: "leading the Node.js bindings for liboqs and their build pipeline",
+    role: "Stripe checkout, the booking API, and confirmation emails, plus the Next.js front end",
   },
   {
-    slug: "educational-platform",
-    title: "Responsive Educational Platform",
-    stack: ["JavaScript", "HTML", "CSS"],
+    slug: "room-m8",
+    title: "RoomM8",
+    stack: ["Spring Boot", "Java", "MySQL", "Next.js"],
     area: "web",
-    href: "https://github.com/sneh2102/shiksha",
+    href: "https://github.com/KeneePatel/room-m8",
     team: true,
-    role: "the responsive front end",
+    role: "the Next.js front end, plus the first settle-up, task, and profile services with their tests",
   },
   {
     slug: "motion-tracking",

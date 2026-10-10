@@ -3,6 +3,21 @@ Microservice Deployment on Google Kubernetes Engine | Terraform, Kubernetes, GKE
 - Provisioned the cluster, custom node pool, Artifact Registry repository, and persistent disk in Terraform, with GCS remote state and outputs exposing the cluster endpoint and registry URL
 - Automated build-to-deploy in Google Cloud Build, tagging each image with the commit SHA alongside latest for traceable rollbacks, pushing to Artifact Registry, and applying manifests via kubectl under a rolling-update strategy
 
+Serverless File Storage | Terraform, AWS (Lambda, Step Functions, API Gateway, Cognito, DynamoDB, S3, Elastic Beanstalk, CloudWatch), Node.js, Next.js | https://github.com/KeneePatel/serverless-file-storage
+- Built a cloud file storage app on my own for CSCI 5409 (Advanced Topics in Cloud Computing, Fall 2024): users sign up with an email address through Cognito, upload JPEG, PNG, or PDF files up to 10 MB, and can see and download only their own files
+- Provisioned all of the AWS infrastructure in Terraform, one file per service with remote state in S3 and a lock table: six Node.js 22 Lambda functions behind an API Gateway with a Cognito authorizer, DynamoDB for file metadata keyed by user, and S3 for the files themselves
+- Ran each upload through a Step Functions workflow that validates the file and returns a presigned S3 URL; the browser uploads straight to S3, and the S3 event marks the file as uploaded. The Next.js 15 frontend runs in Docker on Elastic Beanstalk, and downloads use presigned links that expire after an hour
+
+FlexiGym | Next.js, TypeScript, Express, MongoDB, Stripe, Tailwind CSS, shadcn/ui, Chart.js | https://github.com/KeneePatel/flexi-gym
+- Team project (6 people) for CSCI 5709 at Dalhousie, summer 2024: a web app for booking gym access for a few days at a time instead of buying a membership, with gym search, reviews, and promotions for members, and booking and earnings dashboards for gym owners
+- My part: Stripe payments (a PaymentIntent endpoint in the Express API and a Stripe Elements checkout form), the booking API that saves a paid booking, and booking confirmation emails sent with Nodemailer
+- Set up the Next.js 14 frontend with Tailwind and shadcn/ui, and built its navigation, profile menu, and the login, profile, contact, and FAQ pages
+
+RoomM8 | Spring Boot, Java, MySQL, Next.js, TypeScript, Tailwind CSS, shadcn/ui, Docker, GitLab CI | https://github.com/KeneePatel/room-m8
+- Team project (4 people) for CSCI 5308 at Dalhousie, summer 2024: a web app for roommates to split bills, settle up, assign chores, share grocery lists, and post announcements, backed by a Spring Boot 3.3 API on Java 17 with MySQL and JWT authentication
+- My part: set up the Next.js frontend (light and dark themes, navigation, sign-up, login, and forgot-password flows, the profile page, and the settle-up dialog) and connected it to the API
+- Wrote the first versions of the backend's settle-up, task, and profile services, each with JUnit tests, plus the entities and services behind password reset
+
 Job Scraper with AI Filtering | Python, Ollama (LLM), Pandas | https://github.com/sneh2102/Job-Scraper-with-AI-Filtering
 - Engineered an automated job discovery pipeline that scrapes data from 4 major platforms (LinkedIn, Glassdoor, Indeed, ZipRecruiter), reducing manual job search time by an estimated 80%.
 - Integrated a local LLM (Gemma 3:4b) via Ollama to analyze job descriptions against a personalized resume, achieving high-precision filtering of irrelevant roles.

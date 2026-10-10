@@ -270,8 +270,12 @@
   --chrome-height: calc(var(--spacing) * 21);
   --stretch-display: 112%;
   --hang-numeral: -0.06em; /* section numbers hang off the left margin */
-  --outline-thin: 1px;
-  --outline-thick: 1.2px;
+  /* Outline stroke scales with the type (em resolves on the outlined element),
+     with a floor so small outlines stay readable and a cap for the giants. */
+  --outline-thin: clamp(1.25px, 0.02em, 2.5px);
+  --outline-thick: clamp(1.5px, 0.026em, 3px);
+  /* Decorative giants stay a light hairline so they sit behind the real text. */
+  --outline-quiet: clamp(1px, 0.006em, 1.5px);
   --hang-name: -0.5vw; /* the hero name bleeds off the left edge */
   --rise-distance: calc(var(--spacing) * 4);
   /* Ring cursor: 36px ring grows to a 76px labelled disc. */
@@ -395,9 +399,10 @@
   }
 }
 
-/* Decorative giants and inactive states: the 40% stroke. */
+/* Decorative giants: the 40% stroke at hairline weight. */
 @utility type-outline-quiet {
   --outline-color: var(--color-stroke);
+  --outline-width: var(--outline-quiet);
 }
 
 @utility type-outline-thick {

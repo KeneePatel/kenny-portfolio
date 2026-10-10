@@ -13,7 +13,6 @@ export function HeroName({ name, className }: { name: string; className?: string
     <OutlineText
       aria-hidden="true"
       tone="quiet"
-      stroke="thick"
       className={cn(
         "name-letters animate-fade text-name [animation-delay:var(--hero-name)]",
         className

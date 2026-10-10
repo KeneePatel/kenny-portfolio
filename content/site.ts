@@ -32,7 +32,7 @@ export const site: Site = {
     home: { label: "Back to the homepage", href: "/" },
   },
   hero: {
-    lines: ["Hi.", "I’m Kenny Patel.", "Thanks for stopping by."],
+    lines: ["Hi.", "I’m Kenny Patel.", "I build software, start to finish."],
     facts: [
       { label: "Based", value: "Halifax, NS" },
       { label: "Local", clock: true },

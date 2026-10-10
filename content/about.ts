@@ -2,7 +2,8 @@ import type { AboutCopy } from "./types"
 
 /*
  * About. Facts from the resume (MACS at Dalhousie, open-source work) and
- * CLAUDE.md (the thesis on speech denoising). No portrait in resources yet.
+ * CLAUDE.md (the thesis on speech denoising). The portrait is resources/pic1.jpg,
+ * exported to public/portrait.jpg at 1200px with its metadata stripped.
  */
 export const about: AboutCopy = {
   label: "About",
@@ -22,8 +23,9 @@ export const about: AboutCopy = {
     ],
   },
   portrait: {
-    alt: "Kenny Patel",
-    placeholder: "[TODO: portrait, monochrome and high contrast]",
+    src: "/portrait.jpg",
+    alt: "Kenny Patel in glasses and a checked shirt, looking off to one side.",
+    placeholder: "[TODO: portrait]",
     caption: "fig. 1 · Halifax, NS. 44.65° N, 63.58° W.",
   },
 }
