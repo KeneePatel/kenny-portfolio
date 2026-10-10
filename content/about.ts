@@ -1,30 +1,29 @@
 import type { AboutCopy } from "./types"
 
 /*
- * About: copy from the art-direction canvas. Facts checked against the
- * resume (MACS at Dalhousie, open-source work) and CLAUDE.md (the thesis on
- * speech denoising). No portrait in resources yet.
+ * About. Facts from the resume (MACS at Dalhousie, open-source work) and
+ * CLAUDE.md (the thesis on speech denoising). No portrait in resources yet.
  */
 export const about: AboutCopy = {
   label: "About",
   statement: {
-    filled: "I like understanding how things work",
-    outlined: "— and then building them myself.",
+    filled: "I like taking things apart",
+    outlined: "and building my own.",
   },
-  bio: "Software engineer in Halifax. Master of Applied Computer Science from Dalhousie, with a thesis on removing noise from speech. I build across the stack — interfaces, services, cloud infrastructure — and I contribute to open source.",
+  bio: "I’m Kenny, a software engineer living in Halifax. I did my master’s at Dalhousie, where my thesis taught models to clean up noisy speech. These days I build whole products, from the interface down to the cloud setup, and I pitch in on open source when I can.",
   loop: {
-    label: "How I think — pick a step",
+    label: "How I think (pick a step)",
     groupLabel: "How I think",
     steps: [
-      { name: "Build", line: "Make the first version myself, even if it is rough." },
-      { name: "Break", line: "Push it until it fails — load, edge cases, bad input." },
-      { name: "Understand", line: "Trace the failure to its cause, not its symptom." },
-      { name: "Rebuild", line: "Make it better, and write down what changed." },
+      { name: "Build", line: "I start with a scrappy first version I make myself." },
+      { name: "Break", line: "Then I try to break it, on purpose." },
+      { name: "Understand", line: "When it breaks, I dig until I know why." },
+      { name: "Rebuild", line: "Then I build it again, better, and write down what I learned." },
     ],
   },
   portrait: {
     alt: "Kenny Patel",
-    placeholder: "[TODO: portrait — monochrome, high contrast]",
-    caption: "fig. 1 — Halifax, NS. 44.65° N, 63.58° W.",
+    placeholder: "[TODO: portrait, monochrome and high contrast]",
+    caption: "fig. 1 · Halifax, NS. 44.65° N, 63.58° W.",
   },
 }

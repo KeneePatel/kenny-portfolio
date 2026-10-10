@@ -1,16 +1,16 @@
 import type { PathCopy, TimelineItem } from "./types"
 
 /*
- * Path: every item is from the resume. The canvas also showed "R&D Project
- * Engineer · MyTech Lab (May–Aug 25)" and "Independent projects (2025–)";
- * neither is in the resume, so they're out until Kenny confirms them.
- * GPA: only "GPA 3.78" (scale unconfirmed, per CLAUDE.md).
+ * Path: every item is from Kenny's resumes (resources/Resume.pdf for MyTech
+ * Lab, Starknet dates and the GPA scales; the earlier resume for the "other"
+ * lane). The canvas also showed "Independent projects (2025–)", which no
+ * resume lists, so it stays out until Kenny confirms it.
  */
 export const timeline: TimelineItem[] = [
   {
     id: "bachelor",
     lane: "education",
-    title: "Bachelor of CSE · Charotar",
+    title: "B.Tech CSE · Charotar",
     dates: "2019–23",
     start: "2019-04",
     end: "2023-04",
@@ -36,11 +36,20 @@ export const timeline: TimelineItem[] = [
     kind: "technical",
   },
   {
+    id: "mytech",
+    lane: "engineering",
+    title: "R&D Project Engineer · MyTech Lab",
+    dates: "May–Aug 25",
+    start: "2025-05",
+    end: "2025-08",
+    kind: "technical",
+  },
+  {
     id: "starknet",
     lane: "open-source",
     title: "Starknet ecosystem",
-    dates: "2023–24",
-    start: "2023-01",
+    dates: "Mar–Dec 24",
+    start: "2024-03",
     end: "2024-12",
     kind: "technical",
   },
@@ -75,7 +84,7 @@ export const timeline: TimelineItem[] = [
 
 export const path: PathCopy = {
   label: "Path · scrub the years",
-  title: "So far.",
+  title: "How I got here.",
   lanes: [
     { id: "education", name: "Education" },
     { id: "engineering", name: "Engineering" },
@@ -91,8 +100,8 @@ export const path: PathCopy = {
     label: "Education",
     headline: "Master of Applied Computer Science",
     details: ["Dalhousie University", "Jan 2024 – Aug 2025"],
-    gpa: "GPA 3.78",
+    gpa: "GPA 3.78 / 4.3",
     thesis: { label: "Thesis →", href: "/work/speech-denoising" },
-    secondary: "Bachelor of Computer Science and Engineering · Charotar University · 2019–2023",
+    secondary: "B.Tech, Computer Science and Engineering (Distinction) · Charotar University · 2019–2023 · GPA 9.11 / 10",
   },
 }

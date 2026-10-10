@@ -1,8 +1,8 @@
 import type { Site } from "./types"
 
 /*
- * Site-wide copy and facts. Strings come from the art-direction canvas and the
- * resume; Kenny will rewrite copy later. Never add facts that aren't sourced.
+ * Site-wide copy and facts. Facts come from the resume (resources/Resume.pdf);
+ * the voice is "Plain". Never add facts that aren't sourced.
  */
 export const site: Site = {
   name: "Kenny Patel",
@@ -20,18 +20,19 @@ export const site: Site = {
     linkedin: "https://www.linkedin.com/in/patelkenee/",
   },
   metadata: {
-    title: "Kenny Patel — Software engineer, Halifax",
-    description: "[TODO: one-line site description]",
+    title: "Kenny Patel · Software engineer in Halifax",
+    description:
+      "I’m Kenny, a software engineer in Halifax. Here’s what I’ve built and what I learned building it.",
   },
   notFound: {
-    metaTitle: "Page not found — Kenny Patel",
+    metaTitle: "Page not found · Kenny Patel",
     label: "404 · Not found",
-    title: { filled: "Only", outlined: "noise here." },
-    body: "This page doesn’t exist, or it has moved.",
+    title: { filled: "Oops,", outlined: "wrong turn." },
+    body: "This page doesn’t exist. The homepage does, though.",
     home: { label: "Back to the homepage", href: "/" },
   },
   hero: {
-    lines: ["Hi.", "I’m Kenny Patel.", "And this is my website."],
+    lines: ["Hi.", "I’m Kenny Patel.", "Thanks for stopping by."],
     facts: [
       { label: "Based", value: "Halifax, NS" },
       { label: "Local", clock: true },
@@ -39,8 +40,8 @@ export const site: Site = {
       { label: "Status", value: "Open to roles" },
     ],
     hint: {
-      pointer: "Move your cursor — the noise clears where you look.",
-      touch: "Drag across the field — the noise clears where you touch.",
+      pointer: "Go on, move your cursor around. The dots tidy up as you go.",
+      touch: "Go on, drag a finger across. The dots tidy up as you go.",
     },
     scroll: { label: "Scroll", targetId: "work" },
   },

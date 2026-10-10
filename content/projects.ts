@@ -1,17 +1,17 @@
 import type { Project, WorkCopy } from "./types"
 
 /*
- * Featured projects for the Work track. Copy is from the art-direction canvas;
- * facts are checked against resources/projects.txt and the resume. Kenny left
- * out RoomM8, post-quantum for Node and team projects (collaborator repos).
+ * Featured projects for the Work track. Facts from resources/Resume.pdf and
+ * resources/projects.txt. Kenny left out RoomM8, post-quantum for Node and
+ * team projects (collaborator repos).
  */
 export const featured: Project[] = [
   {
     slug: "speech-denoising",
     title: "Speech Denoising",
     kind: "Master’s thesis · Research",
-    line: "Benchmarking classical and deep-learning approaches to speech enhancement on VoiceBank+DEMAND.",
-    stack: ["PESQ", "STOI", "U-Net", "GAN", "Wiener", "Wavelets"],
+    line: "I spent a summer teaching models to hear past the noise, then measured which approach did best.",
+    stack: ["TensorFlow", "U-Net", "GAN", "PESQ", "STOI", "SNR"],
     diagram: {
       kind: "signal",
       caption: "↓ U-Net · 16 kHz",
@@ -23,7 +23,7 @@ export const featured: Project[] = [
     slug: "microservices-on-gke",
     title: "Microservices on GKE",
     kind: "Cloud · DevOps",
-    line: "Two Node.js services on a regional GKE cluster, provisioned with Terraform and shipped by Cloud Build.",
+    line: "Two small Node.js services on Kubernetes, with Terraform and Cloud Build handling the setup and the deploys.",
     stack: ["Terraform", "Kubernetes", "GKE", "Docker", "Node.js"],
     diagram: {
       kind: "flow",
@@ -51,10 +51,8 @@ export const featured: Project[] = [
     slug: "starknet-open-source",
     title: "Starknet, open source",
     kind: "Open source",
-    // [TODO: confirm] Canvas copy and diff. The resume confirms fixes and a security
-    // patch across Starknet repos; it doesn't mention the TypeScript migration.
-    line: "Fixes, tests and a JavaScript-to-TypeScript migration in other people’s code bases.",
-    stack: ["TypeScript", "Testing", "Cairo VM"],
+    line: "I helped move a Cairo VM from JavaScript to TypeScript and built features for two Starknet apps.",
+    stack: ["TypeScript", "React", "Cairo VM", "REST"],
     diagram: {
       kind: "diff",
       header: "@@ migration @@",
@@ -72,7 +70,7 @@ export const featured: Project[] = [
 
 export const work: WorkCopy = {
   label: "Selected work · {total}",
-  title: ["Things I built", "to understand."],
+  title: ["Stuff I’ve", "made lately."],
   trackLabel: "Featured projects",
   trackRole: "carousel",
   slideRole: "slide",

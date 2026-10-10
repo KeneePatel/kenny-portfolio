@@ -1,9 +1,9 @@
 import type { ContactCopy, FooterCopy } from "./types"
 
-/* Contact and footer copy, from the art-direction canvas. */
+/* Contact and footer copy. */
 export const contact: ContactCopy = {
-  label: "Contact · the noise is gone",
-  title: { filled: "Have something interesting to", outlined: "build?" },
+  label: "Contact · say hello",
+  title: { filled: "Got an idea", outlined: "worth building?" },
   copy: {
     idle: "Copy",
     done: "Copied ✓",

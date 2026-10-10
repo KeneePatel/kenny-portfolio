@@ -44,13 +44,14 @@ This repo has project skills in `.claude/skills/<name>/SKILL.md`. Use them — t
 | `imagegen-frontend-mobile` | Not used: image generation only. |
 | `brandkit` | Not used: brand-board image generation. |
 | `stitch-design-taste` | Not used: writes DESIGN.md for Google Stitch. |
+| `writing-clearly-and-concisely` | Writing or editing any copy in `content/`, plus commit messages and docs. Strunk's rules; read `elements-of-style.md` before writing. Pair it with the user-level `humanizer` skill to strip AI-writing tells. |
 
 ## How to work
 
 - Work in small, reviewable steps. Before a multi-file change, state the plan (files to add/change) in 3–6 bullets, then build.
 - Follow the build order at the end of this file; one milestone per PR-sized change.
-- Don’t polish copy. Kenny will rewrite all text later — keep copy in `content/` and leave `[TODO: …]` placeholders rather than inventing facts.
-- **Never invent facts or metrics.** No percentages, user counts or results that aren’t in `content/`. GPA scale is unconfirmed (show “GPA 3.78” only).
+- Copy lives in `content/` and follows one voice: **Warm** (Kenny's choice, Oct 2026). Friendly and conversational, first person, like telling a friend what you've been working on; plain words, no hype. Write and edit it with `writing-clearly-and-concisely` and `humanizer`: active voice, concrete words, serial comma, no em dashes in prose, no “not X but Y”, no stock AI words. Leave `[TODO: …]` placeholders rather than inventing facts.
+- **Never invent facts or metrics.** No percentages, user counts or results that aren’t in `content/`. Facts come from `resources/Resume.pdf` (the current resume) and `resources/projects.txt`. GPAs: MACS 3.78 / 4.3, B.Tech 9.11 / 10.
 
 ### Definition of done (every task)
 
@@ -165,11 +166,11 @@ Define in `globals.css` as CSS variables, mapped onto shadcn’s variable names,
 
 **Chrome & Menu** — KP mark + three pills (Halifax clock, theme, Menu). Menu = shadcn `Dialog` styled full-screen: six numbered links at up to 112 px, outlined until hover/focus, then the accent; contact + local time in the corner. Focus trapped, Escape closes, focus returns to Menu; choosing a link closes the menu and moves focus to that section. Below 768 px the bar is KP + Menu only: the clock hides and the theme toggle moves into the menu as a row at thumb height (Kenny's decision). Below 1024 px the "Kenny Patel" text beside KP is visually hidden.
 
-**Hero** — one `h1`: “Hi.” / “I’m Kenny Patel.” / “And this is my website.” (third line outlined). Status block (based, local time, builds, status). Outlined “KENNY PATEL” behind (aria-hidden); each letter is a span, hover weight 300→900, neighbours 640 (CSS `:hover` + `:has()`), 360 ms. From the canvas (approved): a hint line (pointer / touch copy, hidden with reduced motion) and a “Scroll → 01 Work” link at the bottom.
+**Hero** — one `h1` of three lines from `content/site.ts`: “Hi.”, “I’m Kenny Patel.”, then a third line set by the voice (outlined). Status block (based, local time, builds, status). Outlined “KENNY PATEL” behind (aria-hidden); each letter is a span, hover weight 300→900, neighbours 640 (CSS `:hover` + `:has()`), 360 ms. From the canvas (approved): a hint line (pointer / touch copy, hidden with reduced motion) and a “Scroll → 01 Work” link at the bottom.
 
 **WorkTrack** — featured projects from `content/projects.ts`, one in focus. Currently three (Speech Denoising, Microservices on GKE, Starknet): Kenny left out RoomM8, post-quantum for Node and team projects (repos on a collaborator's account). Built as a custom track (CSS transform on tablet+, native scroll-snap on phones) rather than Embla. Prev/next round buttons, numbered tabs, arrow keys; 700 ms in-out; inactive panels at 38% opacity. Mobile: native swipe with snap, panels at 84vw. Each panel: number, title, one line, a diagram drawn from the project (no stock images), stack in mono, one CTA.
 
-**Archive** — filterable list (`ToggleGroup`): All · Cloud & DevOps · AI & Data · Systems & Security · Web & Mobile; “Showing n of N” updates. Kenny's decisions: team projects (collaborator repos) are left out, featured projects aren't repeated, Word Map is dropped (unsourced); the active chip fills with the accent. Only filters with at least one project are shown. Rows without a URL aren't links (no arrow, no hover effect). Row hover: title 500→800 + 10 px shift, arrow turns to the accent. Team projects show “Team project · my part: …”.
+**Archive** — filterable list (`ToggleGroup`): All · Cloud & DevOps · AI & Data · Systems & Security · Web & Mobile; “Showing n of N” updates. Kenny's decisions: the resume's projects are all in, including team projects whose repos live on a collaborator's account (marked “Team project · my part: …”); featured projects aren't repeated; Word Map is dropped (unsourced); the active chip fills with the accent. Only filters with at least one project are shown. Rows without a URL aren't links (no arrow, no hover effect). Row hover: title 500→800 + 10 px shift, arrow turns to the accent. Team projects show “Team project · my part: …”.
 
 **About / ThinkLoop** — statement half filled, half outlined. Build → Break → Understand → Rebuild as toggle buttons; the chosen step fills with the accent; its line is announced (`aria-live="polite"`). Portrait tilted −2°, overlapping the column edge.
 
@@ -179,7 +180,7 @@ Define in `globals.css` as CSS variables, mapped onto shadcn’s variable names,
 
 **Open source** — raised band with a 2 px accent top rule; diff-style log with accent “+” markers.
 
-**Contact** — calm field behind “Have something interesting to build?” (“build?” outlined), email + CopyButton (“Copied ✓”, announced), GitHub, LinkedIn, live “It’s HH:MM in Halifax right now.”
+**Contact** — calm field behind the contact headline from `content/contact.ts` (its last phrase outlined), email + CopyButton (“Copied ✓”, announced), GitHub, LinkedIn, live “It’s HH:MM in Halifax right now.”
 
 **Halifax clock** — `Intl.DateTimeFormat('en-CA', { timeZone: 'America/Halifax', … })`. Render it only after mount (or with `suppressHydrationWarning`) so server and client don’t mismatch; update every 30 s.
 
