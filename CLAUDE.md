@@ -48,6 +48,7 @@ This repo has project skills in `.claude/skills/<name>/SKILL.md`. Use them — t
 
 ## How to work
 
+- Git: the repo is meant to be public. No `Co-Authored-By` trailers in commit messages (Kenny stripped them from history), and never commit resumes or other personal documents (`resources/*.pdf` is ignored).
 - Work in small, reviewable steps. Before a multi-file change, state the plan (files to add/change) in 3–6 bullets, then build.
 - Follow the build order at the end of this file; one milestone per PR-sized change.
 - Copy lives in `content/` and follows one voice: **Warm** (Kenny's choice, Oct 2026). Friendly and conversational, first person, like telling a friend what you've been working on; plain words, no hype. Write and edit it with `writing-clearly-and-concisely` and `humanizer`: active voice, concrete words, serial comma, no em dashes in prose, no “not X but Y”, no stock AI words. Leave `[TODO: …]` placeholders rather than inventing facts.

@@ -39,3 +39,6 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Resumes carry personal contact details; keep them out of the repo.
+resources/*.pdf
