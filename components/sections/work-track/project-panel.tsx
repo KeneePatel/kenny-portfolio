@@ -40,6 +40,12 @@ export function ProjectPanel({
             <span className="link-rule">{link.label}</span>
             <span aria-hidden="true">&nbsp;↗</span>
           </a>
+        ) : link?.href.startsWith("#") ? (
+          // Same-page anchor: a plain link, so the browser jumps every time (a
+          // <Link> to the hash already in the URL doesn't scroll).
+          <a href={link.href} data-cursor={cursor} className="inline-flex min-h-11 items-center font-semibold">
+            <span className="link-rule">{link.label}</span>
+          </a>
         ) : link ? (
           <Link href={link.href} data-cursor={cursor} className="inline-flex min-h-11 items-center font-semibold">
             <span className="link-rule">{link.label}</span>

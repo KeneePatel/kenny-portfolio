@@ -91,8 +91,9 @@ lib/                      cn(), motion tokens, pure math (field.ts, timeline.ts)
 
 Rules:
 
-- **Server Components by default.** `"use client"` only on interactive leaves (Field, RingCursor, ThemeToggle, Menu, WorkTrack, ArchiveFilter, ThinkLoop, StackLayers, YearScrubber, CopyEmail, AbPlayer, BarChart, plus the live HalifaxTime, the route-aware skip link and the ThemeProvider wrapper). A section’s `index.tsx` stays a Server Component and passes content down as props.
+- **Server Components by default.** `"use client"` only on interactive leaves (Field, RingCursor, ThemeToggle, Menu, WorkTrack, ArchiveFilter, ThinkLoop, StackLayers, YearScrubber, CopyEmail, AbPlayer, BarChart, plus the live HalifaxTime, the route-aware skip link and KP mark, and the ThemeProvider wrapper). A section’s `index.tsx` stays a Server Component and passes content down as props.
 - One component per file, named export, kebab-case filenames, aim for < 150 lines. Split before it grows.
+- Links to an anchor on the current page (`#top`, `#open-source`) are plain `<a>`, never `<Link>`: Next's `<Link>` doesn't scroll when the URL already ends in that hash, so a second click does nothing. Use `<Link>` only to go to another route (the KP mark switches between the two by route).
 - Components never import from `content/` directly except section `index.tsx` files and route pages.
 - Pure logic (dot grid, lens falloff, timeline positions, filters) lives in `lib/` as plain functions with no React — easy to test.
 - Shared types in `content/types.ts`: `Project`, `ArchiveItem` (`area: 'cloud' | 'ai' | 'systems' | 'web'`, `team?: boolean`, `role?: string`), `TimelineItem` (`lane`, `start`, `end`, `kind: 'technical' | 'other'`), `StackLayer`.
