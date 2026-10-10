@@ -1,0 +1,20 @@
+# Response headers for Cloudflare static assets. Rules that match the same
+# path add up. HTML keeps Cloudflare's default (max-age=0, must-revalidate,
+# with an ETag), so a new deploy shows up on the next visit.
+
+# Next.js puts a content hash in every file under /_next/static (scripts,
+# styles, fonts), so a new build always gets new URLs: keep them a year.
+/_next/static/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# The portrait files keep their names if the photo changes, so cache them
+# for a day and refresh in the background for a week after that.
+/portrait*
+  Cache-Control: public, max-age=86400, stale-while-revalidate=604800
+
+/*
+  Strict-Transport-Security: max-age=63072000; includeSubDomains; preload
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: DENY
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=()

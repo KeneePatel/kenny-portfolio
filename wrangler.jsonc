@@ -1,0 +1,19 @@
+// Cloudflare Workers config. The site is plain static files (`next build`
+// writes them to out/), served from Cloudflare's network with no Worker code.
+// Deploy with `pnpm run cf:deploy` after `pnpm dlx wrangler@4 login`.
+{
+  "name": "kenny-portfolio",
+  "compatibility_date": "2026-10-01",
+  "assets": {
+    "directory": "./out",
+    // Unknown URLs get out/404.html with a real 404 status.
+    "not_found_handling": "404-page",
+    // /work/speech-denoising serves work/speech-denoising.html.
+    "html_handling": "auto-trailing-slash"
+  },
+  // Cloudflare creates the DNS record and certificate for the domain on deploy.
+  "routes": [{ "pattern": "kennypatel.dev", "custom_domain": true }],
+  // Only kennypatel.dev serves the site: no duplicate *.workers.dev copy.
+  "workers_dev": false,
+  "preview_urls": false
+}

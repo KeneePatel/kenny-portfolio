@@ -3,7 +3,8 @@ import type { AboutCopy } from "./types"
 /*
  * About. Facts from the resume (MACS at Dalhousie, open-source work) and
  * CLAUDE.md (the thesis on speech denoising). The portrait is resources/pic1.jpg,
- * exported to public/portrait.jpg at 1200px with its metadata stripped.
+ * exported to public/portrait.jpg at 1200px and to WebP at 480, 640, 800 and
+ * 960px (quality 80) for lib/image-loader.ts, all with metadata stripped.
  */
 export const about: AboutCopy = {
   label: "About",

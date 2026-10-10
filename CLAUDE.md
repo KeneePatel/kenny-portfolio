@@ -15,9 +15,19 @@ https://claude.ai/code/artifact/1d6d6c0a-03dc-42c4-94cd-eb7e63801aec
 
 - Next.js (App Router) · TypeScript (strict) · Tailwind · shadcn/ui · **pnpm only** (never npm/yarn/bun).
 - `pnpm dev` · `pnpm build` · `pnpm lint` · `pnpm exec tsc --noEmit` (typecheck)
+- `pnpm run cf:preview` (build, then serve `out/` in Cloudflare's local runtime on :8787) · `pnpm run cf:deploy` (build and deploy; needs `pnpm dlx wrangler@4 login` once). Use `pnpm run …` here: `pnpm deploy` is a different, built-in pnpm command.
 - Add shadcn components with `pnpm dlx shadcn@latest add <name>`. Never hand-write a shadcn component that the CLI can generate.
 - shadcn style is `base-luma` (Base UI, not Radix: compose with the `render` prop, not `asChild`). After adding a component, change its `import { cn } from "cn"` to `import { cn } from "@/lib/utils"`. The configured `cn` knows our theme scales; the plain one merges `text-label` away as a colour.
 - **Ask before adding any dependency** not listed here. Prefer CSS + small hooks over animation libraries. Allowed without asking: `next-themes`, shadcn-generated deps (e.g. `embla-carousel-react`, Radix packages), `clsx`/`tailwind-merge`/`class-variance-authority`.
+
+## Hosting (Cloudflare, static)
+
+The site is deployed to **kennypatel.dev** as plain static files on Cloudflare Workers static assets (Kenny's decision, Oct 2026; the domain is registered at Cloudflare). There's no server at runtime.
+
+- `next.config.ts` has `output: "export"`: `next build` writes the whole site to `out/`. Cache Components and Partial Prefetching are off because export mode can't run them. Don't add anything that needs a server: route handlers that read the request, Server Actions, `cookies()`/`headers()`, proxy/middleware, ISR, or rewrites/redirects/headers in `next.config`. Every dynamic route needs `generateStaticParams` and `dynamicParams = false`. (`next dev` answers an unknown slug with a 404 and logs a "missing param in generateStaticParams" error; that's expected in export mode.)
+- `wrangler.jsonc` points Cloudflare at `out/`. It serves `404.html` with a 404 status for unknown URLs, maps `/work/x` to `work/x.html`, and attaches the custom domain (DNS record and certificate are created on deploy). No `*.workers.dev` copy.
+- `public/_headers` sets caching and security headers. Files under `/_next/static/` are content-hashed, so they're cached for a year (`immutable`). HTML keeps Cloudflare's default (`max-age=0, must-revalidate` with an ETag), so deploys show up at once.
+- Images: no image server, so `next/image` uses `lib/image-loader.ts`, which maps a photo to pre-resized WebP files (`public/<name>-<width>.webp`, widths in `imageWidths`). To add a photo, export those widths at WebP quality 80 with metadata stripped, and add its path to `resized` in the loader.
 
 ## Skills (`.claude/skills`)
 
@@ -174,7 +184,7 @@ Define in `globals.css` as CSS variables, mapped onto shadcn’s variable names,
 
 **Archive** — filterable list (`ToggleGroup`): All · Cloud & DevOps · AI & Data · Systems & Security · Web & Mobile; “Showing n of N” updates. Kenny's decisions (Oct 2026): the archive holds his own repos (Serverless File Storage, FlexiGym, RoomM8) and the earlier resume projects; team projects are marked “Team project · my part: …” with the part taken from his commits; Trekking Booking Platform, Quantum-Safe Node.js Bindings and Responsive Educational Platform were removed; featured projects aren't repeated; Word Map is dropped (unsourced); the active chip fills with the accent. Only filters with at least one project are shown. Rows without a URL aren't links (no arrow, no hover effect). Row hover: title 500→800 + 10 px shift, arrow turns to the accent. Team projects show “Team project · my part: …”.
 
-**About / ThinkLoop** — statement half filled, half outlined. Build → Break → Understand → Rebuild as toggle buttons; the chosen step fills with the accent; its line is announced (`aria-live="polite"`). Portrait beside the bio, overlapping the column edge, straight (Kenny removed the canvas's −2° tilt). The photo (`public/portrait.jpg`, from `resources/pic1.jpg`) is shown exactly as Kenny edited it: no CSS filters (no grayscale, contrast or tint).
+**About / ThinkLoop** — statement half filled, half outlined. Build → Break → Understand → Rebuild as toggle buttons; the chosen step fills with the accent; its line is announced (`aria-live="polite"`). Portrait beside the bio, overlapping the column edge, straight (Kenny removed the canvas's −2° tilt). The photo (from `resources/pic1.jpg`; `public/portrait.jpg` plus WebP sizes `portrait-480/640/800/960.webp`) is shown exactly as Kenny edited it: no CSS filters (no grayscale, contrast or tint).
 
 **StackLayers** — six layers (Interface, Services, Data, Infrastructure, Languages, Signal & ML) as giant outlined words; `Collapsible`/`Accordion` disclosure shows tools + “Seen in” projects.
 
@@ -188,7 +198,7 @@ Define in `globals.css` as CSS variables, mapped onto shadcn’s variable names,
 
 **Case study** (`/work/[slug]`) — title with outlined second word, meta grid, the key number in the accent, A/B audio (labelled, transcript, never autoplays), charts with a “View as table” toggle.
 
-- Built from the canvas board “Case study — Speech Denoising”; one entry per featured project in `content/case-studies.ts` (slug = the project’s slug). `ensureStatic = "navigation"` keeps it fully static and gives unknown slugs a real 404.
+- Built from the canvas board “Case study — Speech Denoising”; one entry per featured project in `content/case-studies.ts` (slug = the project’s slug). `dynamicParams = false` limits it to those slugs; any other slug gets the host's `404.html` with a real 404 status.
 - Kenny chose not to show the canvas PESQ figure: the key number, chart values, clips, transcript, spectrograms and links stay `[TODO]` until he confirms them. A missing number is a dashed slot or dashed bar, never in the accent, and with no known values a chart has no axis. `[TODO…]` strings render muted.
 - A/B: chip `ToggleGroup` (B, the clean output, on arrival); play is disabled until `src` is set; switching sides mid-play continues from the same moment. Charts: chip `Toggle` (pressed = table), a real `<table>` with caption; one accent bar (`highlight`).
 - Skip link: “Skip to selected work” on `/`, “Skip to content” (`#main`) on every other page.

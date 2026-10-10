@@ -12,8 +12,8 @@ const order = featured.map((project) => project.slug)
 const withCase = new Set(caseStudies.map((study) => study.slug))
 const titleOf = (slug: string) => featured.find((project) => project.slug === slug)?.title ?? slug
 
-// Case studies are fully static; an unknown slug waits for the render, so it gets a real 404.
-export const ensureStatic = "navigation"
+// Only the case studies in content exist; any other slug is a 404 (out/404.html on the host).
+export const dynamicParams = false
 
 export function generateStaticParams() {
   return caseStudies.map(({ slug }) => ({ slug }))

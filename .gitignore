@@ -40,5 +40,8 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
+# Cloudflare Wrangler local state
+/.wrangler/
+
 # Resumes carry personal contact details; keep them out of the repo.
 resources/*.pdf
