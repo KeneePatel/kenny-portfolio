@@ -1,0 +1,14 @@
+{
+  "name": "Kenny Patel",
+  "short_name": "Kenny Patel",
+  "description": "I’m Kenny, a software engineer in Halifax. Here’s what I’ve built and what I learned building it.",
+  "start_url": "/",
+  "display": "browser",
+  "background_color": "#0a0c12",
+  "theme_color": "#0a0c12",
+  "icons": [
+    { "src": "/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/icon-512.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "/icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}

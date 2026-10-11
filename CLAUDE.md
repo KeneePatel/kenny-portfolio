@@ -88,7 +88,7 @@ app/
 components/
   ui/                     shadcn-generated. Extend with cva variants; don’t fork.
   signal/                 design-system primitives (see below)
-  chrome/                 top bar (KP mark, clock, theme, Menu pills) and the Menu dialog
+  chrome/                 top bar (logo, clock, theme, Menu pills) and the Menu dialog
   field/                  Field (canvas), field math wrapper, static fallback
   sections/
     hero/  work-track/  archive/  about/  stack/  path/  open-source/  contact/
@@ -97,21 +97,21 @@ content/                  typed data — the ONLY place copy and facts live
   site.ts  projects.ts  archive.ts  timeline.ts  stack.ts  open-source.ts  contact.ts
   case-studies.ts  types.ts
 hooks/                    use-reduced-motion, use-fine-pointer, use-halifax-clock, use-in-view
-lib/                      cn(), motion tokens, pure math (field.ts, timeline.ts)
+lib/                      cn(), motion tokens, pure math and geometry (field.ts, timeline.ts, logo.ts)
 ```
 
 Rules:
 
-- **Server Components by default.** `"use client"` only on interactive leaves (Field, RingCursor, ThemeToggle, Menu, WorkTrack, ArchiveFilter, ThinkLoop, StackLayers, YearScrubber, CopyEmail, AbPlayer, BarChart, plus the live HalifaxTime, the route-aware skip link and KP mark, and the ThemeProvider wrapper). A section’s `index.tsx` stays a Server Component and passes content down as props.
+- **Server Components by default.** `"use client"` only on interactive leaves (Field, RingCursor, ThemeToggle, Menu, WorkTrack, ArchiveFilter, ThinkLoop, StackLayers, YearScrubber, CopyEmail, AbPlayer, BarChart, plus the live HalifaxTime, the route-aware skip link and home mark, and the ThemeProvider wrapper). A section’s `index.tsx` stays a Server Component and passes content down as props.
 - One component per file, named export, kebab-case filenames, aim for < 150 lines. Split before it grows.
-- Links to an anchor on the current page (`#top`, `#open-source`) are plain `<a>`, never `<Link>`: Next's `<Link>` doesn't scroll when the URL already ends in that hash, so a second click does nothing. Use `<Link>` only to go to another route (the KP mark switches between the two by route).
+- Links to an anchor on the current page (`#top`, `#open-source`) are plain `<a>`, never `<Link>`: Next's `<Link>` doesn't scroll when the URL already ends in that hash, so a second click does nothing. Use `<Link>` only to go to another route (the home mark switches between the two by route).
 - Components never import from `content/` directly except section `index.tsx` files and route pages.
 - Pure logic (dot grid, lens falloff, timeline positions, filters) lives in `lib/` as plain functions with no React — easy to test.
 - Shared types in `content/types.ts`: `Project`, `ArchiveItem` (`area: 'cloud' | 'ai' | 'systems' | 'web'`, `team?: boolean`, `role?: string`), `TimelineItem` (`lane`, `start`, `end`, `kind: 'technical' | 'other'`), `StackLayer`.
 
 ### Signal primitives (`components/signal/`)
 
-`OutlineText` · `SectionHeading` (giant outlined number + accent mono label + title) · `MonoLabel` · `Pill` (Button variant) · `RoundButton` (Button variant) · `ThemeToggle` · `CopyButton` · `RingCursor` · `SkipLink`. Every section heading uses `SectionHeading`; every outlined phrase uses `OutlineText`.
+`OutlineText` · `SectionHeading` (giant outlined number + accent mono label + title) · `MonoLabel` · `Pill` (Button variant) · `RoundButton` (Button variant) · `ThemeToggle` · `CopyButton` · `RingCursor` · `SkipLink` · `LogoMark` (the logo, see below). Every section heading uses `SectionHeading`; every outlined phrase uses `OutlineText`.
 
 ---
 
@@ -176,7 +176,9 @@ Define in `globals.css` as CSS variables, mapped onto shadcn’s variable names,
 
 **RingCursor** — fine pointers only (`(hover: hover) and (pointer: fine)`), never on touch or reduced motion. Never hides the system cursor. 36 px accent ring trailing the pointer (k = 0.24); over any element with `data-cursor="label"` it grows to 76 px, fills with the accent and shows the label. Move it with `transform` on a ref inside rAF — **never React state per frame.**
 
-**Chrome & Menu** — KP mark + three pills (Halifax clock, theme, Menu). Menu = shadcn `Dialog` styled full-screen: six numbered links at up to 112 px, outlined until hover/focus, then the accent; contact + local time in the corner. Focus trapped, Escape closes, focus returns to Menu; choosing a link closes the menu and moves focus to that section. Below 768 px the bar is KP + Menu only: the clock hides and the theme toggle moves into the menu as a row at thumb height (Kenny's decision). Below 1024 px the "Kenny Patel" text beside KP is visually hidden.
+**Chrome & Menu** — the logo (`HomeMark`, linking home) + three pills (Halifax clock, theme, Menu). Menu = shadcn `Dialog` styled full-screen: six numbered links at up to 112 px, outlined until hover/focus, then the accent; contact + local time in the corner. Focus trapped, Escape closes, focus returns to Menu; choosing a link closes the menu and moves focus to that section. Below 768 px the bar is logo + Menu only: the clock hides and the theme toggle moves into the menu as a row at thumb height (Kenny's decision). Below 1024 px the "Kenny Patel" text beside the logo is visually hidden.
+
+**Logo (Signal mark)** — four scattered points that grow toward one clean sine wave: the field in miniature (added Oct 2026; it replaced the KP monogram in the top bar). Geometry lives in `lib/logo.ts`; `LogoMark` draws it inline with tokens (points `fill-current`, the wave and the two nearest points `--primary`), so it follows the theme. In the top bar it sits 20 px tall; inside a `group`, hover or focus slides the points onto the wave's axis (`translate`, `--duration-ring`, ease out; no slide with reduced motion). The static files can't read tokens, so they carry Night hex values: `app/favicon.ico` (16/32/48, the 16 px frame simplified), `app/icon.svg`, `app/apple-icon.png`, `app/opengraph-image.png` (+ `.alt.txt`), `app/manifest.webmanifest` with `public/icon-*.png`. `metadataBase` comes from `site.url`. **If the palette changes, regenerate them** with the scripts in `resources/logo/` (see its README). Don't recolour the wave beyond the accent, the text colour or one solid colour; no glows, gradients, rotation, or moved points.
 
 **Hero** — one `h1` of three lines from `content/site.ts`: “Hi.”, “I’m Kenny Patel.”, then a third line set by the voice (outlined). Status block (based, local time, builds, status). Outlined “KENNY PATEL” behind (aria-hidden); each letter is a span, hover weight 300→900, neighbours 640 (CSS `:hover` + `:has()`), 360 ms. From the canvas (approved): a hint line (pointer / touch copy, hidden with reduced motion) and a “Scroll → 01 Work” link at the bottom.
 

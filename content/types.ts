@@ -251,7 +251,8 @@ export type HeroFact =
 
 export type Site = {
   name: string
-  initials: string
+  /** The live address. Share images and other absolute URLs resolve against it. */
+  url: string
   role: string
   location: Location
   status: string

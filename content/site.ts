@@ -6,7 +6,7 @@ import type { Site } from "./types"
  */
 export const site: Site = {
   name: "Kenny Patel",
-  initials: "KP",
+  url: "https://kennypatel.dev",
   role: "Software engineer",
   location: {
     city: "Halifax",

@@ -25,8 +25,15 @@ const plexMono = IBM_Plex_Mono({
 })
 
 export const metadata: Metadata = {
+  // Share images need absolute URLs.
+  metadataBase: new URL(site.url),
   title: site.metadata.title,
   description: site.metadata.description,
+  // Each page's own title and description fill the link preview. The icons
+  // and share image are files in app/ (favicon.ico, icon.svg, apple-icon.png,
+  // opengraph-image.png), which Next adds to every page.
+  openGraph: { type: "website", siteName: site.name },
+  twitter: { card: "summary_large_image" },
 }
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
