@@ -23,6 +23,8 @@ type StackLayersProps = {
  * Six layers as giant words: outlined while closed (the stroke turns to the accent on
  * hover or focus), filled when open. One open at a time; Base UI's accordion
  * provides the disclosure semantics (button + aria-expanded, heading wrapper).
+ * Closed panels stay in the HTML as hidden="until-found", so search engines
+ * read every tool and the browser's find-in-page opens the right layer.
  */
 export function StackLayers({ layers, copy, cursor }: StackLayersProps) {
   const [open, setOpen] = useState<string[]>([copy.defaultOpen])
@@ -32,6 +34,7 @@ export function StackLayers({ layers, copy, cursor }: StackLayersProps) {
       variant="layers"
       value={open}
       onValueChange={(value) => setOpen(value as string[])}
+      hiddenUntilFound
       className="mt-8 lg:mt-14"
     >
       {layers.map((layer) => {
@@ -46,7 +49,7 @@ export function StackLayers({ layers, copy, cursor }: StackLayersProps) {
             >
               <span className="w-8 shrink-0 font-mono text-xs text-amber-text md:w-14">
                 {layer.code}
-              </span>
+              </span>{" "}
               {isOpen ? (
                 <span className={name}>{layer.name}</span>
               ) : (
@@ -55,7 +58,7 @@ export function StackLayers({ layers, copy, cursor }: StackLayersProps) {
                 >
                   {layer.name}
                 </OutlineText>
-              )}
+              )}{" "}
               {/* Phones show code + name only; the open panel lists the tools anyway. */}
               <span className="hidden font-mono text-xs text-muted-foreground md:inline">
                 {fillTemplate(copy.toolsCount, { count: layer.tools.length })}

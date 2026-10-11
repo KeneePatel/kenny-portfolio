@@ -15,7 +15,8 @@ https://claude.ai/code/artifact/1d6d6c0a-03dc-42c4-94cd-eb7e63801aec
 
 - Next.js (App Router) · TypeScript (strict) · Tailwind · shadcn/ui · **pnpm only** (never npm/yarn/bun).
 - `pnpm dev` · `pnpm build` · `pnpm lint` · `pnpm exec tsc --noEmit` (typecheck)
-- `pnpm run cf:preview` (build, then serve `out/` in Cloudflare's local runtime on :8787) · `pnpm run cf:deploy` (build and deploy; needs `pnpm dlx wrangler@4 login` once). Use `pnpm run …` here: `pnpm deploy` is a different, built-in pnpm command.
+- `pnpm run cf:preview` (build, then serve `out/` in Cloudflare's local runtime on :8787) · `pnpm run cf:deploy` (build and deploy by hand; needs `pnpm dlx wrangler@4 login` once). Use `pnpm run …` here: `pnpm deploy` is a different, built-in pnpm command.
+- **Every push to `main` deploys to kennypatel.dev** (Kenny's Cloudflare Git setup, Oct 2026). Pushing to main is a production release: only push when Kenny asks.
 - Add shadcn components with `pnpm dlx shadcn@latest add <name>`. Never hand-write a shadcn component that the CLI can generate.
 - shadcn style is `base-luma` (Base UI, not Radix: compose with the `render` prop, not `asChild`). After adding a component, change its `import { cn } from "cn"` to `import { cn } from "@/lib/utils"`. The configured `cn` knows our theme scales; the plain one merges `text-label` away as a colour.
 - **Ask before adding any dependency** not listed here. Prefer CSS + small hooks over animation libraries. Allowed without asking: `next-themes`, shadcn-generated deps (e.g. `embla-carousel-react`, Radix packages), `clsx`/`tailwind-merge`/`class-variance-authority`.
@@ -55,6 +56,7 @@ This repo has project skills in `.claude/skills/<name>/SKILL.md`. Use them — t
 | `brandkit` | Not used: brand-board image generation. |
 | `stitch-design-taste` | Not used: writes DESIGN.md for Google Stitch. |
 | `writing-clearly-and-concisely` | Writing or editing any copy in `content/`, plus commit messages and docs. Strunk's rules; read `elements-of-style.md` before writing. Pair it with the user-level `humanizer` skill to strip AI-writing tells. |
+| `seo-geo-aeo` | Auditing or improving search, AI-search (GEO), or answer-engine (AEO) visibility. Its report setup says `npm install -g docx`: use pnpm in a temp folder instead, and save reports outside the repo. |
 
 ## How to work
 
@@ -93,11 +95,12 @@ components/
   sections/
     hero/  work-track/  archive/  about/  stack/  path/  open-source/  contact/
   case-study/             /work/[slug] parts (header, key result, A/B player, story rows, charts)
+  seo/                    JsonLd (schema.org script tag)
 content/                  typed data — the ONLY place copy and facts live
   site.ts  projects.ts  archive.ts  timeline.ts  stack.ts  open-source.ts  contact.ts
-  case-studies.ts  types.ts
+  case-studies.ts  seo.ts (Kenny as JSON-LD sees him, assembled from the others)  types.ts
 hooks/                    use-reduced-motion, use-fine-pointer, use-halifax-clock, use-in-view
-lib/                      cn(), motion tokens, pure math and geometry (field.ts, timeline.ts, logo.ts)
+lib/                      cn(), motion tokens, pure math and geometry (field.ts, timeline.ts, logo.ts), metadata.ts, structured-data.ts, llms.ts
 ```
 
 Rules:
@@ -207,6 +210,16 @@ Define in `globals.css` as CSS variables, mapped onto shadcn’s variable names,
 - `app/not-found.tsx` (copy in `site.notFound`) serves unknown URLs and unknown slugs with a 404 status, its own title and a `main#main`.
 
 ---
+
+## Search (SEO, GEO, AEO)
+
+Added Oct 2026 from a `seo-geo-aeo` audit. Every new page or section keeps these working:
+
+- **Metadata:** every page builds its metadata with `pageMetadata()` (`lib/metadata.ts`): title ≤ 60 characters, description 120–160, a canonical URL and `og:url`. Next replaces a layout's whole `openGraph` when a page sets it, so routes below `app/` pass their parent's share images (see `app/work/[slug]/page.tsx`). Case studies are `og:type` article.
+- **Structured data:** the homepage has Person + WebSite + ProfilePage; each case study has Article (based on its report) + BreadcrumbList. Built by `lib/structured-data.ts`, rendered by `<JsonLd>`, facts only from `content/` (`content/seo.ts`). Person carries `alternateName` "Kenee Patel", the name on his GitHub, LinkedIn and report.
+- **Discovery files:** `app/sitemap.ts`, `app/robots.ts` and `app/llms.txt/route.ts` build `sitemap.xml`, `robots.txt` and `llms.txt` from content, so a new case study appears in all three. Robots allows every crawler, AI assistants included.
+- **Text crawlers can read:** many crawlers skip CSS, so lines stacked with `block` or flex need a real space between them (`{" "}`), or "Stuff I’ve" + "made lately." reads as "I’vemade". Disclosure panels keep their content in the HTML (`hiddenUntilFound` on the toolkit accordion).
+- **Outside the code (Kenny, Cloudflare dashboard):** turn on SSL/TLS → Edge Certificates → Always Use HTTPS (plain `http://` answers 200 today), and keep AI crawlers allowed. Submit the sitemap in Google Search Console and Bing Webmaster Tools.
 
 ## Accessibility (non-negotiable)
 

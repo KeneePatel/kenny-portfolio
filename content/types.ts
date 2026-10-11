@@ -249,6 +249,18 @@ export type HeroFact =
   | { label: string; value: string }
   | { label: string; clock: true }
 
+export type LlmsCopy = {
+  work: string
+  archive: string
+  openSource: string
+  education: string
+  contact: string
+  /** `{part}`: Kenny's part of a team project. */
+  teamPart: string
+  /** Link text for the master's research write-up. */
+  research: string
+}
+
 export type Site = {
   name: string
   /** The live address. Share images and other absolute URLs resolve against it. */
@@ -265,6 +277,17 @@ export type Site = {
     title: string
     description: string
   }
+  /** How search engines and AI assistants should know Kenny (JSON-LD and llms.txt). */
+  identity: {
+    /** The name on his GitHub, LinkedIn and research report. */
+    alternateName: string
+    /** ISO 3166 country code for the address. */
+    country: string
+    /** Universities, as named in the Path section. */
+    alumniOf: string[]
+  }
+  /** Section headings for /llms.txt, the plain-text summary for AI assistants. */
+  llms: LlmsCopy
   /** The 404 page: label, a filled and an outlined phrase, one line, the way home. */
   notFound: {
     metaTitle: string
@@ -367,6 +390,8 @@ export type CaseStudy = {
   /** `followUp`: a row after the charts that reads them (e.g. what a number really means). */
   results: { id: string; heading: string; charts: CaseChart[]; followUp: CaseBlock }
   learned: { block: CaseBlock; linksLabel: string; links: PendingLink[] }
+  /** Search: a longer title and a description that answers the lede, plus the source it's based on. */
+  seo: { title: string; description: string; basedOn: { name: string; href: string } }
 }
 
 /** Strings every case study shares. */

@@ -20,9 +20,24 @@ export const site: Site = {
     linkedin: "https://www.linkedin.com/in/patelkenee/",
   },
   metadata: {
-    title: "Kenny Patel · Software engineer in Halifax",
+    title: "Kenny Patel · Software engineer in Halifax, Nova Scotia",
     description:
-      "I’m Kenny, a software engineer in Halifax. Here’s what I’ve built and what I learned building it.",
+      "I’m Kenny Patel, a software engineer in Halifax, Nova Scotia. I build full-stack, cloud, and ML projects, from a speech-denoising U-Net to Kubernetes on GKE.",
+  },
+  // "Kenee" is the name on his GitHub (KeneePatel), LinkedIn (patelkenee) and research report.
+  identity: {
+    alternateName: "Kenee Patel",
+    country: "CA",
+    alumniOf: ["Dalhousie University", "Charotar University"],
+  },
+  llms: {
+    work: "Selected work",
+    archive: "Other projects",
+    openSource: "Open source (Starknet)",
+    education: "Education",
+    contact: "Contact",
+    teamPart: "Team project · my part: {part}",
+    research: "Research project case study",
   },
   notFound: {
     metaTitle: "Page not found · Kenny Patel",

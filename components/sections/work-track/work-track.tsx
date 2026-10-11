@@ -1,6 +1,6 @@
 "use client"
 
-import { Children, useEffect, useId, useRef, useState } from "react"
+import { Children, Fragment, useEffect, useId, useRef, useState } from "react"
 
 import { SectionHeading } from "@/components/signal/section-heading"
 import type { WorkCopy } from "@/content/types"
@@ -75,10 +75,11 @@ export function WorkTrack({ number, headingId, copy, titles, cursor, children }:
       <SectionHeading
         number={number}
         label={fillTemplate(copy.label, { total: ordinal(count) })}
-        title={copy.title.map((line) => (
-          <span key={line} className="block">
-            {line}
-          </span>
+        title={copy.title.map((line, i) => (
+          <Fragment key={line}>
+            {i > 0 ? " " : null}
+            <span className="block">{line}</span>
+          </Fragment>
         ))}
         id={headingId}
         className="px-page"

@@ -1,16 +1,20 @@
 import { readFileSync } from "node:fs"
 import path from "node:path"
 
-import type { Metadata } from "next"
+import type { Metadata, ResolvingMetadata } from "next"
 import { notFound } from "next/navigation"
 
 import { CaseStudyView } from "@/components/case-study/case-study-view"
 import { WAVE_BOX } from "@/components/case-study/listen-wave"
+import { JsonLd } from "@/components/seo/json-ld"
 import { caseCopy, caseStudies } from "@/content/case-studies"
 import { featured } from "@/content/projects"
+import { language } from "@/content/seo"
 import { site } from "@/content/site"
 import type { CaseStudy } from "@/content/types"
 import { nextWithCase, positionIn } from "@/lib/case-study"
+import { pageMetadata } from "@/lib/metadata"
+import { caseStudyGraph } from "@/lib/structured-data"
 import { fillTemplate, ordinal } from "@/lib/track"
 import { envelopePath, peakOf, readPcm16 } from "@/lib/wav"
 
@@ -37,14 +41,22 @@ export function generateStaticParams() {
   return caseStudies.map(({ slug }) => ({ slug }))
 }
 
-export async function generateMetadata({ params }: PageProps<"/work/[slug]">): Promise<Metadata> {
+export async function generateMetadata(
+  { params }: PageProps<"/work/[slug]">,
+  parent: ResolvingMetadata
+): Promise<Metadata> {
   const { slug } = await params
   const study = caseStudies.find((item) => item.slug === slug)
   if (!study) return { title: site.notFound.metaTitle }
-  return {
-    title: fillTemplate(caseCopy.metaTitle, { title: titleOf(slug) }),
-    description: study.lede,
-  }
+  const { openGraph, twitter } = await parent
+  return pageMetadata({
+    path: `/work/${slug}`,
+    title: fillTemplate(caseCopy.metaTitle, { title: study.seo.title }),
+    description: study.seo.description,
+    siteName: site.name,
+    type: "article",
+    images: { openGraph: openGraph?.images, twitter: twitter?.images },
+  })
 }
 
 export default async function CaseStudyPage({ params }: PageProps<"/work/[slug]">) {
@@ -63,6 +75,21 @@ export default async function CaseStudyPage({ params }: PageProps<"/work/[slug]"
 
   return (
     <main id="main" tabIndex={-1} className="px-page pt-36 pb-16 md:pt-44">
+      <JsonLd
+        data={caseStudyGraph({
+          origin: site.url,
+          path: `/work/${slug}`,
+          name: titleOf(slug),
+          headline: study.seo.title,
+          description: study.seo.description,
+          image: `${site.url}/opengraph-image.png`,
+          keywords: featured.find((project) => project.slug === slug)?.stack ?? [],
+          language,
+          author: site.name,
+          home: site.name,
+          basedOn: study.seo.basedOn,
+        })}
+      />
       <CaseStudyView
         study={study}
         copy={caseCopy}

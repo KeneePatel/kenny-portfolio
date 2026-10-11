@@ -25,7 +25,7 @@ export function OpenSourceSection() {
         label={label}
         title={
           <>
-            <span className="block">{title.filled}</span>
+            <span className="block">{title.filled}</span>{" "}
             <OutlineText className="block">{title.outlined}</OutlineText>
           </>
         }

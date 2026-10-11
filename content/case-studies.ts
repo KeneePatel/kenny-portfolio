@@ -33,6 +33,8 @@ import type { CaseCopy, CaseStudy, ChartRow } from "./types"
  */
 
 const AUDIO = "/case-studies/speech-denoising"
+const REPORT =
+  "https://github.com/KeneePatel/AudioQuality-Denoising-Evaluator/blob/main/evaluator/Kenee_Project_Report_MACS.pdf"
 
 /** The five methods compared, with one metric's values; the U-Net is the result discussed. */
 const methods = (values: [number, number, number, number, number]): ChartRow[] =>
@@ -206,7 +208,7 @@ export const caseStudies: CaseStudy[] = [
       links: [
         {
           label: "Research report (PDF)",
-          href: "https://github.com/KeneePatel/AudioQuality-Denoising-Evaluator/blob/main/evaluator/Kenee_Project_Report_MACS.pdf",
+          href: REPORT,
           external: true,
         },
         {
@@ -220,6 +222,12 @@ export const caseStudies: CaseStudy[] = [
           external: true,
         },
       ],
+    },
+    seo: {
+      title: "Speech Denoising: U-Net vs. Classic Filters",
+      description:
+        "Can a neural network clean up noisy speech better than classic filters? On 824 test recordings, my U-Net raised PESQ by 0.36, the biggest gain of five methods.",
+      basedOn: { name: "Comparison of Deep Learning and Traditional Methods for Speech Denoising", href: REPORT },
     },
   },
 ]

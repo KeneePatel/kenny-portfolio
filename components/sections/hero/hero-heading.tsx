@@ -20,10 +20,10 @@ export function HeroHeading({
     <h1 id={id} className={cn("flex flex-col", className)}>
       <span className="animate-lift text-greeting [animation-delay:var(--hero-greeting)]">
         {greeting}
-      </span>
+      </span>{" "}
       <span className="mt-4 animate-rise text-statement [animation-delay:var(--hero-line2)] md:mt-6 lg:mt-7">
         {name}
-      </span>
+      </span>{" "}
       <OutlineText className="mt-1 animate-rise text-statement [animation-delay:var(--hero-line3)]">
         {line3}
       </OutlineText>
