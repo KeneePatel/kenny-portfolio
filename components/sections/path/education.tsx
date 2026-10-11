@@ -20,8 +20,8 @@ export function Education({
           <span key={detail}>{detail}</span>
         ))}
         <span className="text-amber-text">{education.gpa}</span>
-        <Link href={education.thesis.href} data-cursor={cursor} className="-my-3 inline-flex min-h-11 items-center">
-          <span className="link-rule">{education.thesis.label}</span>
+        <Link href={education.research.href} data-cursor={cursor} className="-my-3 inline-flex min-h-11 items-center">
+          <span className="link-rule">{education.research.label}</span>
         </Link>
       </p>
       <p className="font-mono text-xs text-muted-foreground">{education.secondary}</p>

@@ -199,8 +199,8 @@ export type PathCopy = {
     headline: string
     details: string[]
     gpa: string
-    /** The thesis case study. */
-    thesis: { label: string; href: string }
+    /** Link to the research project's case study. */
+    research: { label: string; href: string }
     secondary: string
   }
 }
@@ -311,10 +311,24 @@ export type CaseChart = {
   caption: string
 }
 
-/** One side of the A/B listening test. `src` is a path under /public once Kenny adds the clip. */
-export type AudioSample = { id: string; label: string; detail: string; noisy: boolean; src?: string }
+/**
+ * One version of the clip in the listening test. `src` is a 16-bit PCM WAV under
+ * /public; the route page draws its waveform from it at build time. `tone` sets
+ * the waveform colour: the noisy input is muted, the U-Net output the accent.
+ */
+export type AudioSample = {
+  id: string
+  label: string
+  detail: string
+  tone: "noisy" | "denoised" | "clean"
+  src?: string
+}
 
-/** A spectrogram panel. `src` is a path under /public; until then `pending` fills the frame. */
+/**
+ * A spectrogram panel. `src` is a white-on-transparent mask under /public that
+ * the page tints with its ink colour, so it follows the theme; until it exists,
+ * `pending` fills the frame.
+ */
 export type CaseImage = { label: string; alt: string; src?: string; pending: string }
 
 export type CaseStudy = {
@@ -350,7 +364,8 @@ export type CaseStudy = {
   }
   spectrograms: { fig: string; axis: { frequency: string; time: string }; images: CaseImage[]; caption: string }
   decisions: CaseBlock[]
-  results: { id: string; heading: string; charts: CaseChart[]; listening: CaseBlock }
+  /** `followUp`: a row after the charts that reads them (e.g. what a number really means). */
+  results: { id: string; heading: string; charts: CaseChart[]; followUp: CaseBlock }
   learned: { block: CaseBlock; linksLabel: string; links: PendingLink[] }
 }
 

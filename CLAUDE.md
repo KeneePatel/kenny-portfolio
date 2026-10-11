@@ -3,7 +3,7 @@
 
 # Kenny Patel — Portfolio (“Signal”)
 
-Personal portfolio for Kenny Patel, software engineer in Halifax, NS. The design is **Direction 3 — Experimental Interactive**: night-first, one Klein-blue accent, huge type in filled and outlined voices, and a hero “field” of noisy dots that clears into a clean signal wherever the cursor goes (from Kenny’s master’s thesis on speech denoising).
+Personal portfolio for Kenny Patel, software engineer in Halifax, NS. The design is **Direction 3 — Experimental Interactive**: night-first, one Klein-blue accent, huge type in filled and outlined voices, and a hero “field” of noisy dots that clears into a clean signal wherever the cursor goes (from Kenny’s master’s research project on speech denoising).
 
 The design lives on a Claude Design canvas (Kenny can open it; agents can’t):
 https://claude.ai/code/artifact/1d6d6c0a-03dc-42c4-94cd-eb7e63801aec
@@ -190,7 +190,7 @@ Define in `globals.css` as CSS variables, mapped onto shadcn’s variable names,
 
 **StackLayers** — six layers (Interface, Services, Data, Infrastructure, Languages, Signal & ML) as giant outlined words; `Collapsible`/`Accordion` disclosure shows tools + “Seen in” projects.
 
-**YearScrubber (Path)** — lanes: Education, Engineering, Open source, Other. Year buttons 2019–now; the chosen year gets an accent band across lanes (450 ms) and an announced “In {year}” list. Technical items 6 px bars; “other” work 2 px grey. On mobile the timeline scrolls inside its own `ScrollArea`. Education (MACS headline, thesis link) closes the section.
+**YearScrubber (Path)** — lanes: Education, Engineering, Open source, Other. Year buttons 2019–now; the chosen year gets an accent band across lanes (450 ms) and an announced “In {year}” list. Technical items 6 px bars; “other” work 2 px grey. On mobile the timeline scrolls inside its own `ScrollArea`. Education (MACS headline, research-project link) closes the section.
 
 **Open source** — raised band with a 2 px accent top rule; diff-style log with accent “+” markers.
 
@@ -201,8 +201,8 @@ Define in `globals.css` as CSS variables, mapped onto shadcn’s variable names,
 **Case study** (`/work/[slug]`) — title with outlined second word, meta grid, the key number in the accent, A/B audio (labelled, transcript, never autoplays), charts with a “View as table” toggle.
 
 - Built from the canvas board “Case study — Speech Denoising”; one entry per featured project in `content/case-studies.ts` (slug = the project’s slug). `dynamicParams = false` limits it to those slugs; any other slug gets the host's `404.html` with a real 404 status.
-- Kenny chose not to show the canvas PESQ figure: the key number, chart values, clips, transcript, spectrograms and links stay `[TODO]` until he confirms them. A missing number is a dashed slot or dashed bar, never in the accent, and with no known values a chart has no axis. `[TODO…]` strings render muted.
-- A/B: chip `ToggleGroup` (B, the clean output, on arrival); play is disabled until `src` is set; switching sides mid-play continues from the same moment. Charts: chip `Toggle` (pressed = table), a real `<table>` with caption; one accent bar (`highlight`).
+- Content comes from Kenny's MACS project report and his two public repos (AudioQuality-Denoising-Evaluator, AudioQuality-Dataset); sources are listed at the top of `content/case-studies.ts`. Kenny's decisions (Oct 2026): five methods (no GAN), call it a "master's research project" (never "thesis"), keep the U-Net's training-set size general, and explain the U-Net's SNR drop as a measurement effect (its rebuilt audio is ~1.7× louder). Charts use the report's Table 5.1. The listening test plays real clips (A noisy, B U-Net, C clean) of test sentence p232_068, run through Kenny's saved model (Kenny vetoed the first sentence, so check a new clip's words in `testset_txt` before using it); waveforms are read from the WAV files at build time (`lib/wav.ts`); spectrograms are WebP alpha masks tinted with the ink colour (`spectrogram-mask`). A missing number is a dashed slot, never in the accent; with negative values a chart draws a zero line. `[TODO…]` strings render muted.
+- A/B: chip `ToggleGroup` (B, the U-Net output, on arrival); play is disabled until the clip has loaded; switching sides mid-play continues from the same moment. Clips play from object URLs (`hooks/use-clip-urls.ts`) because Cloudflare's static assets ignore byte-range requests: served directly, Chrome can't seek them and Safari won't play them. Charts: chip `Toggle` (pressed = table), a real `<table>` with caption; one accent bar (`highlight`).
 - Skip link: “Skip to selected work” on `/`, “Skip to content” (`#main`) on every other page.
 - `app/not-found.tsx` (copy in `site.notFound`) serves unknown URLs and unknown slugs with a 404 status, its own title and a `main#main`.
 

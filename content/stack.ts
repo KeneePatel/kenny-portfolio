@@ -49,7 +49,7 @@ export const stack: StackLayer[] = [
     id: "signal-ml",
     code: "L0",
     name: "Signal & ML",
-    tools: ["TensorFlow", "U-Net", "GAN", "STFT", "Wiener filtering", "Wavelets", "PESQ", "STOI", "OpenCV"],
+    tools: ["TensorFlow", "U-Net", "STFT", "Spectral subtraction", "Wiener filtering", "Wavelets", "PESQ", "STOI", "OpenCV"],
     seenIn: ["Speech Denoising", "Real-Time Motion Tracking"],
   },
 ]

@@ -1,9 +1,11 @@
-import Image from "next/image"
-
 import { MonoLabel } from "@/components/signal/mono-label"
 import type { CaseStudy } from "@/content/types"
 
-/** Before and after, side by side, on one monochrome ramp. Hatched slots until the images exist. */
+/**
+ * Before and after, side by side, on one shared scale. Each image is a mask
+ * filled with the page's ink colour, so the panels follow the theme.
+ * Hatched slots until the images exist.
+ */
 export function Spectrograms({ figure }: { figure: CaseStudy["spectrograms"] }) {
   const { fig, axis, images, caption } = figure
 
@@ -20,13 +22,20 @@ export function Spectrograms({ figure }: { figure: CaseStudy["spectrograms"] }) 
               {axis.frequency}
             </span>
             <div className="flex min-w-0 flex-1 flex-col gap-2">
-              <div className="relative flex aspect-16/7 items-center justify-center border hatch px-4 text-center font-mono text-label text-muted-foreground">
-                {image.src ? (
-                  <Image src={image.src} alt={image.alt} fill sizes="(width >= 48rem) 50vw, 100vw" className="object-cover" />
-                ) : (
-                  image.pending
-                )}
-              </div>
+              {image.src ? (
+                <div className="relative aspect-16/7 border bg-card">
+                  <div
+                    role="img"
+                    aria-label={image.alt}
+                    className="spectrogram-mask absolute inset-0 bg-foreground"
+                    style={{ "--mask": `url(${image.src})` } as React.CSSProperties}
+                  />
+                </div>
+              ) : (
+                <div className="flex aspect-16/7 items-center justify-center border hatch px-4 text-center font-mono text-label text-muted-foreground">
+                  {image.pending}
+                </div>
+              )}
               <div className="flex justify-between font-mono text-label text-muted-foreground">
                 <span>{image.label}</span>
                 <span aria-hidden="true">{axis.time}</span>

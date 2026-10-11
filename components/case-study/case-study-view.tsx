@@ -16,6 +16,8 @@ type CaseStudyViewProps = {
   eyebrow: string
   next: { href: string; label: string; title: string } | null
   cursor: ChromeCopy["cursor"]
+  /** Waveform paths by audio sample id, drawn from the WAV files at build time. */
+  waves: Record<string, string>
 }
 
 /**
@@ -23,7 +25,7 @@ type CaseStudyViewProps = {
  * listening test, the story, the approach, figures, results, lessons, and the
  * way out. Server-rendered; only the player and the charts are interactive.
  */
-export function CaseStudyView({ study, copy, eyebrow, next, cursor }: CaseStudyViewProps) {
+export function CaseStudyView({ study, copy, eyebrow, next, cursor, waves }: CaseStudyViewProps) {
   const { listen, story, approach, spectrograms, decisions, results, learned } = study
   const [leadChart, ...moreCharts] = results.charts
   const chartCopy = { view: copy.chartView, pending: copy.pendingValue }
@@ -41,6 +43,7 @@ export function CaseStudyView({ study, copy, eyebrow, next, cursor }: CaseStudyV
             listen={listen}
             copy={{ play: copy.play, pause: copy.pause, position: copy.position }}
             cursor={{ pick: cursor.pick, play: cursor.play }}
+            waves={waves}
           />
         </div>
       </div>
@@ -72,7 +75,7 @@ export function CaseStudyView({ study, copy, eyebrow, next, cursor }: CaseStudyV
             </div>
           ) : null}
         </StoryRow>
-        <StoryRow block={results.listening} />
+        <StoryRow block={results.followUp} />
         <StoryRow
           block={learned.block}
           aside={<CaseLinks label={learned.linksLabel} links={learned.links} cursor={cursor.open} />}

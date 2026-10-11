@@ -7,6 +7,7 @@ import { MonoLabel } from "@/components/signal/mono-label"
 import { RoundButton } from "@/components/signal/round-button"
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group"
 import type { CaseCopy, CaseStudy } from "@/content/types"
+import { useClipUrls } from "@/hooks/use-clip-urls"
 import { isPending } from "@/lib/case-study"
 import { formatDuration } from "@/lib/time"
 import { fillTemplate } from "@/lib/track"
@@ -18,18 +19,23 @@ type AbPlayerProps = {
   listen: CaseStudy["listen"]
   copy: Pick<CaseCopy, "play" | "pause" | "position">
   cursor: { pick: string; play: string }
+  /** Each clip's waveform path by sample id, read from its WAV at build time. */
+  waves: Record<string, string>
 }
 
 /**
- * A/B listening: the same sentence noisy (A) and denoised (B). Never autoplays;
- * sound starts only from the play button, and switching sides while playing
- * carries on from the same moment. The transcript is always on the page.
+ * A/B listening: the same sentence noisy, denoised and (optionally) clean.
+ * Never autoplays; sound starts only from the play button, and switching
+ * clips while playing carries on from the same moment. Each clip plays from
+ * an object URL (see useClipUrls), so play waits until it has loaded. The
+ * transcript is always on the page.
  */
-export function AbPlayer({ listen, copy, cursor }: AbPlayerProps) {
+export function AbPlayer({ listen, copy, cursor, waves }: AbPlayerProps) {
   const { samples } = listen
   const [activeId, setActiveId] = useState(listen.defaultSample)
   const [playing, setPlaying] = useState(false)
   const [time, setTime] = useState({ current: 0, total: 0 })
+  const urls = useClipUrls(samples)
   const elements = useRef(new Map<string, HTMLAudioElement>())
   // Media events land after React state; only the chosen side may report.
   const activeRef = useRef(activeId)
@@ -91,11 +97,11 @@ export function AbPlayer({ listen, copy, cursor }: AbPlayerProps) {
           ))}
         </ToggleGroup>
       </div>
-      <ListenWave noisy={active.noisy} progress={progress} />
+      <ListenWave tone={active.tone} wave={waves[active.id] ?? null} progress={progress} />
       <div className="flex flex-wrap items-center gap-x-4 gap-y-2 font-mono text-data">
         <RoundButton
           aria-label={action}
-          disabled={!hasAudio}
+          disabled={!urls[active.id]}
           onClick={toggle}
           data-cursor={cursor.play}
           className="size-11"
@@ -119,12 +125,12 @@ export function AbPlayer({ listen, copy, cursor }: AbPlayerProps) {
         </span>
       </p>
       <figcaption className="font-mono text-xs text-muted-foreground">{listen.caption}</figcaption>
-      {samples.map(({ id, src }) =>
-        src ? (
+      {samples.map(({ id }) =>
+        urls[id] ? (
           <audio
             key={id}
-            src={src}
-            preload="metadata"
+            src={urls[id]}
+            preload="auto"
             ref={(el) => {
               if (!el) return
               elements.current.set(id, el)

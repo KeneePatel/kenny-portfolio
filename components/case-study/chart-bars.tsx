@@ -1,5 +1,5 @@
 import type { CaseChart } from "@/content/types"
-import { barOf, formatValue, ticksOf, positionOf, type Scale } from "@/lib/chart"
+import { barOf, formatTick, formatValue, ticksOf, positionOf, type Scale } from "@/lib/chart"
 import { cn } from "@/lib/utils"
 
 type ChartBarsProps = { chart: CaseChart; scale: Scale | null; pending: string }
@@ -7,11 +7,13 @@ type ChartBarsProps = { chart: CaseChart; scale: Scale | null; pending: string }
 /**
  * The chart view: one row per method with its value in text, so the list reads
  * fine without the bars. Bars that aren't data yet are dashed stand-ins.
+ * With negative values on the axis, a zero line shows where "no change" is.
  * Lays out by the width of its own container (label beside or above the bar).
  */
 export function ChartBars({ chart, scale, pending }: ChartBarsProps) {
   const label = "@xl:w-56 @xl:shrink-0"
   const value = "w-24 shrink-0 text-right font-mono text-data"
+  const zero = scale && scale.min < 0 ? positionOf(0, scale) : null
 
   return (
     <div className="@container">
@@ -25,7 +27,7 @@ export function ChartBars({ chart, scale, pending }: ChartBarsProps) {
                 className="absolute left-(--at) -translate-x-1/2"
                 style={{ "--at": `${positionOf(tick, scale)}%` } as React.CSSProperties}
               >
-                {tick}
+                {formatTick(tick, scale)}
               </span>
             ))}
           </span>
@@ -46,6 +48,12 @@ export function ChartBars({ chart, scale, pending }: ChartBarsProps) {
               </span>
               <span className="flex flex-1 items-center gap-4">
                 <span aria-hidden="true" className="relative h-3.5 flex-1">
+                  {zero === null ? null : (
+                    <span
+                      className="absolute -inset-y-1.5 left-(--zero) w-px bg-foreground"
+                      style={{ "--zero": `${zero}%` } as React.CSSProperties}
+                    />
+                  )}
                   <span
                     className={cn(
                       "absolute inset-y-0 left-(--start) w-(--size)",

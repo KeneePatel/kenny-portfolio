@@ -68,3 +68,15 @@ export function formatValue(value: number, { decimals, signed, unit = "" }: Valu
   const sign = value < 0 ? "−" : signed && value > 0 ? "+" : ""
   return `${sign}${digits}${unit}`
 }
+
+/** Decimal places a tick step needs: 0.2 → 1, 0.02 → 2, 2 → 0. */
+export function stepDecimals(step: number): number {
+  const text = String(step)
+  if (text.includes("e-")) return Number(text.split("e-")[1])
+  return text.split(".")[1]?.length ?? 0
+}
+
+/** Axis label for a tick: the step's decimals and a true minus sign, no plus. */
+export function formatTick(tick: number, { step }: Scale): string {
+  return formatValue(tick, { decimals: stepDecimals(step) })
+}

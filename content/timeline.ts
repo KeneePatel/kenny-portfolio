@@ -101,7 +101,7 @@ export const path: PathCopy = {
     headline: "Master of Applied Computer Science",
     details: ["Dalhousie University", "Jan 2024 – Aug 2025"],
     gpa: "GPA 3.78 / 4.3",
-    thesis: { label: "Thesis →", href: "/work/speech-denoising" },
+    research: { label: "Research project →", href: "/work/speech-denoising" },
     secondary: "B.Tech, Computer Science and Engineering (Distinction) · Charotar University · 2019–2023 · GPA 9.11 / 10",
   },
 }

@@ -1,7 +1,7 @@
 import { MonoLabel } from "@/components/signal/mono-label"
 import type { PendingLink } from "@/content/types"
 
-/** The side list of links (thesis, code, audio). Links that don't exist yet show their placeholder. */
+/** The side list of links (report, code, data). Links that don't exist yet show their placeholder. */
 export function CaseLinks({ label, links, cursor }: { label: string; links: PendingLink[]; cursor: string }) {
   return (
     <div className="flex flex-col gap-1 font-mono text-data">

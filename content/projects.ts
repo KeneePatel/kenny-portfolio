@@ -9,9 +9,9 @@ export const featured: Project[] = [
   {
     slug: "speech-denoising",
     title: "Speech Denoising",
-    kind: "Master’s thesis · Research",
-    line: "I spent a summer teaching models to hear past the noise, then measured which approach did best.",
-    stack: ["TensorFlow", "U-Net", "GAN", "PESQ", "STOI", "SNR"],
+    kind: "Master’s research project",
+    line: "I spent a summer training a U-Net to hear past the noise, then measured it against four classic filters.",
+    stack: ["Python", "TensorFlow", "U-Net", "PESQ", "STOI", "SNR"],
     diagram: {
       kind: "signal",
       caption: "↓ U-Net · 16 kHz",
@@ -70,7 +70,7 @@ export const featured: Project[] = [
     slug: "this-website",
     title: "This website",
     kind: "Front end · Design",
-    line: "The site you’re on. The dots up top nod to my thesis: move your cursor and the noise settles into a clean wave.",
+    line: "The site you’re on. The dots up top nod to my master’s research: move your cursor and the noise settles into a clean wave.",
     stack: ["Next.js", "TypeScript", "Tailwind CSS", "Canvas 2D"],
     diagram: {
       kind: "flow",

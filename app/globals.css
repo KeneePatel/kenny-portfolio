@@ -513,6 +513,14 @@
   }
 }
 
+/* Spectrogram: a white-on-transparent image used as a mask over the ink colour.
+   The component sets --mask to url(...). Standard properties only (see memory). */
+@utility spectrogram-mask {
+  mask-image: var(--mask);
+  mask-size: 100% 100%;
+  mask-repeat: no-repeat;
+}
+
 /* Placeholder figure: hairline diagonal hatching on the raised surface. */
 @utility hatch {
   background-color: var(--color-card);
